@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <script>
       document.documentElement.classList.add("js");
     </script>
@@ -7,11 +9,13 @@
     <title>Klar — Visual CMS with GitHub Sync</title>
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <meta name="description" content="Edit your website visually. Sync every change to GitHub automatically. Klar is the modern CMS built for developers who want simplicity and control.">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <meta name="description"
+      content="Edit your website visually. Sync every change to GitHub automatically. Klar is the modern CMS built for developers who want simplicity and control.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
     <style>
       /* ========================================
        CSS Variables & Reset
@@ -193,6 +197,7 @@
           opacity: 0;
           transform: translateY(40px);
         }
+
         to {
           opacity: 1;
           transform: translateY(0);
@@ -203,27 +208,32 @@
         from {
           opacity: 0;
         }
+
         to {
           opacity: 1;
         }
       }
 
       @keyframes pulseGlow {
+
         0%,
         100% {
           opacity: 0.3;
         }
+
         50% {
           opacity: 0.7;
         }
       }
 
       @keyframes breathe {
+
         0%,
         100% {
           transform: scale(1);
           opacity: 0.3;
         }
+
         50% {
           transform: scale(1.05);
           opacity: 0.6;
@@ -235,6 +245,7 @@
           opacity: 0;
           transform: translateY(60px) scale(0.97);
         }
+
         to {
           opacity: 1;
           transform: translateY(0) scale(1);
@@ -363,13 +374,11 @@
         transform: translateX(-50%);
         width: 1400px;
         height: 1000px;
-        background: radial-gradient(
-          ellipse 50% 50% at 50% 50%,
-          rgba(64, 140, 255, 0.3) 0%,
-          rgba(56, 189, 248, 0.12) 30%,
-          rgba(99, 102, 241, 0.06) 55%,
-          transparent 75%
-        );
+        background: radial-gradient(ellipse 50% 50% at 50% 50%,
+            rgba(64, 140, 255, 0.3) 0%,
+            rgba(56, 189, 248, 0.12) 30%,
+            rgba(99, 102, 241, 0.06) 55%,
+            transparent 75%);
         pointer-events: none;
       }
 
@@ -403,17 +412,13 @@
         inset: 0;
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
+          linear-gradient(90deg,
             rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px
-          );
+            transparent 1px);
         background-size: 60px 60px;
-        mask-image: radial-gradient(
-          ellipse 80% 60% at 50% 0%,
-          black,
-          transparent
-        );
+        mask-image: radial-gradient(ellipse 80% 60% at 50% 0%,
+            black,
+            transparent);
       }
 
       .hero .container {
@@ -466,12 +471,10 @@
           #38bdf8 40%,
           #7dd3fc 100%
         ); */
-        background: linear-gradient(
-          135deg,
-          #0874c5 0%,
-          #38bdf8 40%,
-          #7dd3fc 100%
-        );
+        background: linear-gradient(135deg,
+            #0874c5 0%,
+            #38bdf8 40%,
+            #7dd3fc 100%);
 
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -509,11 +512,9 @@
         border-bottom: none;
         padding: 8px;
         position: relative;
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.05) 0%,
-          rgba(255, 255, 255, 0.015) 100%
-        );
+        background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.015) 100%);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         /* box-shadow:
@@ -543,9 +544,11 @@
       .hero-frame-dot:nth-child(1) {
         background: #ff5f57;
       }
+
       .hero-frame-dot:nth-child(2) {
         background: #febc2e;
       }
+
       .hero-frame-dot:nth-child(3) {
         background: #28c840;
       }
@@ -675,12 +678,10 @@
         left: calc(16.66% + 36px);
         right: calc(16.66% + 36px);
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          var(--color-primary),
-          var(--color-border-hover),
-          var(--color-primary)
-        );
+        background: linear-gradient(90deg,
+            var(--color-primary),
+            var(--color-border-hover),
+            var(--color-primary));
       }
 
       .step {
@@ -826,6 +827,7 @@
       .why-compare-card.old h4 {
         color: var(--color-red);
       }
+
       .why-compare-card.new h4 {
         color: var(--color-green);
       }
@@ -884,12 +886,10 @@
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent 10%,
-          rgba(64, 140, 255, 0.6) 50%,
-          transparent 90%
-        );
+        background: linear-gradient(90deg,
+            transparent 10%,
+            rgba(64, 140, 255, 0.6) 50%,
+            transparent 90%);
       }
 
       .cta-glow {
@@ -899,11 +899,9 @@
         transform: translateX(-50%);
         width: 700px;
         height: 350px;
-        background: radial-gradient(
-          ellipse at center,
-          rgba(64, 140, 255, 0.18) 0%,
-          transparent 70%
-        );
+        background: radial-gradient(ellipse at center,
+            rgba(64, 140, 255, 0.18) 0%,
+            transparent 70%);
         pointer-events: none;
         animation: breathe 6s ease-in-out infinite;
       }
@@ -1162,13 +1160,15 @@
             <a href="#cta" class="btn btn-primary btn-large">
               Get Started
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
               </svg>
             </a>
             <a href="#how-it-works" class="btn btn-secondary btn-large">
               See how it works
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
               </svg>
             </a>
           </div>
@@ -1182,7 +1182,8 @@
               <span class="hero-frame-dot"></span>
             </div>
             <div class="hero-visual-frame-fade">
-              <img src="images/Screenshot 2026-04-04 at 13.49.19.png" alt="Klar CMS editor interface showing visual editing, sections panel, and element properties">
+              <img src="images/Screenshot 2026-04-04 at 13.49.19.png"
+                alt="Klar CMS editor interface showing visual editing, sections panel, and element properties">
             </div>
           </div>
         </div>
@@ -1222,7 +1223,9 @@
           <div class="feature-card">
             <div class="feature-icon">
               <svg viewBox="0 0 24 24">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path>
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22">
+                </path>
               </svg>
             </div>
             <h3>GitHub Sync</h3>
@@ -1356,7 +1359,8 @@
             <ul class="why-list">
               <li>
                 <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </span>
@@ -1368,7 +1372,8 @@
               </li>
               <li>
                 <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </span>
@@ -1380,7 +1385,8 @@
               </li>
               <li>
                 <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </span>
@@ -1392,7 +1398,8 @@
               </li>
               <li>
                 <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </span>
@@ -1510,8 +1517,9 @@
             heroGlow1.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
           if (heroGlow2)
             heroGlow2.style.transform = `translate(${-x * 0.3}px, ${-y * 0.3}px)`;
+        }, {
+          passive: true
         },
-        { passive: true },
       );
 
       // Scroll-based nav background
@@ -1524,8 +1532,9 @@
           } else {
             nav.classList.remove("scrolled");
           }
+        }, {
+          passive: true
         },
-        { passive: true },
       );
 
       // Active nav link highlighting
@@ -1540,8 +1549,9 @@
               link.classList.toggle("nav-active", entry.isIntersecting);
             }
           });
+        }, {
+          threshold: 0.4
         },
-        { threshold: 0.4 },
       );
       sections.forEach((s) => sectionObserver.observe(s));
 
@@ -1560,8 +1570,10 @@
               observer.unobserve(entry.target);
             }
           });
+        }, {
+          threshold: 0.05,
+          rootMargin: "0px 0px -60px 0px"
         },
-        { threshold: 0.05, rootMargin: "0px 0px -60px 0px" },
       );
 
       document
@@ -1577,11 +1589,15 @@
           const target = document.querySelector(href);
           if (target) {
             const y = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: y, behavior: "smooth" });
+            window.scrollTo({
+              top: y,
+              behavior: "smooth"
+            });
           }
         });
       });
     </script>
-  
 
-</body></html>
+
+  </body>
+</html>
