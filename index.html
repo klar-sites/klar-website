@@ -1,68 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <script>
-      document.documentElement.classList.add("js");
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klar — Visual CMS with GitHub Sync</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
-    <link rel="apple-touch-icon" href="images/favicon.png">
-    <meta name="description" content="Edit your website visually. Sync every change to GitHub automatically. Klar is the modern CMS built for developers who want simplicity and control.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klar — The visual CMS for sites that live on GitHub</title>
+    <meta name="description"
+      content="Click any text, image, or icon on your live page to edit it. Klar applies the change as clean HTML and commits it straight to your GitHub repo — no build step, no lock-in." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet" />
     <style>
-      /* ========================================
-       CSS Variables & Reset
-       ======================================== */
       :root {
-        --color-primary: #408cff;
-        --color-primary-hover: #5a9fff;
-        --color-primary-soft: rgba(64, 140, 255, 0.1);
-        --color-primary-glow: rgba(64, 140, 255, 0.3);
-
-        --color-bg: #08080a;
-        --color-bg-elevated: #0f0f12;
-        --color-bg-card: #131316;
-        --color-bg-card-hover: #1a1a1e;
-
-        --color-surface: #18181c;
-        --color-surface-hover: #202024;
-
-        --color-text: #f5f5f7;
-        --color-text-secondary: #94949e;
-        --color-text-muted: #5c5c66;
-
-        --color-border: rgba(255, 255, 255, 0.05);
-        --color-border-hover: rgba(255, 255, 255, 0.1);
-
-        --color-green: #61c454;
-        --color-orange: #fb923c;
-        --color-red: #ec6a5f;
-
-        --font-sans:
+        --bg: #08090a;
+        --bg-elev: #0e0f11;
+        --surface: rgba(255, 255, 255, 0.024);
+        --surface-2: rgba(255, 255, 255, 0.045);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.14);
+        --text: #f7f8f8;
+        --muted: #8a8f98;
+        --subtle: #62666d;
+        --accent: #aeb4be;
+        --accent-rgb: 174, 180, 190;
+        --violet: #e9ebef;
+        --cyan: #8b909a;
+        --pink: #c4c8d0;
+        --radius: 14px;
+        --maxw: 1120px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --font:
           "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --font-mono: "SF Mono", "Fira Code", "Fira Mono", monospace;
-
-        --radius-sm: 8px;
-        --radius-md: 12px;
-        --radius-lg: 16px;
-        --radius-xl: 24px;
-        --radius-full: 9999px;
-
-        --max-width: 1160px;
-        --section-padding: 120px;
-
-        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-        --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
       }
 
-      *,
-      *::before,
-      *::after {
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -71,15 +42,27 @@
       html {
         scroll-behavior: smooth;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
 
       body {
-        font-family: var(--font-sans);
-        background: var(--color-bg);
-        color: var(--color-text);
-        line-height: 1.6;
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
         overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Subtle film grain */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
 
       a {
@@ -87,1350 +70,1346 @@
         text-decoration: none;
       }
 
-      img {
-        max-width: 100%;
-        display: block;
+      ::selection {
+        background: rgba(var(--accent-rgb), 0.3);
       }
 
-      /* ========================================
-       Utility
-       ======================================== */
-      .container {
-        max-width: var(--max-width);
+      .wrap {
+        max-width: var(--maxw);
         margin: 0 auto;
         padding: 0 24px;
+        position: relative;
+        z-index: 2;
       }
 
-      .section {
-        padding: var(--section-padding) 0;
-      }
-
-      .section-label {
-        display: inline-block;
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.1em;
+        font-weight: 500;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--color-primary);
-        background: rgba(64, 140, 255, 0.1);
-        border: 1px solid rgba(64, 140, 255, 0.2);
-        padding: 5px 12px;
-        border-radius: 100px;
-        margin-bottom: 20px;
+        color: var(--muted);
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface);
+        backdrop-filter: blur(8px);
       }
 
-      .section-title {
-        font-size: clamp(34px, 5vw, 52px);
-        font-weight: 700;
-        line-height: 1.1;
-        letter-spacing: -0.025em;
-        margin-bottom: 24px;
-      }
-
-      .section-desc {
-        font-size: 17px;
-        color: var(--color-text-secondary);
-        max-width: 560px;
-        line-height: 1.75;
+      .eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent);
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
-        font-family: var(--font-sans);
-        font-weight: 500;
-        letter-spacing: -0.01em;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        padding: 0 18px;
+        height: 40px;
         border-radius: 10px;
-        border: none;
+        border: 1px solid transparent;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s var(--ease);
         white-space: nowrap;
       }
 
-      .btn-sm {
-        padding: 8px 16px;
-        font-size: 14px;
-      }
-
-      .btn-large {
-        padding: 14px 24px;
-        font-size: 15px;
-      }
-
       .btn-primary {
-        background: var(--color-primary);
-        color: #fff;
-        box-shadow:
-          0 0 0 1px rgba(64, 140, 255, 0.3),
-          0 8px 24px rgba(64, 140, 255, 0.25);
+        background: var(--text);
+        color: #08090a;
       }
 
       .btn-primary:hover {
-        background: #3b9ede;
-        box-shadow:
-          0 0 0 1px rgba(64, 140, 255, 0.5),
-          0 12px 32px rgba(64, 140, 255, 0.35);
         transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(255, 255, 255, 0.12);
       }
 
-      .btn-secondary {
-        color: var(--color-text-secondary);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--color-border-hover);
+      .btn-ghost {
+        background: var(--surface);
+        border-color: var(--border);
+        color: var(--text);
       }
 
-      .btn-secondary:hover {
-        color: var(--color-text);
-        background: rgba(255, 255, 255, 0.09);
-        border-color: rgba(255, 255, 255, 0.14);
-        transform: translateY(-1px);
+      .btn-ghost:hover {
+        background: var(--surface-2);
+        border-color: var(--border-strong);
       }
 
-      /* ========================================
-       Animations
-       ======================================== */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .btn-sm {
+        height: 34px;
+        font-size: 13px;
+        padding: 0 14px;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes pulseGlow {
-
-        0%,
-        100% {
-          opacity: 0.3;
-        }
-
-        50% {
-          opacity: 0.7;
-        }
-      }
-
-      @keyframes breathe {
-
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.3;
-        }
-
-        50% {
-          transform: scale(1.05);
-          opacity: 0.6;
-        }
-      }
-
-      @keyframes slideInUp {
-        from {
-          opacity: 0;
-          transform: translateY(60px) scale(0.97);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      .js .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(40px);
-        transition:
-          opacity 0.9s var(--ease-out-expo),
-          transform 0.9s var(--ease-out-expo);
-      }
-
-      .js .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* ========================================
-       Navigation
-       ======================================== */
+      /* ───────── Nav ───────── */
       .nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 100;
-        padding: 16px 0;
+        transition: all 0.3s var(--ease);
+        border-bottom: 1px solid transparent;
       }
 
-      .nav::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: var(--color-bg);
-        border-bottom: 1px solid var(--color-border-hover);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: -1;
+      .nav.scrolled {
+        background: rgba(8, 9, 10, 0.72);
+        backdrop-filter: blur(16px) saturate(140%);
+        border-bottom-color: var(--border);
       }
 
-      .nav.scrolled::before {
-        opacity: 1;
-      }
-
-      .nav-inner {
-        max-width: var(--max-width);
+      .nav__inner {
+        max-width: var(--maxw);
         margin: 0 auto;
         padding: 0 24px;
-        display: flex;
-        align-items: center;
-        gap: 40px;
-      }
-
-      .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 17px;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        flex-shrink: 0;
-      }
-
-      .nav-links {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        list-style: none;
-        flex: 1;
-      }
-
-      .nav-links a {
-        font-size: 14px;
-        color: var(--color-text-secondary);
-        padding: 6px 12px;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-      }
-
-      .nav-links a:hover {
-        color: var(--color-text);
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .nav-links a.nav-active {
-        color: var(--color-text);
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .nav .btn {
-        margin-left: auto;
-        flex-shrink: 0;
-      }
-
-      .mobile-toggle {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--color-text);
-        cursor: pointer;
-        padding: 4px;
-      }
-
-      /* ========================================
-       Hero
-       ======================================== */
-      .hero {
-        position: relative;
-        padding: 180px 0 200px;
-        overflow: hidden;
-      }
-
-      .hero-bg {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        transform: translateZ(0);
-      }
-
-      .hero-spotlight {
-        position: absolute;
-        top: -350px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1400px;
-        height: 1000px;
-        background: radial-gradient(ellipse 50% 50% at 50% 50%,
-            rgba(64, 140, 255, 0.3) 0%,
-            rgba(56, 189, 248, 0.12) 30%,
-            rgba(99, 102, 241, 0.06) 55%,
-            transparent 75%);
-        pointer-events: none;
-      }
-
-      .hero-glow {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        pointer-events: none;
-        will-change: transform;
-        transform: translateZ(0);
-      }
-
-      .hero-glow-1 {
-        width: 500px;
-        height: 500px;
-        background: rgba(64, 140, 255, 0.1);
-        top: -60px;
-        left: 10%;
-      }
-
-      .hero-glow-2 {
-        width: 350px;
-        height: 350px;
-        background: rgba(99, 102, 241, 0.08);
-        top: 80px;
-        right: 5%;
-      }
-
-      .hero-grid {
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(90deg,
-            rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px);
-        background-size: 60px 60px;
-        mask-image: radial-gradient(ellipse 80% 60% at 50% 0%,
-            black,
-            transparent);
-      }
-
-      .hero .container {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .hero-content {
-        max-width: 1000px;
-      }
-
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        color: var(--color-text-secondary);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--color-border-hover);
-        padding: 6px 14px;
-        border-radius: 100px;
-        margin-bottom: 28px;
-      }
-
-      .hero-badge-dot {
-        width: 6px;
-        height: 6px;
-        background: var(--color-green);
-        border-radius: 50%;
-        box-shadow: 0 0 8px var(--color-green);
-        animation: pulseGlow 2s ease-in-out infinite;
-      }
-
-      .hero-title {
-        font-size: clamp(40px, 6vw, 64px);
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        line-height: 1.05;
-        margin-bottom: 24px;
-      }
-
-      .hero-title .highlight {
-        /* background: linear-gradient(
-          135deg,
-          #3b9ede 0%,
-          #38bdf8 40%,
-          #7dd3fc 100%
-        ); */
-        background: linear-gradient(135deg,
-            #0874c5 0%,
-            #38bdf8 40%,
-            #7dd3fc 100%);
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .hero-subtitle {
-        font-size: 17px;
-        color: var(--color-text-secondary);
-        line-height: 1.7;
-        margin: 0 auto 36px;
-        max-width: 540px;
-      }
-
-      .hero-actions {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      /* Hero Visual */
-      .hero-visual {
-        position: relative;
-        width: 100%;
-        max-width: 970px;
-        margin-top: 72px;
-      }
-
-      .hero-visual-frame {
-        width: 100%;
-        border-radius: 16px 16px 16px 16px;
-        background-color: var(--color-bg);
-        /* border: 1px solid rgba(255, 255, 255, 0.08); */
-        border-bottom: none;
-        padding: 8px;
-        position: relative;
-        background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.015) 100%);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        /* box-shadow:
-          inset 0 0 0 rgba(255, 255, 255, 0.1),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.02),
-          inset 1px 0 0 rgba(255, 255, 255, 0.04),
-          inset -1px 0 0 rgba(255, 255, 255, 0.04),
-          0 0 60px rgba(64, 140, 255, 0.15),
-          0 0 120px rgba(64, 140, 255, 0.08),
-          0 24px 80px rgba(0, 0, 0, 0.5); */
-      }
-
-      .hero-frame-chrome {
-        display: flex;
-        display: none;
-        gap: 6px;
-        padding: 10px 12px 19px 15px;
-        align-items: center;
-      }
-
-      .hero-frame-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-
-      .hero-frame-dot:nth-child(1) {
-        background: #ff5f57;
-      }
-
-      .hero-frame-dot:nth-child(2) {
-        background: #febc2e;
-      }
-
-      .hero-frame-dot:nth-child(3) {
-        background: #28c840;
-      }
-
-      .hero-visual-frame img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 16px 16px 16px 16px;
-      }
-
-      .hero-visual-frame-fade {
-        position: relative;
-      }
-
-      .hero-visual-frame-fade::after {
-        content: "";
-        position: absolute;
-        /* display: none; */
-        bottom: -1px;
-        left: -1px;
-        right: -1px;
-        height: 40%;
-        background: linear-gradient(to bottom, transparent 0%, #000 100%);
-        pointer-events: none;
-        border-radius: 16px 16px 16px 16px;
-      }
-
-      /* ========================================
-       Features
-       ======================================== */
-      .features {
-        padding: 120px 0;
-      }
-
-      .features-header {
-        text-align: center;
-        margin-bottom: 80px;
-      }
-
-      .features-header .section-desc {
-        margin: 0 auto;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: var(--color-border);
-      }
-
-      .feature-card {
-        position: relative;
-        padding: 48px 32px;
-        background: var(--color-bg);
-        text-align: center;
-        transition: background 0.4s var(--ease-out-expo);
-      }
-
-      .feature-card:hover {
-        background: rgba(255, 255, 255, 0.02);
-      }
-
-      .feature-icon {
-        width: 64px;
         height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 50%;
-        margin: 0 auto 24px;
-      }
-
-      .feature-icon svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--color-text);
-        fill: none;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-
-      .feature-card h3 {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        letter-spacing: -0.01em;
-      }
-
-      .feature-card p {
-        font-size: 14px;
-        color: var(--color-text-secondary);
-        line-height: 1.7;
-      }
-
-      /* ========================================
-       How It Works
-       ======================================== */
-      .how-it-works {
-        padding: 120px 0;
-        position: relative;
-      }
-
-      .how-it-works-header {
-        text-align: center;
-        margin-bottom: 88px;
-      }
-
-      .how-it-works-header .section-desc {
-        margin: 0 auto;
-      }
-
-      .steps {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-        position: relative;
-      }
-
-      .steps::before {
-        content: "";
-        position: absolute;
-        top: 36px;
-        left: calc(16.66% + 36px);
-        right: calc(16.66% + 36px);
-        height: 1px;
-        background: linear-gradient(90deg,
-            var(--color-primary),
-            var(--color-border-hover),
-            var(--color-primary));
-      }
-
-      .step {
-        text-align: center;
-        position: relative;
-      }
-
-      .step-number {
-        width: 64px;
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 28px;
-        background: var(--color-bg-card);
-        border: 1px solid var(--color-border-hover);
-        border-radius: 50%;
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--color-primary);
-        position: relative;
-        z-index: 1;
-        box-shadow: 0 0 32px rgba(64, 140, 255, 0.08);
-      }
-
-      .step h3 {
-        font-size: 19px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        letter-spacing: -0.015em;
-      }
-
-      .step p {
-        font-size: 14px;
-        color: var(--color-text-secondary);
-        line-height: 1.7;
-        max-width: 260px;
-        margin: 0 auto;
-      }
-
-      /* ========================================
-       Why Section
-       ======================================== */
-      .why-section {
-        padding: 120px 0;
-      }
-
-      .why-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-        align-items: center;
-      }
-
-      .why-content .section-desc {
-        margin-bottom: 44px;
-      }
-
-      .why-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .why-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-      }
-
-      .why-list-icon {
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-
-      .why-list-icon svg {
-        width: 20px;
-        height: 20px;
-        stroke: var(--color-primary);
-        fill: none;
-        stroke-width: 2;
-      }
-
-      .why-list li strong {
-        display: block;
-        font-size: 15px;
-        font-weight: 600;
-        margin-bottom: 2px;
-      }
-
-      .why-list li span {
-        font-size: 14px;
-        color: var(--color-text-secondary);
-        line-height: 1.6;
-      }
-
-      .why-visual {
-        position: relative;
-      }
-
-      .why-compare {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-
-      .why-compare-card {
-        padding: 32px 28px;
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--color-border);
-        transition: all 0.4s var(--ease-out-expo);
-      }
-
-      .why-compare-card:hover {
-        transform: translateY(-2px);
-      }
-
-      .why-compare-card.old {
-        background: rgba(236, 106, 95, 0.03);
-        border-color: rgba(236, 106, 95, 0.12);
-      }
-
-      .why-compare-card.new {
-        background: rgba(97, 196, 84, 0.03);
-        border-color: rgba(97, 196, 84, 0.12);
-      }
-
-      .why-compare-card h4 {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .why-compare-card.old h4 {
-        color: var(--color-red);
-      }
-
-      .why-compare-card.new h4 {
-        color: var(--color-green);
-      }
-
-      .why-compare-card ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .why-compare-card li {
-        font-size: 13px;
-        color: var(--color-text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        line-height: 1.5;
-      }
-
-      .why-compare-card.old li::before {
-        content: "×";
-        color: var(--color-red);
-        font-weight: 700;
-        font-size: 14px;
-      }
-
-      .why-compare-card.new li::before {
-        content: "✓";
-        color: var(--color-green);
-        font-weight: 700;
-        font-size: 14px;
-      }
-
-      /* ========================================
-       CTA Section
-       ======================================== */
-      .cta-section {
-        padding: 120px 0;
-      }
-
-      .cta-box {
-        position: relative;
-        text-align: center;
-        padding: 100px 48px;
-        background: var(--color-bg-card);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: var(--radius-xl);
-        overflow: hidden;
-      }
-
-      .cta-box::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg,
-            transparent 10%,
-            rgba(64, 140, 255, 0.6) 50%,
-            transparent 90%);
-      }
-
-      .cta-glow {
-        position: absolute;
-        bottom: -120px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 700px;
-        height: 350px;
-        background: radial-gradient(ellipse at center,
-            rgba(64, 140, 255, 0.18) 0%,
-            transparent 70%);
-        pointer-events: none;
-        animation: breathe 6s ease-in-out infinite;
-      }
-
-      .cta-box .section-title {
-        position: relative;
-        z-index: 1;
-        margin-bottom: 16px;
-      }
-
-      .cta-box .section-desc {
-        position: relative;
-        z-index: 1;
-        margin: 0 auto 36px;
-        text-align: center;
-      }
-
-      .cta-buttons {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-      }
-
-      .cta-note {
-        position: relative;
-        z-index: 1;
-        margin-top: 20px;
-        font-size: 13px;
-        color: var(--color-text-muted);
-      }
-
-      /* ========================================
-       Footer
-       ======================================== */
-      .footer {
-        padding: 48px 0;
-        border-top: 1px solid var(--color-border);
-      }
-
-      .footer-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 32px;
       }
 
-      .footer-brand {
+      .logo {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: 0.02em;
+        color: var(--text);
       }
 
-      .footer-brand-icon {
+      .logo__mark {
         width: 24px;
         height: 24px;
-        background: var(--color-primary);
-        border-radius: 6px;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        color: var(--text);
       }
 
-      .footer-brand-icon svg {
-        width: 13px;
-        height: 13px;
-        fill: #fff;
+      .logo__mark svg {
+        width: 24px;
+        height: 24px;
       }
 
-      .footer-brand span {
+      .nav__links {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+      }
+
+      .nav__links a {
         font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+
+      .nav__links a:hover {
+        color: var(--text);
+        background: var(--surface);
+      }
+
+      .nav__cta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .nav__burger {
+        display: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        cursor: pointer;
+      }
+
+      /* ───────── Hero ───────── */
+      .hero {
+        position: relative;
+        padding: 168px 0 80px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .aurora {
+        position: absolute;
+        inset: -20% -10% auto -10%;
+        height: 760px;
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(90px);
+        opacity: 0.42;
+      }
+
+      .aurora::before,
+      .aurora::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .aurora::before {
+        width: 620px;
+        height: 620px;
+        left: 50%;
+        top: -120px;
+        transform: translateX(-60%);
+        background: radial-gradient(circle, var(--accent), transparent 62%);
+        animation: drift 18s ease-in-out infinite;
+      }
+
+      .aurora::after {
+        width: 520px;
+        height: 520px;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-10%);
+        background: radial-gradient(circle, var(--violet), transparent 60%);
+        animation: drift 22s ease-in-out infinite reverse;
+      }
+
+      .aurora__c {
+        position: absolute;
+        width: 460px;
+        height: 460px;
+        left: 30%;
+        top: 40px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--cyan), transparent 60%);
+        opacity: 0.5;
+        animation: drift 26s ease-in-out infinite;
+      }
+
+      @keyframes drift {
+
+        0%,
+        100% {
+          transform: translate(-50%, 0) scale(1);
+        }
+
+        50% {
+          transform: translate(-42%, 36px) scale(1.08);
+        }
+      }
+
+      /* faint grid floor */
+      .hero__grid {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 420px;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse 70% 100% at 50% 100%,
+            #000 10%,
+            transparent 70%);
+        opacity: 0.35;
+      }
+
+      .hero h1 {
+        font-size: clamp(40px, 6.4vw, 76px);
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        font-weight: 700;
+        max-width: 14ch;
+        margin: 24px auto 0;
+      }
+
+      .hero h1 .grad {
+        color: var(--text);
+      }
+
+      .hero .lead {
+        font-size: clamp(17px, 2vw, 20px);
+        color: var(--muted);
+        max-width: 600px;
+        margin: 24px auto 0;
+        line-height: 1.55;
+      }
+
+      .hero__cta {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 34px;
+        flex-wrap: wrap;
+      }
+
+      .hero__note {
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--subtle);
+      }
+
+      /* ───────── Editor mockup ───────── */
+      .shot {
+        position: relative;
+        margin: 64px auto 0;
+        z-index: 2;
+      }
+
+      .shot__glow {
+        position: absolute;
+        inset: -8% 6% -30% 6%;
+        background: linear-gradient(140deg, var(--accent), var(--violet));
+        filter: blur(80px);
+        opacity: 0.28;
+        z-index: -1;
+        border-radius: 50%;
+      }
+
+      .shot__img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        box-shadow:
+          0 40px 120px -20px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      }
+
+      .win {
+        border: 1px solid var(--border-strong);
+        border-radius: 16px;
+        background: linear-gradient(180deg, #131417, #0c0d0f);
+        overflow: hidden;
+        box-shadow:
+          0 40px 120px -20px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      }
+
+      .win__bar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.015);
+      }
+
+      .win__dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .win__dots span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #2c2e33;
+      }
+
+      .win__addr {
+        flex: 1;
+        height: 28px;
+        border-radius: 7px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        font-size: 12px;
+        color: var(--subtle);
+        gap: 8px;
+      }
+
+      .win__chip {
+        font-size: 11px;
+        font-weight: 600;
+        color: #08090a;
+        background: var(--text);
+        padding: 5px 10px;
+        border-radius: 6px;
+      }
+
+      .win__body {
+        display: grid;
+        grid-template-columns: 1fr 232px;
+        min-height: 360px;
+      }
+
+      .canvas {
+        padding: 40px 36px;
+        background:
+          radial-gradient(120% 80% at 20% 0%,
+            rgba(var(--accent-rgb), 0.06),
+            transparent 60%),
+          #0a0b0d;
+        position: relative;
+      }
+
+      .canvas .badge {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .canvas h3 {
+        font-size: 30px;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        position: relative;
+        display: inline-block;
+        padding: 4px 6px;
+        margin: 0 -6px;
+        border-radius: 6px;
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        background: rgba(var(--accent-rgb), 0.08);
+      }
+
+      .canvas h3::after {
+        content: "Editing";
+        position: absolute;
+        top: -26px;
+        left: -2px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #08090a;
+        background: var(--accent);
+        padding: 3px 7px;
+        border-radius: 5px;
+        text-transform: none;
+      }
+
+      .canvas p {
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 40ch;
+        margin-top: 16px;
+      }
+
+      .canvas .row {
+        display: flex;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .canvas .pill {
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        flex: 0 0 96px;
+      }
+
+      .canvas .pill.solid {
+        background: linear-gradient(140deg, var(--accent), var(--violet));
+        border: none;
+      }
+
+      /* floating block toolbar */
+      .toolbar {
+        position: absolute;
+        left: 36px;
+        bottom: 36px;
+        display: flex;
+        gap: 2px;
+        padding: 5px;
+        background: #16171b;
+        border: 1px solid var(--border-strong);
+        border-radius: 10px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .toolbar b {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+      }
+
+      .toolbar b:hover {
+        background: var(--surface-2);
+        color: var(--text);
+      }
+
+      .toolbar svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .side {
+        border-left: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.012);
+        padding: 18px 16px;
+      }
+
+      .side .h {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--subtle);
+        margin-bottom: 12px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field label {
+        font-size: 11px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .field .inp {
+        height: 30px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .field .inp.lit {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+      }
+
+      .chips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .chips span {
+        font-size: 11px;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        padding: 3px 8px;
+        border-radius: 6px;
+      }
+
+      /* ───────── Trust strip ───────── */
+      .trust {
+        padding: 40px 0 8px;
+        text-align: center;
+      }
+
+      .trust p {
+        font-size: 13px;
+        color: var(--subtle);
+        letter-spacing: 0.04em;
+      }
+
+      .trust__row {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 22px;
+        opacity: 0.6;
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .trust__row span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ───────── Sections ───────── */
+      section.block {
+        padding: 110px 0;
+        position: relative;
+      }
+
+      .sechead {
+        max-width: 640px;
+      }
+
+      .sechead.center {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .sechead h2 {
+        font-size: clamp(30px, 4vw, 46px);
+        letter-spacing: -0.03em;
+        line-height: 1.08;
+        font-weight: 700;
+        margin-top: 16px;
+      }
+
+      .sechead p {
+        color: var(--muted);
+        font-size: 18px;
+        margin-top: 16px;
+        line-height: 1.55;
+      }
+
+      /* feature rows */
+      .feat {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        margin-top: 72px;
+      }
+
+      .feat:first-of-type {
+        margin-top: 56px;
+      }
+
+      .feat.flip .feat__text {
+        order: 2;
+      }
+
+      .feat__text h3 {
+        font-size: 26px;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
         font-weight: 600;
       }
 
-      .footer-copyright {
-        font-size: 13px;
-        color: var(--color-text-muted);
+      .feat__text>p {
+        color: var(--muted);
+        font-size: 16px;
+        margin-top: 14px;
+        line-height: 1.6;
       }
 
-      .footer-links {
-        display: flex;
-        gap: 24px;
+      .feat__list {
         list-style: none;
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
       }
 
-      .footer-links a {
+      .feat__list li {
+        display: flex;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--muted);
+        align-items: flex-start;
+      }
+
+      .feat__list svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        margin-top: 1px;
+        color: var(--accent);
+      }
+
+      .feat__list b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* visual cards used in feature rows */
+      .vcard {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, var(--surface), transparent);
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .vcard::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+            transparent,
+            var(--border-strong),
+            transparent);
+      }
+
+      .vcard__glow {
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        right: -80px;
+        top: -100px;
+        background: radial-gradient(circle,
+            rgba(var(--accent-rgb), 0.2),
+            transparent 60%);
+        filter: blur(40px);
+        pointer-events: none;
+      }
+
+      /* commit list */
+      .commits {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .commit {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 10px;
+        border-radius: 9px;
+      }
+
+      .commit:hover {
+        background: var(--surface);
+      }
+
+      .commit .g {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex: 0 0 10px;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+      }
+
+      .commit .msg {
+        flex: 1;
+        font-size: 13.5px;
+      }
+
+      .commit .meta {
+        font-size: 12px;
+        color: var(--subtle);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ai chat card */
+      .chat {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .bubble {
+        max-width: 86%;
+        font-size: 13.5px;
+        padding: 11px 14px;
+        border-radius: 14px;
+        line-height: 1.45;
+      }
+
+      .bubble.me {
+        align-self: flex-end;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-bottom-right-radius: 5px;
+      }
+
+      .bubble.ai {
+        align-self: flex-start;
+        background: rgba(var(--accent-rgb), 0.08);
+        border: 1px solid rgba(var(--accent-rgb), 0.22);
+        border-bottom-left-radius: 5px;
+        color: #d6dae1;
+      }
+
+      .chat__apply {
+        display: flex;
+        gap: 8px;
+        align-self: flex-start;
+        margin-top: 2px;
+      }
+
+      .tag {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 7px;
+      }
+
+      .tag.solid {
+        background: var(--text);
+        color: #08090a;
+      }
+
+      .tag.out {
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+
+      /* ───────── Bento ───────── */
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 64px;
+      }
+
+      .tile {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 24px;
+        transition: all 0.25s var(--ease);
+      }
+
+      .tile:hover {
+        border-color: var(--border-strong);
+        background: var(--surface-2);
+        transform: translateY(-3px);
+      }
+
+      .tile__ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: rgba(var(--accent-rgb), 0.1);
+        border: 1px solid rgba(var(--accent-rgb), 0.2);
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+
+      .tile__ic svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .tile h4 {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .tile p {
+        font-size: 13.5px;
+        color: var(--muted);
+        margin-top: 7px;
+        line-height: 1.5;
+      }
+
+      /* ───────── Code section ───────── */
+      .codewrap {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 56px;
+        align-items: center;
+        margin-top: 8px;
+      }
+
+      .code {
+        border: 1px solid var(--border-strong);
+        border-radius: 14px;
+        background: #0b0c0e;
+        overflow: hidden;
+        box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
+      }
+
+      .code__bar {
+        display: flex;
+        gap: 7px;
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .code__bar span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #2c2e33;
+      }
+
+      .code pre {
+        margin: 0;
+        padding: 22px;
+        font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
         font-size: 13px;
-        color: var(--color-text-muted);
-        transition: color 0.2s ease;
+        line-height: 1.7;
+        overflow-x: auto;
+        color: #c9ccd4;
       }
 
-      .footer-links a:hover {
-        color: var(--color-text);
+      .c-kw {
+        color: #a7b6c9;
       }
 
-      /* ========================================
-       Responsive
-       ======================================== */
-      @media (max-width: 1024px) {
-        :root {
-          --section-padding: 80px;
-        }
+      .c-fn {
+        color: #82d0ff;
+      }
 
-        .features-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      .c-str {
+        color: #9ce6a8;
+      }
 
-        .steps {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      .c-com {
+        color: #5c606a;
+      }
 
-        .steps::before {
+      .c-pr {
+        color: #ffb38a;
+      }
+
+      /* ───────── CTA ───────── */
+      .cta {
+        position: relative;
+        text-align: center;
+        padding: 96px 0 110px;
+        overflow: hidden;
+      }
+
+      .cta__panel {
+        position: relative;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 72px 32px;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--surface), transparent);
+      }
+
+      .cta__panel .aglow {
+        position: absolute;
+        width: 700px;
+        height: 360px;
+        left: 50%;
+        top: -180px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse,
+            rgba(var(--accent-rgb), 0.32),
+            transparent 65%);
+        filter: blur(50px);
+        pointer-events: none;
+      }
+
+      .cta h2 {
+        font-size: clamp(32px, 4.6vw, 52px);
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .cta p {
+        color: var(--muted);
+        font-size: 18px;
+        margin: 18px auto 0;
+        max-width: 480px;
+        position: relative;
+      }
+
+      .cta__cta {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 32px;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      /* ───────── Footer ───────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 64px 0 48px;
+      }
+
+      .foot {
+        display: grid;
+        grid-template-columns: 1.6fr repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .foot__brand p {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 14px;
+        max-width: 30ch;
+        line-height: 1.6;
+      }
+
+      .foot__col h5 {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .foot__col a {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+        padding: 6px 0;
+        transition: color 0.15s;
+      }
+
+      .foot__col a:hover {
+        color: var(--text);
+      }
+
+      .foot__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 56px;
+        padding-top: 28px;
+        border-top: 1px solid var(--border);
+        color: var(--subtle);
+        font-size: 13px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /* ───────── Reveal ───────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.8s var(--ease),
+          transform 0.8s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ───────── Responsive ───────── */
+      @media (max-width: 900px) {
+        .nav__links {
           display: none;
         }
 
-        .why-grid {
-          gap: 48px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        :root {
-          --section-padding: 80px;
+        .nav__burger {
+          display: grid;
+          place-items: center;
         }
 
-        .nav-links {
+        .nav__cta .btn-ghost {
           display: none;
         }
 
-        .mobile-toggle {
-          display: block;
+        .feat,
+        .codewrap {
+          grid-template-columns: 1fr;
+          gap: 32px;
         }
 
+        .feat.flip .feat__text {
+          order: 0;
+        }
+
+        .bento {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .win__body {
+          grid-template-columns: 1fr;
+        }
+
+        .side {
+          display: none;
+        }
+
+        .foot {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
         .hero {
-          padding: 120px 0 48px;
+          padding-top: 130px;
         }
 
-        .hero-visual {
-          margin-top: 48px;
-        }
-
-        .features-grid {
+        .bento,
+        .foot {
           grid-template-columns: 1fr;
         }
 
-        .steps {
-          grid-template-columns: 1fr;
-          gap: 48px;
+        .cta__panel {
+          padding: 48px 20px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
         }
 
-        .steps::before {
-          display: none;
-        }
-
-        .why-grid {
-          grid-template-columns: 1fr;
-          gap: 56px;
-        }
-
-        .why-compare {
-          grid-template-columns: 1fr;
-        }
-
-        .footer-inner {
-          flex-direction: column;
-          gap: 24px;
-          text-align: center;
-        }
-
-        .cta-box {
-          padding: 56px 24px;
-        }
-
-        .cta-buttons {
-          flex-direction: column;
-        }
-
-        .cta-buttons .btn {
-          width: 100%;
-          justify-content: center;
+        .reveal {
+          opacity: 1;
+          transform: none;
         }
       }
     </style>
   </head>
   <body>
-    <!-- ============ Navigation ============ -->
+    <!-- NAV -->
     <nav class="nav" id="nav">
-      <div class="nav-inner">
-        <a href="#" class="nav-logo">
-          <img src="images/klar-logo.png" alt="Klar">
-          <!-- <div class="nav-logo-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </div>
-          Klar -->
+      <div class="nav__inner">
+        <a href="#" class="logo">
+          <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                clip-rule="evenodd"></path>
+            </svg></span>
+          KLAR
         </a>
-        <ul class="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#why">Why Klar</a></li>
-        </ul>
-        <a href="#cta" class="btn btn-sm btn-primary">Get Started</a>
-        <button class="mobile-toggle" aria-label="Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+        <div class="nav__links">
+          <a href="#features">Features</a>
+          <a href="#ai">AI</a>
+          <a href="#content">Content</a>
+          <a href="#developers">Developers</a>
+          <a href="https://klar-sites.github.io/klar-docs/page-5.html">Docs</a>
+        </div>
+        <div class="nav__cta">
+          <a href="https://editor.klar.website/" class="btn btn-ghost btn-sm">Sign in</a>
+          <a href="#start" class="btn btn-primary btn-sm">Start editing</a>
+          <button class="nav__burger" aria-label="Menu" id="burger">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </nav>
 
-    <!-- ============ Hero ============ -->
-    <section class="hero" id="hero">
-      <div class="hero-bg">
-        <div class="hero-spotlight"></div>
-        <div class="hero-glow hero-glow-1"></div>
-        <div class="hero-glow hero-glow-2"></div>
-        <div class="hero-grid"></div>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="aurora">
+        <div class="aurora__c"></div>
       </div>
-      <div class="container">
-        <div class="hero-content">
-          <!-- Open Source · GitHub Sync -->
-          <!-- Tool for Static HTML Pages -->
-          <!-- Ultimate Tool for Editing Static HTML Pages -->
-          <!-- Give your editors control of the content -->
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Edit Content on Static HTML Pages
-          </div>
-          <!-- Give Your Clients the Keys -->
-          <!-- Give Your Clients the Content -->
-          <!-- Edit Any Page. Ship via Git. -->
-          <!-- Let Clients Edit Your Site -->
-          <h1 class="hero-title">  
-            Give Clients Control of Content
-            <br><span class="highlight">Keep Your Code in Git</span>
-          </h1>
-          <!-- Klar is a lightweight CMS that lets the clients edit any HTML page,
-          preview changes instantly, and sync and publish<br />everything to
-          GitHub automatically. -->
-          <!-- Klar is a lightweight CMS that lets clients edit HTML pages, preview
-          changes instantly, and automatically<br />publish to GitHub. -->
-          <p class="hero-subtitle">
-            Klar is a lightweight CMS that lets clients edit any HTML page,
-            preview changes instantly, and automatically sync<br>and publish
-            everything to GitHub.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#cta" class="btn btn-primary btn-large">
-              Get Started
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </a>
-            <a href="#how-it-works" class="btn btn-secondary btn-large">
-              See how it works
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </a>
-          </div>
+      <div class="hero__grid"></div>
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot"></span>Visual CMS · Git-native</span>
+        <h1>Edit your website by <span class="grad">clicking on it</span></h1>
+        <p class="lead">
+          Klar renders your live page and lets you edit text, images, and icons
+          right where they are. Every change is applied as clean HTML and
+          committed straight to your GitHub repo — no build step, no lock-in.
+        </p>
+        <div class="hero__cta">
+          <a href="#start" class="btn btn-primary">Start editing — free</a>
+          <a href="#docs" class="btn btn-ghost">Read the docs →</a>
         </div>
+        <p class="hero__note">Works with any static site in a GitHub repo.</p>
 
-        <div class="hero-visual">
-          <div class="hero-visual-frame">
-            <div class="hero-frame-chrome">
-              <span class="hero-frame-dot"></span>
-              <span class="hero-frame-dot"></span>
-              <span class="hero-frame-dot"></span>
-            </div>
-            <div class="hero-visual-frame-fade">
-              <img src="images/Screenshot 2026-04-04 at 13.49.19.png" alt="Klar CMS editor interface showing visual editing, sections panel, and element properties">
-            </div>
-          </div>
+        <!-- editor mockup -->
+        <div class="shot reveal">
+          <div class="shot__glow"></div>
+          <img class="shot__img" src="/images/Screenshot 2026-06-07 at 14.18.53.png"
+            alt="The Klar visual editor — clicking a headline to edit it inline, with the structured fields panel on the right."
+            loading="lazy" />
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- ============ Features ============ -->
-    <section class="features section" id="features">
-      <div class="container">
-        <div class="features-header animate-on-scroll">
-          <div class="section-label">Features</div>
-          <h2 class="section-title">
-            Everything you need to<br>edit with confidence
-          </h2>
-          <p class="section-desc">
-            A focused set of tools that make website editing fast, visual, and
-            completely synced with your codebase.
+    <!-- TRUST -->
+    <div class="trust wrap reveal">
+      <p>EVERYTHING A SITE NEEDS — NOTHING IT DOESN'T</p>
+      <div class="trust__row">
+        <span>⌁ Clean HTML</span>
+        <span>⎇ Git history</span>
+        <span>✦ AI editing</span>
+        <span>◳ GitHub Pages</span>
+        <span>⚡ No build step</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="block" id="features">
+      <div class="wrap">
+        <div class="sechead reveal">
+          <span class="eyebrow"><span class="dot"></span>The editor</span>
+          <h2>Edit on the page, not in a form</h2>
+          <p>
+            Klar loads the real rendered output in a sandboxed frame. Click
+            anything to change it — text, images, links, icons, even repeating
+            lists — with the structure of your HTML untouched.
           </p>
         </div>
-        <div class="features-grid">
-          <!-- Click-to-Edit -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M15 3l6 6-12 12H3v-6L15 3z"></path>
-                <path d="M13 5l6 6"></path>
-              </svg>
-            </div>
-            <h3>Click-to-Edit Interface</h3>
-            <p>
-              Hover over any element to highlight it. Click to start editing.
-              Change text, images, links, and attributes — all inline.
-            </p>
-          </div>
 
-          <!-- GitHub Sync -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22">
-                </path>
-              </svg>
-            </div>
-            <h3>GitHub Sync</h3>
+        <!-- row 1 -->
+        <div class="feat reveal">
+          <div class="feat__text">
+            <h3>Click-to-edit, exactly where it lives</h3>
             <p>
-              Every edit becomes a commit. Publish directly to GitHub with
-              auto-generated commit messages. Enable GitHub Pages in one click.
+              Hover to highlight, click to edit inline. Rich text for
+              paragraphs, a clean structured panel for attributes, and a
+              floating toolbar to add, duplicate, reorder, or remove blocks.
             </p>
-          </div>
-
-          <!-- Real-time Preview -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-            <h3>Real-time Preview</h3>
-            <p>
-              See your changes instantly in a sandboxed preview that renders
-              your page exactly as visitors see it. Toggle scripts, resize
-              viewports.
-            </p>
-          </div>
-
-          <!-- Structured Panel -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-            </div>
-            <h3>Structured Editing</h3>
-            <p>
-              Edit content through a sidebar panel with element badges,
-              attribute editors, and search. Navigate sections like header,
-              main, and footer.
-            </p>
-          </div>
-
-          <!-- Media Management -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
-            </div>
-            <h3>Media Library</h3>
-            <p>
-              Upload, browse, and swap images through a GitHub-backed media
-              library. Drag and drop files directly into your project.
-            </p>
-          </div>
-
-          <!-- Clean Output -->
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </div>
-            <h3>Clean HTML Output</h3>
-            <p>
-              No bloated markup. Klar edits your actual HTML — the same files in
-              your repo. What you see is what gets committed.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ How It Works ============ -->
-    <section class="how-it-works section" id="how-it-works">
-      <div class="container">
-        <div class="how-it-works-header animate-on-scroll">
-          <div class="section-label">How It Works</div>
-          <h2 class="section-title">Three steps to a better workflow</h2>
-          <p class="section-desc">
-            Just connect your GitHub repo and start editing.<br>No complex
-            setup. No database.
-          </p>
-        </div>
-        <div class="steps">
-          <div class="step animate-on-scroll">
-            <div class="step-number">1</div>
-            <h3>Edit Website</h3>
-            <p>
-              Click any element on your page to edit text, images, links, and
-              attributes with an intuitive visual interface.
-            </p>
-          </div>
-          <div class="step animate-on-scroll">
-            <div class="step-number">2</div>
-            <h3>Save to GitHub</h3>
-            <p>
-              Save your edits and they are committed directly to your GitHub
-              repository with auto-generated commit messages.
-            </p>
-          </div>
-          <div class="step animate-on-scroll">
-            <div class="step-number">3</div>
-            <h3>Publish your site</h3>
-            <p>
-              Deploy your website via GitHub Pages, Vercel, or Netlify — your
-              workflow, your choice.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Why Klar ============ -->
-    <section class="why-section section" id="why">
-      <div class="container">
-        <div class="why-grid">
-          <div class="why-content animate-on-scroll">
-            <div class="section-label">Why Klar</div>
-            <h2 class="section-title">
-              Built for developers who want simplicity
-            </h2>
-            <p class="section-desc">
-              Traditional CMS tools are bloated, complex, and disconnect you
-              from your code. Klar keeps you in control.
-            </p>
-            <ul class="why-list">
+            <ul class="feat__list">
               <li>
-                <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <div>
-                  <strong>Git-native version control</strong>
-                  <span>Every change is a commit. Roll back, branch, and merge —
-                    your content lives in your repo.</span>
-                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Inline rich text</b> with paste sanitization — no messy
+                  markup creeps in.</span>
               </li>
               <li>
-                <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <div>
-                  <strong>Zero build complexity</strong>
-                  <span>No database, no server config, no deploy pipeline to
-                    maintain. Just HTML + GitHub.</span>
-                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Container &amp; list editing</b> for cards, grids, and
+                  repeating rows.</span>
               </li>
               <li>
-                <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <div>
-                  <strong>Clean, portable output</strong>
-                  <span>Your HTML stays clean and readable. No vendor lock-in, no
-                    proprietary format.</span>
-                </div>
-              </li>
-              <li>
-                <span class="why-list-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <div>
-                  <strong>Fast and focused</strong>
-                  <span>No feature bloat. Klar does one thing exceptionally well —
-                    visual editing with GitHub sync.</span>
-                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Undo / redo</b> across structural changes, kept in sync
+                  with the preview.</span>
               </li>
             </ul>
           </div>
-          <div class="why-visual animate-on-scroll">
-            <div class="why-compare">
-              <div class="why-compare-card old">
-                <h4>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                  </svg>
-                  Traditional CMS
-                </h4>
-                <ul>
-                  <li>Complex admin panels</li>
-                  <li>Database dependencies</li>
-                  <li>Bloated HTML output</li>
-                  <li>Vendor lock-in</li>
-                  <li>Slow deploy cycles</li>
-                </ul>
+          <div class="vcard">
+            <div class="vcard__glow"></div>
+            <!-- rich-text formatting toolbar -->
+            <div style="
+                display: inline-flex;
+                gap: 2px;
+                padding: 5px;
+                background: #16171b;
+                border: 1px solid var(--border-strong);
+                border-radius: 9px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+              ">
+              <span style="
+                  width: 28px;
+                  height: 28px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 6px;
+                  font-weight: 700;
+                  color: var(--text);
+                  background: var(--surface-2);
+                ">B</span>
+              <span style="
+                  width: 28px;
+                  height: 28px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 6px;
+                  font-style: italic;
+                  color: var(--muted);
+                ">I</span>
+              <span style="
+                  width: 28px;
+                  height: 28px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 6px;
+                  text-decoration: underline;
+                  color: var(--muted);
+                ">U</span>
+              <span style="
+                  width: 28px;
+                  height: 28px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 6px;
+                  color: var(--muted);
+                ">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round">
+                  <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 1 0-7.07-7.07l-1.71 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 1 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+              </span>
+            </div>
+            <p style="
+                font-size: 22px;
+                line-height: 1.45;
+                letter-spacing: -0.02em;
+                color: var(--text);
+                margin-top: 18px;
+              ">
+              Build something people
+              <span style="
+                  background: rgba(var(--accent-rgb), 0.22);
+                  border-radius: 4px;
+                  padding: 0 4px;
+                  box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.35);
+                ">actually love</span>
+              to use.
+            </p>
+            <p style="font-size: 13px; color: var(--subtle); margin-top: 14px">
+              Select any text to format it — bold, italic, links.
+            </p>
+          </div>
+        </div>
+
+        <!-- row 2 -->
+        <div class="feat flip reveal">
+          <div class="feat__text">
+            <h3>Clean HTML, committed to Git</h3>
+            <p>
+              Every save is a real commit to your repo — applied with Cheerio to
+              the source HTML, with zero editor artifacts, wrappers, or data
+              attributes. Your code stays yours.
+            </p>
+            <ul class="feat__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Version history</b> — browse commits and preview any past
+                  version.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Publish to GitHub Pages</b> in one click, on its own
+                  branch.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Shared sections</b> sync a header or footer across every
+                  page.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="vcard">
+            <div class="vcard__glow"></div>
+            <div class="commits">
+              <div class="commit">
+                <span class="g"></span><span class="msg">Update hero copy &amp; CTA</span><span class="meta">just
+                  now</span>
               </div>
-              <div class="why-compare-card new">
-                <h4>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                  </svg>
-                  Klar
-                </h4>
-                <ul>
-                  <li>Visual inline editing</li>
-                  <li>Git-based storage</li>
-                  <li>Clean semantic HTML</li>
-                  <li>Fully portable</li>
-                  <li>Instant publishing</li>
-                </ul>
+              <div class="commit">
+                <span class="g"></span><span class="msg">Swap pricing screenshot</span><span class="meta">2h ago</span>
+              </div>
+              <div class="commit">
+                <span class="g"></span><span class="msg">Add testimonial section</span><span
+                  class="meta">yesterday</span>
+              </div>
+              <div class="commit">
+                <span class="g"></span><span class="msg">Fix footer links</span><span class="meta">2d ago</span>
               </div>
             </div>
           </div>
@@ -1438,150 +1417,396 @@
       </div>
     </section>
 
-    <!-- ============ CTA ============ -->
-    <section class="cta-section section" id="cta">
-      <div class="container">
-        <div class="cta-box animate-on-scroll">
-          <div class="cta-glow"></div>
-          <h2 class="section-title">Ready to simplify<br>your workflow?</h2>
-          <p class="section-desc">
-            Start editing the content of your website and let Klar handle<br>the
-            GitHub sync. No complex setup.
+    <!-- AI -->
+    <section class="block" id="ai">
+      <div class="wrap">
+        <div class="feat reveal" style="margin-top: 0">
+          <div class="feat__text">
+            <span class="eyebrow"><span class="dot"></span>AI assistant</span>
+            <h3 style="margin-top: 18px; font-size: clamp(28px, 3.6vw, 40px)">
+              An assistant that edits the page with you
+            </h3>
+            <p>
+              Describe a change in plain English. Klar's AI can generate a page
+              or section, modify the current one, or edit the exact element you
+              clicked — and it understands content rendered at runtime by your
+              own JavaScript or React.
+            </p>
+            <ul class="feat__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Review before you apply</b> — a full before/after diff on
+                  every change.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Design-system aware</b> — reuses your existing classes and
+                  tokens.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Bring your own key</b> — Claude, GPT, and more via your
+                  provider.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="vcard">
+            <div class="vcard__glow"></div>
+            <div class="chat">
+              <div class="bubble me">
+                Make this CTA bolder and change it to "Get started free"
+              </div>
+              <div class="bubble ai">
+                Updated the button label and bumped it to your primary style.
+                Here's the change to the hero section.
+              </div>
+              <div class="chat__apply">
+                <span class="tag solid">Apply</span>
+                <span class="tag out">View diff</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="block" id="content">
+      <div class="wrap">
+        <div class="sechead center reveal">
+          <span class="eyebrow"><span class="dot"></span>Structured content</span>
+          <h2>From one page to a real content model</h2>
+          <p>
+            Turn parts of a page into named fields, then render dynamic lists —
+            blog indexes, card grids, archives — that update themselves.
           </p>
-          <div class="cta-buttons">
-            <a href="https://editor.klar.website/" class="btn btn-primary btn-large">
-              Start Building
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </div>
+        <div class="feat reveal" style="margin-top: 64px">
+          <div class="vcard">
+            <div class="vcard__glow"></div>
+            <div class="side" style="border: none; background: transparent; padding: 0">
+              <div class="h">Edit all fields · blog-post</div>
+              <div class="field">
+                <label>Title</label>
+                <div class="inp lit"></div>
+              </div>
+              <div class="field">
+                <label>Image</label>
+                <div class="inp"></div>
+              </div>
+              <div class="field">
+                <label>Category</label>
+                <div class="chips"><span>Technology</span></div>
+              </div>
+              <div class="field">
+                <label>Tags</label>
+                <div class="chips">
+                  <span>Leadership</span><span>CSS</span><span>+</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feat__text">
+            <h3>Content fields &amp; listing templates</h3>
+            <p>
+              Declare <code style="color: var(--violet)">:field()</code> rules
+              in your editable selectors to capture titles, images, tags, dates,
+              and rich blocks per page. Drop a
+              <code style="color: var(--violet)">&lt;template data-query&gt;</code>
+              and Klar renders the list for you on every save.
+            </p>
+            <ul class="feat__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Page types</b> — reusable templates for posts, products,
+                  people.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Tags &amp; vocabularies</b> with faceted filtering out of
+                  the box.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Public content API</b> — read it anywhere, no backend to
+                  run.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO -->
+    <section class="block" style="padding-top: 0">
+      <div class="wrap">
+        <div class="sechead center reveal">
+          <h2>Batteries included</h2>
+          <p>The everyday tools that make a CMS actually usable.</p>
+        </div>
+        <div class="bento">
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <circle cx="9" cy="9" r="2"></circle>
+                <path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path>
               </svg>
+            </div>
+            <h4>Media library</h4>
+            <p>Upload, browse, and swap images from a GitHub-backed folder.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m8 12 3 3 5-6"></path>
+              </svg>
+            </div>
+            <h4>Icon picker</h4>
+            <p>
+              Search thousands of icons from the Iconify catalog and drop them
+              in.
+            </p>
+          </div>
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M17 1l4 4-4 4"></path>
+                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                <path d="M7 23l-4-4 4-4"></path>
+                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+              </svg>
+            </div>
+            <h4>Shared sections</h4>
+            <p>
+              Edit a nav or footer once; sync it across every page in one
+              commit.
+            </p>
+          </div>
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h4>Members &amp; roles</h4>
+            <p>Invite collaborators as admins or editors with email invites.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M4 4h16v16H4z"></path>
+                <path d="m4 8 8 5 8-5"></path>
+              </svg>
+            </div>
+            <h4>Form submissions</h4>
+            <p>
+              A tokenized endpoint with spam defenses, inbox, and email alerts.
+            </p>
+          </div>
+          <div class="tile reveal">
+            <div class="tile__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="M6 8h.01M10 8h.01M14 8h.01M7 13h10"></path>
+              </svg>
+            </div>
+            <h4>Keyboard-first</h4>
+            <p>
+              Save, publish, undo, and navigate without leaving the keyboard.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVELOPERS / CODE -->
+    <section class="block" id="developers">
+      <div class="wrap">
+        <div class="codewrap">
+          <div class="feat__text reveal">
+            <span class="eyebrow"><span class="dot"></span>Developers</span>
+            <h3 style="margin-top: 18px; font-size: clamp(28px, 3.6vw, 40px)">
+              Your content, anywhere
+            </h3>
+            <p>
+              A dependency-free SDK, served straight from your Klar host. Read
+              published content with
+              <code style="color: var(--violet)">list()</code>, or add visitor
+              sign-in and per-user data — no build step, no backend to run.
+            </p>
+            <ul class="feat__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Content SDK</b> —
+                  <code>list / facets / vocabularies</code> with
+                  filtering.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span><b>Users SDK</b> — Google sign-in and per-user key-value
+                  storage.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="code reveal">
+            <div class="code__bar"><span></span><span></span><span></span></div>
+            <pre><span class="c-com">// served from your Klar host — no build step</span>
+<span class="c-kw">import</span> { <span class="c-fn">createKlarClient</span> } <span class="c-kw">from</span>
+  <span class="c-str">'https://your-klar-host/sdk/content.js'</span>;
+
+<span class="c-kw">const</span> klar = <span class="c-fn">createKlarClient</span>({ <span class="c-pr">projectId</span>: <span class="c-pr">42</span> });
+
+<span class="c-com">// fetch published posts, newest first</span>
+<span class="c-kw">const</span> posts = <span class="c-kw">await</span> klar.<span class="c-fn">list</span>(<span class="c-str">'blog-post'</span>, {
+  <span class="c-pr">published</span>: <span class="c-kw">true</span>,
+  <span class="c-pr">order</span>: <span class="c-str">'published_at:desc'</span>,
+  <span class="c-pr">limit</span>: <span class="c-pr">10</span>,
+});
+
+document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</span>).innerHTML =
+  klar.<span class="c-fn">render</span>(posts, <span class="c-str">`&lt;a href="${url}"&gt;${content.title}&lt;/a&gt;`</span>);</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="start">
+      <div class="wrap">
+        <div class="cta__panel reveal">
+          <div class="aglow"></div>
+          <h2>Make your first edit in minutes</h2>
+          <p>
+            Point Klar at a page in your repo, click on it, and ship. No
+            migration, no rebuild — your HTML stays exactly where it is.
+          </p>
+          <div class="cta__cta">
+            <a href="https://editor.klar.website/" class="btn btn-primary">Start editing — free</a>
+            <a href="https://klar-sites.github.io/klar-docs/page-5.html" class="btn btn-ghost">Browse the docs →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="docs">
+      <div class="wrap">
+        <div class="foot">
+          <div class="foot__brand">
+            <a href="#" class="logo">
+              <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                    clip-rule="evenodd"></path>
+                </svg></span>
+              KLAR
             </a>
-            <!-- <a href="#" class="btn btn-secondary btn-large">View on GitHub</a> -->
+            <p>
+              The visual CMS for websites that live on GitHub. Click to edit,
+              commit clean HTML, ship.
+            </p>
           </div>
-          <p class="cta-note">
-            <!-- Free and open source · Works with any GitHub repository -->
-            Works with any GitHub repository
-          </p>
+          <div class="foot__col">
+            <h5>Product</h5>
+            <a href="#features">Visual editing</a>
+            <a href="#ai">AI assistant</a>
+            <a href="#content">Content fields</a>
+            <a href="#start">Publishing</a>
+          </div>
+          <div class="foot__col">
+            <h5>Developers</h5>
+            <a href="#developers">Content SDK</a>
+            <a href="#developers">Users SDK</a>
+            <a href="#docs">Documentation</a>
+            <a href="#docs">Content API</a>
+          </div>
+          <div class="foot__col">
+            <h5>Company</h5>
+            <a href="#">About</a>
+            <a href="#">Changelog</a>
+            <a href="#">Privacy</a>
+            <a href="#">Contact</a>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ Footer ============ -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <div class="footer-brand">
-            <img src="images/klar-logo.png" alt="Klar" width="60">
-            <!-- <div class="footer-brand-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-            </div>
-            <span>Klar</span> -->
-          </div>
-          <span class="footer-copyright">© 2026 Klar. All rights reserved.</span>
-          <ul class="footer-links">
-            <li><a href="https://klar-sites.github.io/klar-docs/page-5.html">Docs</a></li>
-            <!-- <li><a href="#">GitHub</a></li> -->
-            <li><a href="#">Contact</a></li>
-          </ul>
+        <div class="foot__bottom">
+          <span>© 2026 Klar. Clean HTML, zero bloat.</span>
+          <span>Built for GitHub.</span>
         </div>
       </div>
     </footer>
 
-    <!-- ============ JavaScript ============ -->
     <script>
-      // Hero parallax glow
-      const heroGlow1 = document.querySelector(".hero-glow-1");
-      const heroGlow2 = document.querySelector(".hero-glow-2");
-
-      window.addEventListener(
-        "mousemove",
-        (e) => {
-          const x = (e.clientX / window.innerWidth - 0.5) * 30;
-          const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-          if (heroGlow1)
-            heroGlow1.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
-          if (heroGlow2)
-            heroGlow2.style.transform = `translate(${-x * 0.3}px, ${-y * 0.3}px)`;
-        }, {
-          passive: true
-        },
-      );
-
-      // Scroll-based nav background
+      // Nav background on scroll
       const nav = document.getElementById("nav");
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (window.scrollY > 20) {
-            nav.classList.add("scrolled");
-          } else {
-            nav.classList.remove("scrolled");
-          }
-        }, {
-          passive: true
-        },
-      );
+      const onScroll = () =>
+        nav.classList.toggle("scrolled", window.scrollY > 12);
+      onScroll();
+      window.addEventListener("scroll", onScroll, {
+        passive: true,
+      });
 
-      // Active nav link highlighting
-      const sections = document.querySelectorAll("section[id]");
-      const navLinks = document.querySelectorAll(".nav-links a");
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const id = entry.target.id;
-            const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-            if (link) {
-              link.classList.toggle("nav-active", entry.isIntersecting);
-            }
-          });
-        }, {
-          threshold: 0.4
-        },
-      );
-      sections.forEach((s) => sectionObserver.observe(s));
-
-      // Scroll animations with stagger
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const siblings =
-                entry.target.parentElement.querySelectorAll(
-                  ".animate-on-scroll",
-                );
-              const index = Array.from(siblings).indexOf(entry.target);
-              entry.target.style.transitionDelay = `${index * 0.12}s`;
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.05,
-          rootMargin: "0px 0px -60px 0px"
-        },
-      );
-
-      document
-        .querySelectorAll(".animate-on-scroll")
-        .forEach((el) => observer.observe(el));
-
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        link.addEventListener("click", (e) => {
-          const href = link.getAttribute("href");
-          if (href === "#") return;
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            const y = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: y,
-              behavior: "smooth"
-            });
-          }
+      // Mobile menu (lightweight: reveal links inline)
+      const burger = document.getElementById("burger");
+      const links = document.querySelector(".nav__links");
+      burger?.addEventListener("click", () => {
+        const open = links.style.display === "flex";
+        Object.assign(links.style, {
+          display: open ? "" : "flex",
+          position: "absolute",
+          top: "64px",
+          left: "0",
+          right: "0",
+          flexDirection: "column",
+          gap: "4px",
+          padding: "16px 24px",
+          background: "rgba(8,9,10,0.96)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
         });
+      });
+
+      // Scroll-reveal with stagger
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.transitionDelay =
+                (e.target.dataset.delay || 0) + "ms";
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -8% 0px",
+        },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Stagger bento tiles for a touch of polish
+      document.querySelectorAll(".bento .tile").forEach((el, i) => {
+        el.dataset.delay = i * 60;
       });
     </script>
   </body>
