@@ -10,6 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/Inter-Regular.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/Inter-Bold.woff2">
+    <style>
+      @font-face {
+        font-family: 'Inter'; font-style: normal; font-weight: 400;
+        font-display: swap; src: url('/fonts/Inter-Regular.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Inter'; font-style: normal; font-weight: 700;
+        font-display: swap; src: url('/fonts/Inter-Bold.woff2') format('woff2');
+      }
+      /* add 500/600/800 if you use them above the fold */
+    </style>
     <style>
       :root {
         --bg: #08090a;
