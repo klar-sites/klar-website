@@ -19,6 +19,8 @@
       href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2">
     <link rel="preload" as="font" type="font/woff2" crossorigin
       href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-700-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-800-normal.woff2">
     <style>
       @font-face {
         font-family: 'Inter';
@@ -104,16 +106,6 @@
         position: relative;
       }
 
-      /* Subtle film grain */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        opacity: 0.03;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      }
 
       a {
         color: inherit;
@@ -1414,11 +1406,8 @@
         transition: color 0.18s var(--ease);
       }
       .tback:hover { color: var(--text); }
-      .tback--bottom {
-        margin: 56px 0 0;
-        padding-top: 28px;
-        border-top: 1px solid var(--border);
-        width: 100%;
+      .tback--side {
+        margin: 4px 0 0;
       }
 
       .tdetail {
@@ -1429,56 +1418,19 @@
       }
       .tdetail__main { min-width: 0; }
 
-      /* live preview, framed like a browser */
+      /* live preview */
       .tpreview {
         border: 1px solid var(--border);
         border-radius: var(--radius);
         overflow: hidden;
         background: var(--bg-elev);
       }
-      .tpreview__bar {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        height: 40px;
-        padding: 0 14px;
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-      }
-      .tpreview__dots { display: inline-flex; gap: 6px; flex-shrink: 0; }
-      .tpreview__dots i {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--border-strong);
-      }
-      .tpreview__url {
-        flex: 1;
-        min-width: 0;
-        font-size: 12px;
-        color: var(--muted);
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-radius: 7px;
-        padding: 4px 12px;
-      }
-      .tpreview__open {
-        flex-shrink: 0;
-        color: var(--muted);
-        font-size: 15px;
-        transition: color 0.18s var(--ease);
-      }
-      .tpreview__open:hover { color: var(--text); }
       .tpreview__viewport {
         position: relative;
         width: 100%;
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 16 / 9;
         overflow: hidden;
-        background: #fff;
+        background: transparent;
       }
       .tpreview__frame {
         position: absolute;
@@ -1486,11 +1438,17 @@
         left: 0;
         border: 0;
         display: block;
-        background: #fff;
+        background: transparent;
       }
 
       /* about / rich text */
-      .tabout { margin-top: 48px; }
+      .tabout {
+        margin-top: 32px;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px 24px;
+      }
       .tabout > h2 {
         font-size: 22px;
         font-weight: 700;
@@ -1563,8 +1521,9 @@
         top: 88px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
       }
+      .tdetail__side .crumbs { margin-bottom: 2px; }
       .tdetail__title {
         font-size: clamp(24px, 3vw, 30px);
         font-weight: 800;
@@ -1605,6 +1564,7 @@
         gap: 16px;
         font-size: 13px;
       }
+      .tdetail__card .tdetail__repo { display: none; }
       .tdetail__card dt { color: var(--muted); }
       .tdetail__card dd { color: var(--text); text-align: right; min-width: 0; }
       .tdetail__card dd a {
@@ -1652,6 +1612,7 @@
       @media (max-width: 640px) {
         .tgrid { grid-template-columns: 1fr; }
         .thero { padding-top: 116px; }
+        .tabout { padding: 24px 22px; }
       }
     </style>
 
@@ -1857,9 +1818,9 @@
                   <span className="grad">built for Klar</span>
                 </h1>
                 <p className="lead">
-                  Production-ready, git-native starting points from the Klar
-                  community. Pick one, click to edit, and ship clean HTML straight
-                  to your GitHub repo — no build step, no lock-in.
+                  Beautiful, ready-to-launch website templates for any idea. Pick
+                  one, click anything on the page to make it yours, and publish
+                  your site in minutes — no code, no designers, no hassle.
                 </p>
               </div>
             </header>
@@ -1915,7 +1876,7 @@
       // Renders the site at a fixed desktop width, then scales it down to fit
       // the frame — so the preview shows the real desktop layout instead of the
       // iframe's narrow width triggering a mobile/responsive view.
-      const DESIGN_WIDTH = 1440;
+      const DESIGN_WIDTH = 1280;
 
       function PreviewFrame({ url, title }: { url: string; title: string }) {
         const viewport = useRef(null as HTMLDivElement | null);
@@ -1963,23 +1924,6 @@
               <div className="tdetail">
                 <div className="tdetail__main">
                   <div className="tpreview">
-                    <div className="tpreview__bar">
-                      <span className="tpreview__dots">
-                        <i />
-                        <i />
-                        <i />
-                      </span>
-                      <span className="tpreview__url">{t.websiteUrl}</span>
-                      <a
-                        className="tpreview__open"
-                        href={t.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="Open in a new tab"
-                      >
-                        ↗
-                      </a>
-                    </div>
                     <PreviewFrame url={t.websiteUrl} title={t.title} />
                   </div>
 
@@ -1996,9 +1940,7 @@
 
                 <aside className="tdetail__side">
                   <nav className="crumbs">
-                    <a href="/index.html">Templates</a>
-                    <span>›</span>
-                    <a href="#">Websites</a>
+                    <a href="/templates">Templates</a>
                     <span>›</span>
                     <span>{cap(t.category)}</span>
                   </nav>
@@ -2034,7 +1976,7 @@
                         <dt>Author</dt>
                         <dd>{t.author}</dd>
                       </div>
-                      <div>
+                      <div className="tdetail__repo">
                         <dt>Repository</dt>
                         <dd>
                           <a
@@ -2048,12 +1990,12 @@
                       </div>
                     </dl>
                   </div>
+
+                  <a className="tback tback--side" href="#">
+                    ← All templates
+                  </a>
                 </aside>
               </div>
-
-              <a className="tback tback--bottom" href="#">
-                ← All templates
-              </a>
             </div>
           </div>
         );
