@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates — Klar</title>
+    <meta name="description"
+      content="Browse production-ready, git-native website templates from the Klar community. Pick one, click to edit, and ship clean HTML straight to your GitHub repo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-700-normal.woff2">
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-700-normal.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-800-normal.woff2') format('woff2');
+      }
+    </style>
+    <style>
+      :root {
+        --bg: #08090a;
+        --bg-elev: #0e0f11;
+        --surface: rgba(255, 255, 255, 0.024);
+        --surface-2: rgba(255, 255, 255, 0.045);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.14);
+        --text: #f7f8f8;
+        --muted: #8a8f98;
+        --subtle: #62666d;
+        --accent: #aeb4be;
+        --accent-rgb: 174, 180, 190;
+        --violet: #e9ebef;
+        --cyan: #8b909a;
+        --pink: #c4c8d0;
+        --radius: 14px;
+        --maxw: 1350px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --font:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Subtle film grain */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ::selection {
+        background: rgba(var(--accent-rgb), 0.3);
+      }
+
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--surface);
+        backdrop-filter: blur(8px);
+      }
+
+      .eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        padding: 0 18px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: var(--text);
+        color: #08090a;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(255, 255, 255, 0.12);
+      }
+
+      .btn-ghost {
+        background: var(--surface);
+        border-color: var(--border);
+        color: var(--text);
+      }
+
+      .btn-ghost:hover {
+        background: var(--surface-2);
+        border-color: var(--border-strong);
+      }
+
+      .btn-sm {
+        height: 34px;
+        font-size: 13px;
+        padding: 0 14px;
+      }
+
+      /* ───────── Nav ───────── */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transition: all 0.3s var(--ease);
+        border-bottom: 1px solid transparent;
+      }
+
+      .nav.scrolled {
+        background: rgba(8, 9, 10, 0.72);
+        backdrop-filter: blur(16px) saturate(140%);
+        border-bottom-color: var(--border);
+      }
+
+      .nav__inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: 0.02em;
+        color: var(--text);
+      }
+
+      .logo__mark {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+      }
+
+      .logo__mark svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .nav__links {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+      }
+
+      .nav__links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+
+      .nav__links a:hover {
+        color: var(--text);
+        background: var(--surface);
+      }
+
+      .nav__cta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .nav__burger {
+        display: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        cursor: pointer;
+      }
+
+      /* ───────── Hero ───────── */
+      .hero {
+        position: relative;
+        padding: 168px 0 80px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .aurora {
+        position: absolute;
+        inset: -20% -10% auto -10%;
+        height: 760px;
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(90px);
+        opacity: 0.42;
+      }
+
+      .aurora::before,
+      .aurora::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .aurora::before {
+        width: 620px;
+        height: 620px;
+        left: 50%;
+        top: -120px;
+        transform: translateX(-60%);
+        background: radial-gradient(circle, var(--accent), transparent 62%);
+        animation: drift 18s ease-in-out infinite;
+      }
+
+      .aurora::after {
+        width: 520px;
+        height: 520px;
+        left: 50%;
+        top: -40px;
+        transform: translateX(-10%);
+        background: radial-gradient(circle, var(--violet), transparent 60%);
+        animation: drift 22s ease-in-out infinite reverse;
+      }
+
+      .aurora__c {
+        position: absolute;
+        width: 460px;
+        height: 460px;
+        left: 30%;
+        top: 40px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--cyan), transparent 60%);
+        opacity: 0.5;
+        animation: drift 26s ease-in-out infinite;
+      }
+
+      @keyframes drift {
+
+        0%,
+        100% {
+          transform: translate(-50%, 0) scale(1);
+        }
+
+        50% {
+          transform: translate(-42%, 36px) scale(1.08);
+        }
+      }
+
+      /* faint grid floor */
+      .hero__grid {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 420px;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse 70% 100% at 50% 100%,
+            #000 10%,
+            transparent 70%);
+        opacity: 0.35;
+      }
+
+      .hero h1 {
+        font-size: clamp(40px, 6.4vw, 76px);
+        line-height: 1.02;
+        letter-spacing: -0.035em;
+        font-weight: 700;
+        max-width: 14ch;
+        margin: 24px auto 0;
+      }
+
+      .hero h1 .grad {
+        color: var(--text);
+      }
+
+      .hero .lead {
+        font-size: clamp(17px, 2vw, 20px);
+        color: var(--muted);
+        max-width: 600px;
+        margin: 24px auto 0;
+        line-height: 1.55;
+      }
+
+      .hero__cta {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 34px;
+        flex-wrap: wrap;
+      }
+
+      .hero__note {
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--subtle);
+      }
+
+      /* ───────── Editor mockup ───────── */
+      .shot {
+        position: relative;
+        margin: 64px auto 0;
+        z-index: 2;
+      }
+
+      .shot__glow {
+        position: absolute;
+        inset: -8% 6% -30% 6%;
+        background: linear-gradient(140deg, var(--accent), var(--violet));
+        filter: blur(80px);
+        opacity: 0;
+        z-index: -1;
+        border-radius: 50%;
+      }
+
+      .shot__frame {
+        position: relative;
+        padding: 8px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--surface);
+        background: none;
+        -webkit-mask-image: linear-gradient(to bottom,
+            #000 0,
+            #000 60%,
+            transparent 100%);
+        mask-image: linear-gradient(to bottom,
+            #000 0,
+            #000 60%,
+            transparent 100%);
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      .shot__img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+      }
+
+      .win {
+        border: 1px solid var(--border-strong);
+        border-radius: 16px;
+        background: linear-gradient(180deg, #131417, #0c0d0f);
+        overflow: hidden;
+        box-shadow:
+          0 40px 120px -20px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      }
+
+      .win__bar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.015);
+      }
+
+      .win__dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .win__dots span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #2c2e33;
+      }
+
+      .win__addr {
+        flex: 1;
+        height: 28px;
+        border-radius: 7px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        font-size: 12px;
+        color: var(--subtle);
+        gap: 8px;
+      }
+
+      .win__chip {
+        font-size: 11px;
+        font-weight: 600;
+        color: #08090a;
+        background: var(--text);
+        padding: 5px 10px;
+        border-radius: 6px;
+      }
+
+      .win__body {
+        display: grid;
+        grid-template-columns: 1fr 232px;
+        min-height: 360px;
+      }
+
+      .canvas {
+        padding: 40px 36px;
+        background:
+          radial-gradient(120% 80% at 20% 0%,
+            rgba(var(--accent-rgb), 0.06),
+            transparent 60%),
+          #0a0b0d;
+        position: relative;
+      }
+
+      .canvas .badge {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .canvas h3 {
+        font-size: 30px;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        position: relative;
+        display: inline-block;
+        padding: 4px 6px;
+        margin: 0 -6px;
+        border-radius: 6px;
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        background: rgba(var(--accent-rgb), 0.08);
+      }
+
+      .canvas h3::after {
+        content: "Editing";
+        position: absolute;
+        top: -26px;
+        left: -2px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #08090a;
+        background: var(--accent);
+        padding: 3px 7px;
+        border-radius: 5px;
+        text-transform: none;
+      }
+
+      .canvas p {
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 40ch;
+        margin-top: 16px;
+      }
+
+      .canvas .row {
+        display: flex;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .canvas .pill {
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        flex: 0 0 96px;
+      }
+
+      .canvas .pill.solid {
+        background: linear-gradient(140deg, var(--accent), var(--violet));
+        border: none;
+      }
+
+      /* floating block toolbar */
+      .toolbar {
+        position: absolute;
+        left: 36px;
+        bottom: 36px;
+        display: flex;
+        gap: 2px;
+        padding: 5px;
+        background: #16171b;
+        border: 1px solid var(--border-strong);
+        border-radius: 10px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .toolbar b {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+      }
+
+      .toolbar b:hover {
+        background: var(--surface-2);
+        color: var(--text);
+      }
+
+      .toolbar svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .side {
+        border-left: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.012);
+        padding: 18px 16px;
+      }
+
+      .side .h {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--subtle);
+        margin-bottom: 12px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field label {
+        font-size: 11px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .field .inp {
+        height: 30px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .field .inp.lit {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+      }
+
+      .chips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .chips span {
+        font-size: 11px;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        padding: 3px 8px;
+        border-radius: 6px;
+      }
+
+      /* ───────── Trust strip ───────── */
+      .trust {
+        padding: 40px 0 8px;
+        text-align: center;
+      }
+
+      .trust p {
+        font-size: 13px;
+        color: var(--subtle);
+        letter-spacing: 0.04em;
+      }
+
+      .trust__row {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 22px;
+        opacity: 0.6;
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .trust__row span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ───────── Sections ───────── */
+      section.block {
+        padding: 110px 0;
+        position: relative;
+      }
+
+      .sechead {
+        max-width: 640px;
+      }
+
+      .sechead.center {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .sechead h2 {
+        font-size: clamp(30px, 4vw, 46px);
+        letter-spacing: -0.03em;
+        line-height: 1.08;
+        font-weight: 700;
+        margin-top: 16px;
+      }
+
+      .sechead p {
+        color: var(--muted);
+        font-size: 18px;
+        margin-top: 16px;
+        line-height: 1.55;
+      }
+
+      /* feature rows */
+      .feat {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        margin-top: 72px;
+      }
+
+      .feat:first-of-type {
+        margin-top: 56px;
+      }
+
+      .feat.flip .feat__text {
+        order: 2;
+      }
+
+      .feat__text h3 {
+        font-size: 26px;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        font-weight: 600;
+      }
+
+      .feat__text>p {
+        color: var(--muted);
+        font-size: 16px;
+        margin-top: 14px;
+        line-height: 1.6;
+      }
+
+      .feat__list {
+        list-style: none;
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .feat__list li {
+        display: flex;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--muted);
+        align-items: flex-start;
+      }
+
+      .feat__list svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        margin-top: 1px;
+        color: var(--accent);
+      }
+
+      .feat__list b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* visual cards used in feature rows */
+      .vcard {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, var(--surface), transparent);
+        padding: 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .vcard::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+            transparent,
+            var(--border-strong),
+            transparent);
+      }
+
+      .vcard__glow {
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        right: -80px;
+        top: -100px;
+        background: radial-gradient(circle,
+            rgba(var(--accent-rgb), 0.2),
+            transparent 60%);
+        filter: blur(40px);
+        pointer-events: none;
+      }
+
+      /* commit list */
+      .commits {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .commit {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 10px;
+        border-radius: 9px;
+      }
+
+      .commit:hover {
+        background: var(--surface);
+      }
+
+      .commit .g {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex: 0 0 10px;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+      }
+
+      .commit .msg {
+        flex: 1;
+        font-size: 13.5px;
+      }
+
+      .commit .meta {
+        font-size: 12px;
+        color: var(--subtle);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ai chat card */
+      .chat {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .bubble {
+        max-width: 86%;
+        font-size: 13.5px;
+        padding: 11px 14px;
+        border-radius: 14px;
+        line-height: 1.45;
+      }
+
+      .bubble.me {
+        align-self: flex-end;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-bottom-right-radius: 5px;
+      }
+
+      .bubble.ai {
+        align-self: flex-start;
+        background: rgba(var(--accent-rgb), 0.08);
+        border: 1px solid rgba(var(--accent-rgb), 0.22);
+        border-bottom-left-radius: 5px;
+        color: #d6dae1;
+      }
+
+      .chat__apply {
+        display: flex;
+        gap: 8px;
+        align-self: flex-start;
+        margin-top: 2px;
+      }
+
+      .tag {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 7px;
+      }
+
+      .tag.solid {
+        background: var(--text);
+        color: #08090a;
+      }
+
+      .tag.out {
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+
+      /* ───────── Bento ───────── */
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 64px;
+      }
+
+      .tile {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 24px;
+        transition: all 0.25s var(--ease);
+      }
+
+      .tile:hover {
+        border-color: var(--border-strong);
+        background: var(--surface-2);
+        transform: translateY(-3px);
+      }
+
+      .tile__ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: rgba(var(--accent-rgb), 0.1);
+        border: 1px solid rgba(var(--accent-rgb), 0.2);
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+
+      .tile__ic svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .tile h4 {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .tile p {
+        font-size: 13.5px;
+        color: var(--muted);
+        margin-top: 7px;
+        line-height: 1.5;
+      }
+
+      /* ───────── Code section ───────── */
+      .codewrap {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 56px;
+        align-items: center;
+        margin-top: 8px;
+      }
+
+      .code {
+        border: 1px solid var(--border-strong);
+        border-radius: 14px;
+        background: #0b0c0e;
+        overflow: hidden;
+        box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
+      }
+
+      .code__bar {
+        display: flex;
+        gap: 7px;
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .code__bar span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #2c2e33;
+      }
+
+      .code pre {
+        margin: 0;
+        padding: 22px;
+        font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        overflow-x: auto;
+        color: #c9ccd4;
+      }
+
+      .c-kw {
+        color: #a7b6c9;
+      }
+
+      .c-fn {
+        color: #82d0ff;
+      }
+
+      .c-str {
+        color: #9ce6a8;
+      }
+
+      .c-com {
+        color: #5c606a;
+      }
+
+      .c-pr {
+        color: #ffb38a;
+      }
+
+      /* ───────── CTA ───────── */
+      .cta {
+        position: relative;
+        text-align: center;
+        padding: 96px 0 110px;
+        overflow: hidden;
+      }
+
+      .cta__panel {
+        position: relative;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 72px 32px;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--surface), transparent);
+      }
+
+      .cta__panel .aglow {
+        position: absolute;
+        width: 700px;
+        height: 360px;
+        left: 50%;
+        top: -180px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse,
+            rgba(var(--accent-rgb), 0.32),
+            transparent 65%);
+        filter: blur(50px);
+        pointer-events: none;
+      }
+
+      .cta h2 {
+        font-size: clamp(32px, 4.6vw, 52px);
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .cta p {
+        color: var(--muted);
+        font-size: 18px;
+        margin: 18px auto 0;
+        max-width: 480px;
+        position: relative;
+      }
+
+      .cta__cta {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 32px;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      /* ───────── Footer ───────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 64px 0 48px;
+      }
+
+      .foot {
+        display: grid;
+        grid-template-columns: 1.6fr repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .foot__brand p {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 14px;
+        max-width: 30ch;
+        line-height: 1.6;
+      }
+
+      .foot__col h5 {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .foot__col a {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+        padding: 6px 0;
+        transition: color 0.15s;
+      }
+
+      .foot__col a:hover {
+        color: var(--text);
+      }
+
+      .foot__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 56px;
+        padding-top: 28px;
+        border-top: 1px solid var(--border);
+        color: var(--subtle);
+        font-size: 13px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      /* ───────── Reveal ───────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.8s var(--ease),
+          transform 0.8s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ───────── Responsive ───────── */
+      @media (max-width: 900px) {
+        .nav__links {
+          display: none;
+        }
+
+        .nav__burger {
+          display: grid;
+          place-items: center;
+        }
+
+        .nav__cta .btn-ghost {
+          display: none;
+        }
+
+        .feat,
+        .codewrap {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .feat.flip .feat__text {
+          order: 0;
+        }
+
+        .bento {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .win__body {
+          grid-template-columns: 1fr;
+        }
+
+        .side {
+          display: none;
+        }
+
+        .foot {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero {
+          padding-top: 130px;
+        }
+
+        .bento,
+        .foot {
+          grid-template-columns: 1fr;
+        }
+
+        .cta__panel {
+          padding: 48px 20px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+      <div class="nav__inner">
+        <a href="index.html" class="logo">
+          <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                clip-rule="evenodd"></path>
+            </svg></span>
+          KLAR
+        </a>
+        <div class="nav__links">
+          <a href="index.html#features">Features</a>
+          <a href="index.html#ai">AI</a>
+          <a href="index.html#content">Content</a>
+          <a href="index.html#developers">Developers</a>
+          <a href="templates.html" aria-current="page">Templates</a>
+          <a href="https://klar-sites.github.io/klar-docs/page-5.html">Docs</a>
+        </div>
+        <div class="nav__cta">
+          <a href="https://editor.klar.website/" class="btn btn-ghost btn-sm">Sign in</a>
+          <a href="https://editor.klar.website/" class="btn btn-primary btn-sm">Start editing</a>
+          <button class="nav__burger" aria-label="Menu" id="burger">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- TEMPLATE GALLERY (React + Babel + TypeScript, all inline, no build step) -->
+    <style>
+      #root {
+        min-height: calc(100vh);
+      }
+      .thero {
+        position: relative;
+        z-index: 2;
+        padding: 110px 0 28px;
+      }
+      .crumbs {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 22px;
+      }
+      .crumbs a:hover { color: var(--text); }
+      .crumbs span { color: var(--subtle); }
+      .thero h1 {
+        font-size: clamp(34px, 5.4vw, 60px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.04;
+        margin-bottom: 18px;
+      }
+      .thero .lead {
+        color: var(--muted);
+        font-size: clamp(16px, 1.6vw, 19px);
+        max-width: 620px;
+      }
+
+      .block.tgallery { position: relative; z-index: 2; padding-top: 8px; }
+
+      .tfilter {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 4px 36px;
+        margin: 44px 0 52px;
+        border-bottom: 1px solid var(--border);
+      }
+      .tab {
+        font: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+        padding: 6px 6px 18px;
+        margin-bottom: -1px;
+        color: var(--muted);
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        transition: color 0.18s var(--ease), border-color 0.18s var(--ease);
+      }
+      .tab:hover { color: var(--text); }
+      .tab--on { color: var(--text); border-bottom-color: var(--text); }
+      .tab__ico { display: inline-flex; }
+      .tab__ico svg { width: 22px; height: 22px; display: block; }
+      .tab__label { font-size: 13px; font-weight: 500; white-space: nowrap; }
+
+      .tgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 28px;
+      }
+
+      .tcard {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .tcard__media {
+        display: block;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        transition: border-color 0.3s var(--ease);
+      }
+      .tcard:hover .tcard__media { border-color: var(--border-strong); }
+      .tcard:hover .tcard__media img { opacity: 0.8; }
+      .tcard__media img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .tcard__head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .tcard__head h3 {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      .tcard__tag {
+        flex-shrink: 0;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 4px 9px;
+        white-space: nowrap;
+      }
+      .tcard__desc {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+        margin-top: -4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .tempty {
+        color: var(--muted);
+        text-align: center;
+        padding: 64px 0;
+        font-size: 15px;
+      }
+      .tempty a { color: var(--text); text-decoration: underline; }
+
+      /* ───────── Detail page ───────── */
+      .tdetail-page {
+        position: relative;
+        z-index: 2;
+        padding: 110px 0 96px;
+      }
+      .tback {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 28px;
+        transition: color 0.18s var(--ease);
+      }
+      .tback:hover { color: var(--text); }
+      .tback--bottom {
+        margin: 56px 0 0;
+        padding-top: 28px;
+        border-top: 1px solid var(--border);
+        width: 100%;
+      }
+
+      .tdetail {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 420px;
+        gap: 40px;
+        align-items: start;
+      }
+      .tdetail__main { min-width: 0; }
+
+      /* live preview, framed like a browser */
+      .tpreview {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--bg-elev);
+      }
+      .tpreview__bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: 40px;
+        padding: 0 14px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .tpreview__dots { display: inline-flex; gap: 6px; flex-shrink: 0; }
+      .tpreview__dots i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--border-strong);
+      }
+      .tpreview__url {
+        flex: 1;
+        min-width: 0;
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 4px 12px;
+      }
+      .tpreview__open {
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 15px;
+        transition: color 0.18s var(--ease);
+      }
+      .tpreview__open:hover { color: var(--text); }
+      .tpreview__viewport {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        background: #fff;
+      }
+      .tpreview__frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 0;
+        display: block;
+        background: #fff;
+      }
+
+      /* about / rich text */
+      .tabout { margin-top: 48px; }
+      .tabout > h2 {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 20px;
+      }
+      .richtext { color: var(--muted); font-size: 15px; line-height: 1.7; }
+      .richtext > *:first-child { margin-top: 0; }
+      .richtext h1,
+      .richtext h2,
+      .richtext h3,
+      .richtext h4 {
+        color: var(--text);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+        margin: 1.8em 0 0.6em;
+      }
+      .richtext h1 { font-size: 24px; }
+      .richtext h2 { font-size: 20px; }
+      .richtext h3 { font-size: 17px; }
+      .richtext h4 { font-size: 15px; }
+      .richtext p { margin: 0 0 1em; }
+      .richtext a { color: var(--text); text-decoration: underline; }
+      .richtext ul,
+      .richtext ol { margin: 0 0 1em; padding-left: 1.3em; }
+      .richtext li { margin: 0.3em 0; }
+      .richtext img { max-width: 100%; border-radius: 10px; }
+      .richtext blockquote {
+        margin: 1.2em 0;
+        padding: 4px 0 4px 18px;
+        border-left: 2px solid var(--border-strong);
+        color: var(--text);
+      }
+      .richtext code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.88em;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1px 6px;
+      }
+      .richtext pre {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 0 0 1.2em;
+      }
+      .richtext pre code { background: none; border: 0; padding: 0; }
+      .richtext hr { border: 0; border-top: 1px solid var(--border); margin: 1.8em 0; }
+      .richtext table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 0 1.2em;
+        font-size: 14px;
+      }
+      .richtext th,
+      .richtext td {
+        text-align: left;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+      }
+      .richtext th { color: var(--text); background: var(--surface); font-weight: 600; }
+
+      /* sticky sidebar */
+      .tdetail__side {
+        position: sticky;
+        top: 88px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .tdetail__title {
+        font-size: clamp(24px, 3vw, 30px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      .tdetail__desc { color: var(--muted); font-size: 15px; line-height: 1.55; }
+      .tdetail__meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .tdetail__cat { text-transform: capitalize; }
+      .tdetail__meta .tdot { color: var(--subtle); }
+      .tdetail__actions { display: flex; gap: 10px; margin-top: 4px; }
+      .tdetail__actions .btn { flex: 1; }
+      .tdetail__card {
+        margin-top: 8px;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+      }
+      .tdetail__card h4 {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--subtle);
+        margin-bottom: 12px;
+      }
+      .tdetail__card dl { display: flex; flex-direction: column; gap: 11px; }
+      .tdetail__card dl > div {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 13px;
+      }
+      .tdetail__card dt { color: var(--muted); }
+      .tdetail__card dd { color: var(--text); text-align: right; min-width: 0; }
+      .tdetail__card dd a {
+        color: var(--text);
+        text-decoration: underline;
+        word-break: break-all;
+      }
+
+      @media (max-width: 900px) {
+        .tdetail { grid-template-columns: 1fr; gap: 32px; }
+        .tdetail__side {
+          position: static;
+          order: -1;
+        }
+      }
+
+      /* skeleton */
+      .tcard--skel { pointer-events: none; }
+      .tcard--skel .tcard__media,
+      .sk {
+        background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 37%, var(--surface) 63%);
+        background-size: 400% 100%;
+        animation: shimmer 1.4s ease infinite;
+      }
+      .sk { border-radius: 6px; height: 14px; }
+      .sk--t { width: 55%; height: 18px; }
+      .sk--p { width: 100%; }
+      @keyframes shimmer {
+        0% { background-position: 100% 0; }
+        100% { background-position: -100% 0; }
+      }
+
+      @media (max-width: 760px) {
+        .tfilter {
+          justify-content: flex-start;
+          flex-wrap: nowrap;
+          gap: 4px 24px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          margin: 36px -24px 44px;
+          padding: 0 24px;
+        }
+        .tfilter::-webkit-scrollbar { display: none; }
+      }
+      @media (max-width: 640px) {
+        .tgrid { grid-template-columns: 1fr; }
+        .thero { padding-top: 116px; }
+      }
+    </style>
+
+    <div id="root"></div>
+
+    <!-- React 18 + ReactDOM + Babel standalone (TypeScript + JSX in the browser) -->
+    <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.9/babel.min.js"></script>
+
+    <!--
+      The TSX source lives in a non-executable script tag so Babel's auto
+      transformer ignores it. We compile it ourselves below with the
+      TypeScript preset forced on (allExtensions/isTSX) — inline scripts have
+      no .tsx filename, so otherwise preset-typescript stays inert and the
+      browser throws on `interface`.
+    -->
+    <script type="text/tsx" id="app-source">
+      const { useState, useEffect, useMemo, useRef } = React;
+
+      interface Template {
+        name: string;
+        title: string;
+        description: string;
+        websiteUrl: string;
+        posterUrl: string;
+        author: string;
+        category: string;
+        repo: string;
+        text?: string; // rich text (HTML) for the "About this template" section
+      }
+
+      type Status = "loading" | "ready" | "error";
+
+      const API = "https://editor.klar.website/api/templates";
+
+      function useTemplates() {
+        const [data, setData] = useState([] as Template[]);
+        const [status, setStatus] = useState("loading" as Status);
+
+        useEffect(() => {
+          let alive = true;
+          fetch(API)
+            .then((r) => {
+              if (!r.ok) throw new Error("HTTP " + r.status);
+              return r.json();
+            })
+            .then((json: { templates: Template[] }) => {
+              if (!alive) return;
+              setData(json.templates || []);
+              setStatus("ready");
+            })
+            .catch(() => {
+              if (alive) setStatus("error");
+            });
+          return () => {
+            alive = false;
+          };
+        }, []);
+
+        return { data, status };
+      }
+
+      function TemplateCard({ t }: { t: Template }) {
+        const name = t.title.split("—")[0].trim();
+
+        return (
+          <a className="tcard" href={"#" + encodeURIComponent(t.name)}>
+            <span className="tcard__media">
+              <img src={t.posterUrl} alt={t.title} loading="lazy" />
+            </span>
+            <div className="tcard__head">
+              <h3>{name}</h3>
+              <span className="tcard__tag">{t.category}</span>
+            </div>
+            <p className="tcard__desc">{t.description}</p>
+          </a>
+        );
+      }
+
+      function Skeletons() {
+        return (
+          <div className="tgrid">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div className="tcard tcard--skel" key={i}>
+                <div className="tcard__media" />
+                <div className="sk sk--t" />
+                <div className="sk sk--p" />
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      // Minimal stroke icons, one per category (drawn above each tab label).
+      const svg = (children: React.ReactNode) => (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {children}
+        </svg>
+      );
+      const ICONS: { [k: string]: React.ReactNode } = {
+        all: svg(
+          <React.Fragment>
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </React.Fragment>
+        ),
+        websites: svg(
+          <React.Fragment>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+          </React.Fragment>
+        ),
+        apps: svg(
+          <React.Fragment>
+            <rect x="3" y="3" width="18" height="18" rx="2.5" />
+            <path d="M3 9h18M9 3v18" />
+          </React.Fragment>
+        ),
+        "landing-page": svg(
+          <React.Fragment>
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M3 9h18M7 13h6M7 16.5h10" />
+          </React.Fragment>
+        ),
+        portfolio: svg(
+          <React.Fragment>
+            <rect x="3" y="7" width="18" height="13" rx="2" />
+            <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18" />
+          </React.Fragment>
+        ),
+        saas: svg(
+          <path d="M7 18a4 4 0 0 1-.5-7.97A6 6 0 0 1 18 9.5a3.5 3.5 0 0 1-.5 8.5z" />
+        ),
+        blog: svg(
+          <React.Fragment>
+            <rect x="4" y="3" width="16" height="18" rx="2" />
+            <path d="M8 8h8M8 12h8M8 16h5" />
+          </React.Fragment>
+        ),
+        events: svg(
+          <React.Fragment>
+            <rect x="3" y="4.5" width="18" height="16.5" rx="2" />
+            <path d="M3 9h18M8 2.5v4M16 2.5v4" />
+          </React.Fragment>
+        ),
+        services: svg(
+          <path d="M14.7 6.3a4 4 0 0 0-5.2 5.2l-6 6 2 2 6-6a4 4 0 0 0 5.2-5.2l-2.4 2.4-2.2-.6-.6-2.2z" />
+        ),
+      };
+
+      // Fixed filter set — always shown, whether or not a category has templates.
+      const CATEGORIES = [
+        { label: "All Templates", key: "all" },
+        { label: "Websites", key: "websites" },
+        { label: "Apps", key: "apps" },
+        { label: "Landing Page", key: "landing-page" },
+        { label: "Portfolio", key: "portfolio" },
+        { label: "SaaS", key: "saas" },
+        { label: "Blog", key: "blog" },
+        { label: "Events", key: "events" },
+        { label: "Services", key: "services" },
+      ];
+
+      const normalize = (c: string) => c.toLowerCase().replace(/\s+/g, "-");
+
+      function Gallery({ data, status }: { data: Template[]; status: Status }) {
+        const [active, setActive] = useState("all");
+
+        const shown = useMemo(
+          () =>
+            active === "all"
+              ? data
+              : data.filter((t) => normalize(t.category) === active),
+          [active, data]
+        );
+
+        const activeCat =
+          CATEGORIES.find((c) => c.key === active) || CATEGORIES[0];
+        const crumb = active === "all" ? "Websites" : activeCat.label;
+        const headingLead = active === "all" ? "Website" : activeCat.label;
+
+        return (
+          <React.Fragment>
+            <header className="thero">
+              <div className="wrap">
+                <nav className="crumbs">
+                  <a href="/index.html">Templates</a>
+                  <span>›</span>
+                  <span>{crumb}</span>
+                </nav>
+                <h1>
+                  {headingLead} templates{" "}
+                  <span className="grad">built for Klar</span>
+                </h1>
+                <p className="lead">
+                  Production-ready, git-native starting points from the Klar
+                  community. Pick one, click to edit, and ship clean HTML straight
+                  to your GitHub repo — no build step, no lock-in.
+                </p>
+              </div>
+            </header>
+
+            <section className="block tgallery">
+              <div className="wrap">
+                {status !== "error" && (
+                  <div className="tfilter">
+                    {CATEGORIES.map((c) => (
+                      <button
+                        key={c.key}
+                        className={"tab" + (c.key === active ? " tab--on" : "")}
+                        onClick={() => setActive(c.key)}
+                      >
+                        <span className="tab__ico">{ICONS[c.key]}</span>
+                        <span className="tab__label">{c.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {status === "loading" && <Skeletons />}
+
+                {status === "error" && (
+                  <div className="tempty">
+                    Couldn't load templates right now.{" "}
+                    <a href={API} target="_blank" rel="noopener noreferrer">
+                      Open the API ↗
+                    </a>
+                  </div>
+                )}
+
+                {status === "ready" &&
+                  (shown.length ? (
+                    <div className="tgrid">
+                      {shown.map((t) => (
+                        <TemplateCard key={t.name} t={t} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="tempty">No templates in this category yet.</div>
+                  ))}
+              </div>
+            </section>
+          </React.Fragment>
+        );
+      }
+
+      function cap(s: string) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      // Renders the site at a fixed desktop width, then scales it down to fit
+      // the frame — so the preview shows the real desktop layout instead of the
+      // iframe's narrow width triggering a mobile/responsive view.
+      const DESIGN_WIDTH = 1440;
+
+      function PreviewFrame({ url, title }: { url: string; title: string }) {
+        const viewport = useRef(null as HTMLDivElement | null);
+        const [scale, setScale] = useState(1);
+        const [height, setHeight] = useState(0);
+
+        useEffect(() => {
+          const el = viewport.current;
+          if (!el) return;
+          const measure = () => {
+            setScale(el.clientWidth / DESIGN_WIDTH);
+            setHeight(el.clientHeight);
+          };
+          measure();
+          const ro = new ResizeObserver(measure);
+          ro.observe(el);
+          return () => ro.disconnect();
+        }, []);
+
+        return (
+          <div className="tpreview__viewport" ref={viewport}>
+            <iframe
+              className="tpreview__frame"
+              src={url}
+              title={title + " — live preview"}
+              loading="lazy"
+              style={{
+                width: DESIGN_WIDTH + "px",
+                height: height ? height / scale + "px" : "100%",
+                transform: "scale(" + scale + ")",
+                transformOrigin: "top left",
+              }}
+            />
+          </div>
+        );
+      }
+
+      function TemplateDetail({ t }: { t: Template }) {
+        const useUrl =
+          "https://editor.klar.website/?template=" + encodeURIComponent(t.repo);
+
+        return (
+          <div className="tdetail-page">
+            <div className="wrap">
+              <div className="tdetail">
+                <div className="tdetail__main">
+                  <div className="tpreview">
+                    <div className="tpreview__bar">
+                      <span className="tpreview__dots">
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                      <span className="tpreview__url">{t.websiteUrl}</span>
+                      <a
+                        className="tpreview__open"
+                        href={t.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Open in a new tab"
+                      >
+                        ↗
+                      </a>
+                    </div>
+                    <PreviewFrame url={t.websiteUrl} title={t.title} />
+                  </div>
+
+                  {t.text && (
+                    <article className="tabout">
+                      <h2>About this template</h2>
+                      <div
+                        className="richtext"
+                        dangerouslySetInnerHTML={{ __html: t.text }}
+                      />
+                    </article>
+                  )}
+                </div>
+
+                <aside className="tdetail__side">
+                  <nav className="crumbs">
+                    <a href="/index.html">Templates</a>
+                    <span>›</span>
+                    <a href="#">Websites</a>
+                    <span>›</span>
+                    <span>{cap(t.category)}</span>
+                  </nav>
+                  <h1 className="tdetail__title">{t.title}</h1>
+                  <p className="tdetail__desc">{t.description}</p>
+                  <div className="tdetail__meta">
+                    <span>by {t.author}</span>
+                    <span className="tdot">·</span>
+                    <span className="tdetail__cat">{t.category}</span>
+                  </div>
+                  <div className="tdetail__actions">
+                    <a
+                      className="btn btn-ghost"
+                      href={t.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Preview ↗
+                    </a>
+                    <a className="btn btn-primary" href={useUrl}>
+                      Use template
+                    </a>
+                  </div>
+
+                  <div className="tdetail__card">
+                    <h4>Details</h4>
+                    <dl>
+                      <div>
+                        <dt>Category</dt>
+                        <dd>{cap(t.category)}</dd>
+                      </div>
+                      <div>
+                        <dt>Author</dt>
+                        <dd>{t.author}</dd>
+                      </div>
+                      <div>
+                        <dt>Repository</dt>
+                        <dd>
+                          <a
+                            href={"https://github.com/" + t.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {t.repo}
+                          </a>
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </aside>
+              </div>
+
+              <a className="tback tback--bottom" href="#">
+                ← All templates
+              </a>
+            </div>
+          </div>
+        );
+      }
+
+      // Tiny hash router: #<template-name> shows the detail page, empty shows
+      // the gallery. Resets scroll on navigation so it feels like a new page.
+      function useRoute() {
+        const read = () =>
+          decodeURIComponent((window.location.hash || "").replace(/^#/, ""));
+        const [route, setRoute] = useState(read);
+        useEffect(() => {
+          const onHash = () => {
+            setRoute(read());
+            window.scrollTo(0, 0);
+          };
+          window.addEventListener("hashchange", onHash);
+          return () => window.removeEventListener("hashchange", onHash);
+        }, []);
+        return route;
+      }
+
+      function App() {
+        const { data, status } = useTemplates();
+        const route = useRoute();
+        const current = route ? data.find((t) => t.name === route) : null;
+
+        if (current) return <TemplateDetail t={current} />;
+
+        if (route && status === "loading") {
+          return (
+            <div className="tdetail-page">
+              <div className="wrap tempty">Loading template…</div>
+            </div>
+          );
+        }
+        if (route && status === "ready") {
+          return (
+            <div className="tdetail-page">
+              <div className="wrap tempty">
+                Template not found. <a href="#">← Back to all templates</a>
+              </div>
+            </div>
+          );
+        }
+
+        return <Gallery data={data} status={status} />;
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+
+    <!-- Compile the inline TSX in the browser and run it -->
+    <script>
+      (function () {
+        var source = document.getElementById("app-source").textContent;
+        try {
+          var compiled = Babel.transform(source, {
+            presets: [
+              ["react"],
+              ["typescript", { allExtensions: true, isTSX: true }],
+            ],
+          }).code;
+          new Function(compiled)();
+        } catch (err) {
+          console.error("Template app failed to compile:", err);
+          var el = document.getElementById("root");
+          if (el)
+            el.innerHTML =
+              '<div class="wrap tempty" style="padding-top:140px">' +
+              "Something went wrong loading this page.</div>";
+        }
+      })();
+    </script>
+    <!-- FOOTER -->
+    <footer id="docs">
+      <div class="wrap">
+        <div class="foot">
+          <div class="foot__brand">
+            <a href="index.html" class="logo">
+              <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                    clip-rule="evenodd"></path>
+                </svg></span>
+              KLAR
+            </a>
+            <p>
+              The visual CMS for websites that live on GitHub. Click to edit,
+              commit clean HTML, ship.
+            </p>
+          </div>
+          <div class="foot__col">
+            <h5>Product</h5>
+            <a href="index.html#features">Visual editing</a>
+            <a href="index.html#ai">AI assistant</a>
+            <a href="index.html#content">Content fields</a>
+            <a href="index.html#start">Publishing</a>
+          </div>
+          <div class="foot__col">
+            <h5>Developers</h5>
+            <a href="index.html#developers">Content SDK</a>
+            <a href="index.html#developers">Users SDK</a>
+            <a href="index.html#docs">Documentation</a>
+            <a href="index.html#docs">Content API</a>
+          </div>
+          <div class="foot__col">
+            <h5>Company</h5>
+            <a href="#">About</a>
+            <a href="#">Changelog</a>
+            <a href="#">Privacy</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
+        <div class="foot__bottom">
+          <span>© 2026 Klar. Clean HTML, zero bloat.</span>
+          <span>Built for GitHub.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Nav background on scroll
+      const nav = document.getElementById("nav");
+      const onScroll = () =>
+        nav.classList.toggle("scrolled", window.scrollY > 12);
+      onScroll();
+      window.addEventListener("scroll", onScroll, {
+        passive: true,
+      });
+
+      // Mobile menu (lightweight: reveal links inline)
+      const burger = document.getElementById("burger");
+      const links = document.querySelector(".nav__links");
+      burger?.addEventListener("click", () => {
+        const open = links.style.display === "flex";
+        Object.assign(links.style, {
+          display: open ? "" : "flex",
+          position: "absolute",
+          top: "64px",
+          left: "0",
+          right: "0",
+          flexDirection: "column",
+          gap: "4px",
+          padding: "16px 24px",
+          background: "rgba(8,9,10,0.96)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        });
+      });
+
+      // Scroll-reveal with stagger
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.transitionDelay =
+                (e.target.dataset.delay || 0) + "ms";
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -8% 0px",
+        },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Stagger bento tiles for a touch of polish
+      document.querySelectorAll(".bento .tile").forEach((el, i) => {
+        el.dataset.delay = i * 60;
+      });
+    </script>
+  </body>
+</html>
