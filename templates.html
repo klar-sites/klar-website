@@ -1272,17 +1272,22 @@
         gap: 8px;
         font-size: 13px;
         color: var(--muted);
-        margin-bottom: 22px;
-      }
-      .crumbs a:hover { color: var(--text); }
-      .crumbs span { color: var(--subtle); }
-      .thero h1 {
-        font-size: clamp(34px, 5.4vw, 60px);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.04;
         margin-bottom: 18px;
       }
+      .crumbs a { transition: color 0.18s var(--ease); }
+      .crumbs a:hover { color: var(--text); }
+      .crumbs span { color: var(--subtle); }
+      .crumbs .crumbs__current { color: var(--text); }
+      /* keep the breadcrumb's space (no layout shift) but hide it */
+      .crumbs--hidden { visibility: hidden; }
+      .thero h1 {
+        font-size: clamp(30px, 4vw, 46px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.40;
+        margin-bottom: 12px;
+      }
+      .thero h1 .grad { display: block; }
       .thero .lead {
         color: var(--muted);
         font-size: clamp(16px, 1.6vw, 19px);
@@ -1813,26 +1818,63 @@
 
         const activeCat =
           CATEGORIES.find((c) => c.key === active) || CATEGORIES[0];
-        const crumb = activeCat.label;
-        const headingLead = active === "all" ? "Website" : activeCat.label;
+        const labelOf = (key: string) => {
+          const c = CATEGORIES.find((c) => c.key === key);
+          return c ? c.label : cap(key);
+        };
+        // Parent group (Websites / Apps) for a sub-category tab, if any.
+        const parentGroup = GROUPS[active]
+          ? null
+          : Object.keys(GROUPS).find((g) => GROUPS[g].indexOf(active) !== -1) ||
+            null;
+        const HEADING_LEAD: { [k: string]: string } = {
+          all: "Website and app",
+          websites: "Website",
+          apps: "App",
+        };
+        const headingLead = HEADING_LEAD[active] || activeCat.label;
+        const headingWord = active === "all" ? "templates" : "Templates";
 
         return (
           <React.Fragment>
             <header className="thero">
               <div className="wrap">
-                <nav className="crumbs">
-                  <a href="/index.html">Templates</a>
+                <nav
+                  className={"crumbs" + (active === "all" ? " crumbs--hidden" : "")}
+                >
+                  <a
+                    href="/templates"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActive("all");
+                    }}
+                  >
+                    Templates
+                  </a>
+                  {parentGroup && (
+                    <React.Fragment>
+                      <span>›</span>
+                      <a
+                        href="/templates"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setActive(parentGroup);
+                        }}
+                      >
+                        {labelOf(parentGroup)}
+                      </a>
+                    </React.Fragment>
+                  )}
                   <span>›</span>
-                  <span>{crumb}</span>
+                  <span className="crumbs__current">{activeCat.label}</span>
                 </nav>
                 <h1>
-                  {headingLead} templates{" "}
-                  <span className="grad">built for Klar</span>
+                  {headingLead} {headingWord}{" "}
+                  <span className="grad">Built for Klar</span>
                 </h1>
                 <p className="lead">
                   Beautiful, ready-to-launch website templates for any idea. Pick
-                  one, click anything on the page to make it yours, and publish
-                  your site in minutes — no code, no designers, no hassle.
+                  one, click anything on the page to make it yours.
                 </p>
               </div>
             </header>
