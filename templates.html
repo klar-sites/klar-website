@@ -1813,7 +1813,7 @@
 
         const activeCat =
           CATEGORIES.find((c) => c.key === active) || CATEGORIES[0];
-        const crumb = active === "all" ? "Websites" : activeCat.label;
+        const crumb = activeCat.label;
         const headingLead = active === "all" ? "Website" : activeCat.label;
 
         return (
@@ -2003,7 +2003,7 @@
                     </dl>
                   </div>
 
-                  <a className="tback tback--side" href="#">
+                  <a className="tback tback--side" href="/templates">
                     ← All templates
                   </a>
                 </aside>
