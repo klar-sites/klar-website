@@ -1843,7 +1843,7 @@
                   className={"crumbs" + (active === "all" ? " crumbs--hidden" : "")}
                 >
                   <a
-                    href="/templates"
+                    href="/templates.html"
                     onClick={(e) => {
                       e.preventDefault();
                       setActive("all");
@@ -1855,7 +1855,7 @@
                     <React.Fragment>
                       <span>›</span>
                       <a
-                        href="/templates"
+                        href="/templates.html"
                         onClick={(e) => {
                           e.preventDefault();
                           setActive(parentGroup);
@@ -1994,7 +1994,7 @@
 
                 <aside className="tdetail__side">
                   <nav className="crumbs">
-                    <a href="/templates">Templates</a>
+                    <a href="/templates.html">Templates</a>
                     <span>›</span>
                     <span>{cap(t.category)}</span>
                   </nav>
@@ -2045,7 +2045,7 @@
                     </dl>
                   </div>
 
-                  <a className="tback tback--side" href="/templates">
+                  <a className="tback tback--side" href="/templates.html">
                     ← All templates
                   </a>
                 </aside>
