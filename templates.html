@@ -1788,6 +1788,18 @@
 
       const normalize = (c: string) => c.toLowerCase().replace(/\s+/g, "-");
 
+      // Some tabs are groups that collect several categories.
+      const GROUPS: { [k: string]: string[] } = {
+        websites: ["landing-page", "portfolio", "blog", "events", "services"],
+        apps: ["saas"],
+      };
+
+      function matchesCategory(t: Template, key: string) {
+        const cat = normalize(t.category);
+        const group = GROUPS[key];
+        return group ? group.indexOf(cat) !== -1 : cat === key;
+      }
+
       function Gallery({ data, status }: { data: Template[]; status: Status }) {
         const [active, setActive] = useState("all");
 
@@ -1795,7 +1807,7 @@
           () =>
             active === "all"
               ? data
-              : data.filter((t) => normalize(t.category) === active),
+              : data.filter((t) => matchesCategory(t, active)),
           [active, data]
         );
 
