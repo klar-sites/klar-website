@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klar — The visual CMS for sites that live on GitHub</title>
+    <title>Klar — Edit your GitHub website by clicking on it</title>
     <meta name="description"
-      content="Click any text, image, or icon on your live page to edit it. Klar applies the change as clean HTML and commits it straight to your GitHub repo — no build step, no lock-in.">
+      content="Klar loads your live page from a GitHub repo and lets you click any text, image, link, or icon to edit it. Each save commits clean HTML to your repo; one shortcut publishes to GitHub Pages.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
@@ -183,18 +183,19 @@
       </div>
       <div class="hero__grid"></div>
       <div class="wrap">
-        <div class="eyebrow"><span class="dot"></span>Visual CMS · Git-native</div>
+        <div class="eyebrow"><span class="dot"></span>Visual CMS for static sites on GitHub</div>
         <h1>Edit your website by <span class="grad">clicking on it</span></h1>
         <p class="lead">
-          Klar renders your live page and lets you edit text, images, and icons
-          right where they are. Every change is applied as clean HTML and
-          committed straight to your GitHub repo — no build step, no lock-in.
+          Klar loads your live page and lets you edit text, images, links, and
+          icons right where they sit. Each save commits clean HTML to your GitHub
+          repo — no injected wrappers, no data attributes — and ⌘⇧P publishes to
+          GitHub Pages.
         </p>
         <div class="hero__cta">
           <a href="#start" class="btn btn-primary">Start editing — free</a>
           <a href="https://klar-sites.github.io/klar-docs/page-5.html" class="btn btn-ghost">Read the docs →</a>
         </div>
-        <p class="hero__note">Works with any static site in a GitHub repo.</p>
+        <p class="hero__note">Works with any static HTML site in a GitHub repo. Sign in with Google to start.</p>
 
         <!-- editor mockup -->
         <div class="shot reveal">
@@ -210,7 +211,7 @@
 
     <!-- TRUST -->
     <div class="trust wrap reveal">
-      <p>EVERYTHING A SITE NEEDS — NOTHING IT DOESN'T</p>
+      <p>NO DATABASE · NO BUILD STEP · JUST YOUR GITHUB REPO</p>
       <div class="trust__row">
         <span>⌁ Clean HTML</span>
         <span>⎇ Git history</span>
@@ -227,9 +228,10 @@
           <span class="eyebrow"><span class="dot"></span>The editor</span>
           <h2>Edit on the page, not in a form</h2>
           <p>
-            Klar loads the real rendered output in a sandboxed frame. Click
-            anything to change it — text, images, links, icons, even repeating
-            lists — with the structure of your HTML untouched.
+            Klar renders your real page in a preview and lets you click any
+            element to change it — text, images, links, icons, even repeating
+            lists. You edit what visitors see; Klar writes it back to your source
+            HTML.
           </p>
         </div>
 
@@ -238,9 +240,10 @@
           <div class="feat__text">
             <h3>Click-to-edit, exactly where it lives</h3>
             <p>
-              Hover to highlight, click to edit inline. Rich text for
-              paragraphs, a clean structured panel for attributes, and a
-              floating toolbar to add, duplicate, reorder, or remove blocks.
+              Hover to highlight, click to edit inline. Paragraphs get a
+              rich-text toolbar, every element gets a structured panel for its
+              attributes, and a floating toolbar adds, duplicates, reorders, or
+              removes blocks.
             </p>
             <ul class="feat__list">
               <li>
@@ -328,14 +331,13 @@
                 color: var(--text);
                 margin-top: 18px;
               ">
-              Build something people
+              Edit this heading and it saves as
               <span style="
                   background: rgba(var(--accent-rgb), 0.22);
                   border-radius: 4px;
                   padding: 0 4px;
                   box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.35);
-                ">actually love</span>
-              to use.
+                ">clean HTML</span>.
             </p>
             <p style="font-size: 13px; color: var(--subtle); margin-top: 14px">
               Select any text to format it — bold, italic, links.
@@ -348,9 +350,9 @@
           <div class="feat__text">
             <h3>Clean HTML, committed to Git</h3>
             <p>
-              Every save is a real commit to your repo — applied with Cheerio to
-              the source HTML, with zero editor artifacts, wrappers, or data
-              attributes. Your code stays yours.
+              Every save (⌘⇧S) is a real commit to your repo. Klar edits the
+              source HTML in place — no editor artifacts, wrappers, or data
+              attributes — so your files stay exactly as you wrote them.
             </p>
             <ul class="feat__list">
               <li>
@@ -364,8 +366,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                <span><b>Publish to GitHub Pages</b> in one click, on its own
-                  branch.</span>
+                <span><b>Publish to GitHub Pages</b> with ⌘⇧P when you're
+                  ready.</span>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -406,35 +408,35 @@
           <div class="feat__text">
             <div class="eyebrow"><span class="dot"></span>AI assistant</div>
             <h3 style="margin-top: 18px; font-size: clamp(28px, 3.6vw, 40px)">
-              An assistant that edits the page with you
+              Tell the AI what to change, in plain English
             </h3>
             <p>
-              Describe a change in plain English. Klar's AI can generate a page
-              or section, modify the current one, or edit the exact element you
-              clicked — and it understands content rendered at runtime by your
-              own JavaScript or React.
+              Describe a change and Klar's assistant writes it. Generate a whole
+              page or site, modify the current page, edit a section or the exact
+              element you clicked, or just chat — it even edits content your own
+              JavaScript or React renders at runtime, by changing the source.
             </p>
             <ul class="feat__list">
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                <span><b>Review before you apply</b> — a full before/after diff on
-                  every change.</span>
+                <span><b>Review before you apply</b> — see the change, then accept
+                  it.</span>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                <span><b>Design-system aware</b> — reuses your existing classes and
-                  tokens.</span>
+                <span><b>Six modes</b> — page, site, section, element, modify, and
+                  chat.</span>
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                <span><b>Bring your own key</b> — Claude, GPT, and more via your
-                  provider.</span>
+                <span><b>Bring your own key</b> — add your AI provider's API
+                  key.</span>
               </li>
             </ul>
           </div>
@@ -463,10 +465,11 @@
       <div class="wrap">
         <div class="sechead center reveal">
           <span class="eyebrow"><span class="dot"></span>Structured content</span>
-          <h2>From one page to a real content model</h2>
+          <h2>Turn pages into structured, reusable content</h2>
           <p>
-            Turn parts of a page into named fields, then render dynamic lists —
-            blog indexes, card grids, archives — that update themselves.
+            Mark parts of a page as named fields — title, image, tags, date — and
+            Klar builds the lists that depend on them: blog indexes, card grids,
+            archives, rendered fresh every time you publish.
           </p>
         </div>
         <div class="feat reveal" style="margin-top: 64px">
@@ -497,11 +500,10 @@
           <div class="feat__text">
             <h3>Content fields &amp; listing templates</h3>
             <p>
-              Declare <code style="color: var(--violet)">:field()</code> rules
-              in your editable selectors to capture titles, images, tags, dates,
-              and rich blocks per page. Drop a
-              <code style="color: var(--violet)">&lt;template data-query&gt;</code>
-              and Klar renders the list for you on every save.
+              Give each page type fields — strings, text, images, links, tags,
+              dates, arrays, and more. Add a listing template written in
+              <code style="color: var(--violet)">Liquid</code> and Klar renders
+              the collection — a blog index, a product grid — on every publish.
             </p>
             <ul class="feat__list">
               <li>
@@ -535,8 +537,8 @@
     <section class="block" style="padding-top: 0">
       <div class="wrap">
         <div class="sechead center reveal">
-          <h2>Batteries included</h2>
-          <p>The everyday tools that make a CMS actually usable.</p>
+          <h2>Built into every project</h2>
+          <p>Media, icons, shared sections, members, forms, and shortcuts — nothing to install.</p>
         </div>
         <div class="bento">
           <div class="tile reveal">
@@ -559,8 +561,8 @@
             </div>
             <h4>Icon picker</h4>
             <p>
-              Search thousands of icons from the Iconify catalog and drop them
-              in.
+              Search Heroicons, Lucide, and Material icons; drop them in as
+              inline SVG.
             </p>
           </div>
           <div class="tile reveal">
@@ -599,7 +601,8 @@
             </div>
             <h4>Form submissions</h4>
             <p>
-              A tokenized endpoint with spam defenses, inbox, and email alerts.
+              Post forms to a Klar endpoint — honeypot and rate limiting, an
+              inbox, and email alerts.
             </p>
           </div>
           <div class="tile reveal">
@@ -611,7 +614,8 @@
             </div>
             <h4>Keyboard-first</h4>
             <p>
-              Save, publish, undo, and navigate without leaving the keyboard.
+              Save (⌘⇧S), publish (⌘⇧P), undo (⌘Z), and toggle panels without
+              the mouse.
             </p>
           </div>
         </div>
@@ -625,13 +629,13 @@
           <div class="feat__text reveal">
             <span class="eyebrow"><span class="dot"></span>Developers</span>
             <h3 style="margin-top: 18px; font-size: clamp(28px, 3.6vw, 40px)">
-              Your content, anywhere
+              Your content, over a dependency-free SDK
             </h3>
             <p>
-              A dependency-free SDK, served straight from your Klar host. Read
-              published content with
-              <code style="color: var(--violet)">list()</code>, or add visitor
-              sign-in and per-user data — no build step, no backend to run.
+              A dependency-free SDK, served from your Klar host. Query published
+              content with <code style="color: var(--violet)">list()</code>, or
+              add Google visitor sign-in and per-user data — no build step, no
+              backend to run.
             </p>
             <ul class="feat__list">
               <li>
@@ -680,7 +684,7 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
           <div class="aglow"></div>
           <h2>Make your first edit in minutes</h2>
           <p>
-            Point Klar at a page in your repo, click on it, and ship. No
+            Sign in with Google, connect your repo, and click on the page. No
             migration, no rebuild — your HTML stays exactly where it is.
           </p>
           <div class="cta__cta">
@@ -705,8 +709,8 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
               KLAR
             </a>
             <p>
-              The visual CMS for websites that live on GitHub. Click to edit,
-              commit clean HTML, ship.
+              The visual CMS for static sites on GitHub. Click to edit, commit
+              clean HTML, publish to GitHub Pages.
             </p>
           </div>
           <div class="foot__col">
@@ -732,8 +736,8 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
           </div>
         </div>
         <div class="foot__bottom">
-          <span>© 2026 Klar. Clean HTML, zero bloat.</span>
-          <span>Built for GitHub.</span>
+          <span>© 2026 Klar.</span>
+          <span>Commits to your repo · Publishes to GitHub Pages.</span>
         </div>
       </div>
     </footer>
