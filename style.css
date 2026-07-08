@@ -442,6 +442,12 @@ a {
   border: 1px solid var(--border);
   background: var(--surface);
   background: none;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.dark .shot__frame {
   -webkit-mask-image: linear-gradient(to bottom,
       #000 0,
       #000 60%,
@@ -450,8 +456,6 @@ a {
       #000 0,
       #000 60%,
       transparent 100%);
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 .shot__img {
