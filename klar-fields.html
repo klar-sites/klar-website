@@ -1,16 +1,24 @@
-<!DOCTYPE html><html lang="en" class="dark"><head>
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klar — Edit your GitHub website by clicking on it</title>
-    <meta name="description" content="Klar loads your live page from a GitHub repo and lets you click any text, image, link, or icon to edit it. Each save commits clean HTML to your repo; one shortcut publishes to GitHub Pages.">
+    <meta name="description"
+      content="Klar loads your live page from a GitHub repo and lets you click any text, image, link, or icon to edit it. Each save commits clean HTML to your repo; one shortcut publishes to GitHub Pages.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-700-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-700-normal.woff2">
     <style>
       @font-face {
         font-family: 'Inter';
@@ -54,7 +62,8 @@
     </style>
     <link rel="stylesheet" href="/style.css" <="" head="">
   </head>
-  <body><nav class="nav" id="nav">
+  <body>
+    <nav class="nav" id="nav">
       <style>
         .nav__theme {
           display: grid;
@@ -94,7 +103,9 @@
       <div class="nav__inner">
         <a href="#" class="logo">
           <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z" clip-rule="evenodd"></path>
+              <path fill-rule="evenodd"
+                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                clip-rule="evenodd"></path>
             </svg></span>
           KLAR
         </a>
@@ -107,7 +118,8 @@
         </div>
         <div class="nav__cta">
           <button class="nav__theme" aria-label="Toggle dark mode" id="themeToggle">
-            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
               <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -118,14 +130,16 @@
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
-            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </button>
           <a href="https://editor.klar.website/" class="btn btn-ghost btn-sm">Sign in</a>
           <a href="#start" class="btn btn-primary btn-sm">Start editing</a>
           <button class="nav__burger" aria-label="Menu" id="burger">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
               <line x1="4" y1="7" x2="20" y2="7"></line>
               <line x1="4" y1="12" x2="20" y2="12"></line>
               <line x1="4" y1="17" x2="20" y2="17"></line>
@@ -159,41 +173,17 @@
           });
         })();
       </script>
-    </nav><header class="hero">
-      <div class="aurora">
-        <div class="aurora__c"></div>
-      </div>
-      <div class="hero__grid"></div>
-      <div class="wrap">
-        <div class="eyebrow"><span class="dot"></span>Visual CMS for static sites on GitHub</div>
-        <h1>Edit your website by <span class="grad">clicking on it</span></h1>
-        <p class="lead">
-          Klar loads your live page and lets you edit text, images, links, and
-          icons right where they sit. Each save commits clean HTML to your GitHub
-          repo — no injected wrappers, no data attributes — and ⌘⇧P publishes to
-          GitHub Pages.
-        </p>
-        <div class="hero__cta">
-          <a href="#start" class="btn btn-primary">Start editing — free</a>
-          <a href="https://klar-sites.github.io/klar-docs/page-5.html" class="btn btn-ghost">Read the docs →</a>
-        </div>
-        <p class="hero__note">Works with any static HTML site in a GitHub repo. Sign in with Google to start.</p>
-
-        <!-- editor mockup -->
-        <div class="shot reveal">
-          <div class="shot__glow"></div>
-          <div class="shot__frame">
-            <img class="shot__img" src="/images/Screenshot 2026-06-07 at 14.18.53.png" alt="The Klar visual editor — clicking a headline to edit it inline, with the structured fields panel on the right." loading="lazy">
-          </div>
-        </div>
-      </div>
-    </header><main></main><footer id="docs">
+    </nav>
+    <main></main>
+    <footer id="docs">
       <div class="wrap">
         <div class="foot">
           <div class="foot__brand">
             <a href="#" class="logo">
               <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z" clip-rule="evenodd"></path>
+                  <path fill-rule="evenodd"
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z"
+                    clip-rule="evenodd"></path>
                 </svg></span>
               KLAR
             </a>
@@ -229,7 +219,8 @@
           <span>Commits to your repo · Publishes to GitHub Pages.</span>
         </div>
       </div>
-    </footer><script>
+    </footer>
+    <script>
       // Nav background on scroll
       const nav = document.getElementById("nav");
       const onScroll = () =>
@@ -281,4 +272,6 @@
       document.querySelectorAll(".bento .tile").forEach((el, i) => {
         el.dataset.delay = i * 60;
       });
-    </script></body></html>
+    </script>
+  </body>
+</html>
