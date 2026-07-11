@@ -1,10 +1,5 @@
 {
   "pageTypes": [],
-  "pages": [
-    {
-      "name": "index.html",
-      "editableElements": ".nav__links[]"
-    }
-  ],
+  "pages": [],
   "vocabularies": {}
 }
