@@ -195,7 +195,7 @@ window.$RefreshSig$ = () => (type) => type;</script>
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
     <!-- Panel widget styles (Tailwind theme, emitted by the panel build). -->
-    <link rel="stylesheet" href="http://localhost:5173/klar-editor-panel.css?v=1783778707" />
+    <link rel="stylesheet" href="http://localhost:5173/dist-standalone/klar-editor-panel.css?v=1783778707" />
     <!-- Restore the persisted panel width BEFORE first paint, as a CSS var the
          aside reads. A plain (non-module) inline script runs synchronously during
          head parse — before the aside lays out — so the panel never flashes at the
@@ -675,8 +675,8 @@ window.$RefreshSig$ = () => (type) => type;</script>
     <!-- Two UMD globals, React bundled into the panel one. Work over file:// too.
          `?v=1783778707` is stamped with the build epoch by build:standalone so a
          plain reload always fetches fresh bundles (no stale-cache guessing). -->
-    <script src="http://localhost:5173/klar-editor.umd.js?v=1783778707"></script>
-    <script src="http://localhost:5173/klar-editor-panel.umd.js?v=1783778707"></script>
+    <script src="http://localhost:5173/dist-standalone/klar-editor.umd.js?v=1783778707"></script>
+    <script src="http://localhost:5173/dist-standalone/klar-editor-panel.umd.js?v=1783778707"></script>
     <script type="module" src="http://localhost:5173/dist-standalone/demo.html?html-proxy&index=0.js"></script>
   
 
