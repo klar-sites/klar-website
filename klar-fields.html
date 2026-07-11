@@ -60,7 +60,7 @@
         src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-800-normal.woff2') format('woff2');
       }
     </style>
-    <link rel="stylesheet" href="/style.css" <="" head="">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -784,7 +784,8 @@
           try {
             localStorage.setItem(k, v);
           } catch {
-            /* ignore */ }
+            /* ignore */
+          }
         };
 
         // Vocabulary for tag/select fields — resolved by both iframe (chips) and panel.
@@ -875,7 +876,8 @@
               const el = iframe.contentDocument.querySelector(sel);
               if (el) el.textContent = text;
             } catch (_) {
-              /* cross-origin */ }
+              /* cross-origin */
+            }
           },
           isCodeField: (sel) => {
             try {
@@ -938,7 +940,8 @@
           try {
             iframe.contentDocument.addEventListener('keydown', onUndoKey);
           } catch (_) {
-            /* cross-origin */ }
+            /* cross-origin */
+          }
         });
 
         function init(editableSelectors) {
@@ -1111,7 +1114,8 @@
                 const el = iframe.contentDocument.querySelector(m.selector);
                 if (el) edited = el.textContent;
               } catch (_) {
-                /* cross-origin */ }
+                /* cross-origin */
+              }
               entry = Object.assign({}, m, {
                 edited,
                 original: codeOriginal(m.selector)
@@ -1346,9 +1350,9 @@
           btn.addEventListener('click', () => {
             outputView = btn.dataset.view;
             outTitle.textContent = outputView.charAt(0).toUpperCase() + outputView.slice(
-            1); // Html / Head / Body
+              1); // Html / Head / Body
             document.querySelectorAll('#outtabs button').forEach((b) => b.classList.toggle('active', b ===
-            btn));
+              btn));
             if (!outWrap.hidden) outEl.textContent = renderOutputHtml();
           });
         });
