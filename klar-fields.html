@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klar — Edit your GitHub website by clicking on it</title>
+    <!-- Restore the persisted panel width BEFORE first paint, as a CSS var the
+         aside reads. A plain (non-module) inline script runs synchronously during
+         head parse — before the aside lays out — so the panel never flashes at the
+         340px default and then jumps to the stored width. -->
+    <script>
+      try {
+        let __w = localStorage.getItem('klar-demo-width');
+        if (__w) document.documentElement.style.setProperty('--klar-panel-width', __w);
+      } catch (e) {}
+    </script>
     <meta name="description"
       content="Klar loads your live page from a GitHub repo and lets you click any text, image, link, or icon to edit it. Each save commits clean HTML to your repo; one shortcut publishes to GitHub Pages.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,16 +78,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <!-- Panel widget styles (Tailwind theme, emitted by the panel build). -->
     <link rel="stylesheet" href="https://editor.klar.website/klar-editor-panel.css" />
-    <!-- Restore the persisted panel width BEFORE first paint, as a CSS var the
-         aside reads. A plain (non-module) inline script runs synchronously during
-         head parse — before the aside lays out — so the panel never flashes at the
-         340px default and then jumps to the stored width. -->
-    <script>
-      try {
-        let __w = localStorage.getItem('klar-demo-width');
-        if (__w) document.documentElement.style.setProperty('--klar-panel-width', __w);
-      } catch (e) {}
-    </script>
+    
     <style>
       /* Chrome uses Klar's own theme tokens (emitted into klar-editor-panel.css by
        Tailwind's @theme), so the demo matches the real editor's colors exactly. */
