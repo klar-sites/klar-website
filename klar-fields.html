@@ -174,7 +174,82 @@
         })();
       </script>
     </nav>
-    <main style="padding-top:168px;"></main>
+    <main style="padding-top:168px;">
+
+    <div id="app">
+    <header>
+      <div class="brand">
+        <img src="https://editor.klar.website/klar-logo.png" alt="KLAR" />
+      </div>
+      <span id="editbadge" class="edit-badge" hidden></span>
+      <div class="actions">
+        <button id="toggleurl" class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary" title="Load a live site" aria-label="Load a live site">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </button>
+        <button id="save" class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show HTML</button>
+      </div>
+    </header>
+    <div id="urlbar" class="urlbar" hidden>
+      <input id="url" type="text" spellcheck="false"
+        placeholder="https://example.com — load a live site" />
+      <button id="loadurl" class="primary">Load →</button>
+      <button id="reset">Demo page</button>
+    </div>
+    <main>
+      <div id="stage">
+        <iframe id="editor" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
+      </div>
+      <aside>
+        <div id="resizer" title="Drag to resize"></div>
+        <div class="tabs">
+          <button class="tab active" data-tab="field">Element</button>
+          <button class="tab" data-tab="editable">Editable Elements</button>
+          <button class="act" id="applycfg" hidden>Apply →</button>
+        </div>
+        <div id="panel" class="pane"></div>
+        <div id="cfgwrap" class="pane" hidden>
+          <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
+        </div>
+        <div id="outwrap" hidden>
+          <div id="outcard">
+            <div id="outhead">
+              <h2>HTML</h2>
+              <div class="spacer"></div>
+              <button id="closeout" type="button" title="Close" aria-label="Close">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <div id="outbody">
+              <div id="outnav">
+                <div class="navitem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  HTML
+                </div>
+              </div>
+              <div id="outcontent">
+                <div id="outtabs">
+                  <button type="button" data-view="html" class="active">HTML</button>
+                  <button type="button" data-view="head">HEAD</button>
+                  <button type="button" data-view="body">BODY</button>
+                </div>
+                <div id="outtitle">Html</div>
+                <pre id="out" class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+    </div>
+
+    <!-- Two UMD globals, React bundled into the panel one. Loaded from the hosted
+         editor (editor.klar.website) so this page is portable — drop it on any host
+         and it pulls the canonical editor bundles; the host handles cache headers. -->
+    <script src="https://editor.klar.website/klar-editor.umd.js"></script>
+    <script src="https://editor.klar.website/klar-editor-panel.umd.js"></script>
+    <script type="module" src="/dist-standalone/index.html?html-proxy&index=0.js"></script>
+      
+    </main>
     <footer id="docs">
       <div class="wrap">
         <div class="foot">
