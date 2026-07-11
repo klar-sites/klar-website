@@ -65,10 +65,7 @@
   <body>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <!-- Panel widget styles (Tailwind theme, emitted by the panel build). -->
     <link rel="stylesheet" href="https://editor.klar.website/klar-editor-panel.css" />
     <!-- Restore the persisted panel width BEFORE first paint, as a CSS var the
@@ -87,11 +84,13 @@
       * {
         box-sizing: border-box;
       }
+
       /* Pin the whole app to the viewport — only inner regions (page, panel) scroll. */
       html,
       body {
         height: 100%;
       }
+
       body {
         margin: 0;
         color: var(--color-foreground);
@@ -99,6 +98,7 @@
         height: 100vh;
         overflow: hidden;
       }
+
       /* Flex column lives on a wrapper, not <body>, so the root stays a plain
          block (no flex overlay cluttering <body> in DevTools). */
       #app {
@@ -106,6 +106,7 @@
         display: flex;
         flex-direction: column;
       }
+
       /* Header skeleton — mirrors Klar's Toolbar: h-[60px] px-4 pl-3 bg-surface
          border-b border-edge, brand left / actions right (gap-2.5). */
       header {
@@ -119,6 +120,7 @@
         flex: 0 0 auto;
         position: relative;
       }
+
       /* Edit-count pill — centered in the header, exactly as Klar's toolbar. */
       .edit-badge {
         position: absolute;
@@ -135,15 +137,18 @@
         border-radius: 9999px;
         pointer-events: none;
       }
+
       .brand,
       .actions {
         display: flex;
         align-items: center;
         gap: 10px;
       }
+
       .brand img {
         display: block;
       }
+
       /* The load-live-site icon and Apply edits use Klar's LITERAL toolbar classes
          (from klar-editor-panel.css) so they're pixel-identical — same text-sm rem
          sizing against Klar's 13px root and the same system font stack. Only the
@@ -152,6 +157,7 @@
         background: var(--color-secondary);
         color: #fff;
       }
+
       /* Collapsible URL bar — toggled by the globe icon. */
       .urlbar {
         display: flex;
@@ -161,6 +167,7 @@
         background: var(--color-surface);
         flex: 0 0 auto;
       }
+
       .urlbar input {
         flex: 1 1 auto;
         min-width: 0;
@@ -173,9 +180,11 @@
         font-size: 12px;
         outline: none;
       }
+
       .urlbar input:focus {
         border-color: var(--color-primary);
       }
+
       .urlbar button {
         flex: 0 0 auto;
         font: inherit;
@@ -187,11 +196,13 @@
         color: var(--color-foreground);
         cursor: pointer;
       }
+
       .urlbar button.primary {
         background: var(--color-foreground);
         color: var(--color-base);
         border-color: var(--color-foreground);
       }
+
       .urlbar button:hover {
         opacity: 0.85;
       }
@@ -201,11 +212,13 @@
         flex: 1 1 auto;
         min-height: 0;
       }
+
       #stage {
         flex: 1 1 auto;
         min-width: 0;
         background: #252525;
       }
+
       #editor {
         width: 100%;
         height: 100%;
@@ -213,6 +226,7 @@
         background: #252525;
         display: block;
       }
+
       /* Draggable divider — an absolute overlay straddling the panel's left edge,
          so it takes NO layout space (no gap band). Invisible by default (only the
          aside's 1px border-left shows); highlights on hover / while dragging. */
@@ -227,6 +241,7 @@
         background: transparent;
         transition: background 0.12s;
       }
+
       #resizer:hover,
       #resizer.dragging {
         background: transparent;
@@ -242,9 +257,11 @@
         min-width: 260px;
         background: var(--color-surface);
       }
+
       [hidden] {
         display: none !important;
       }
+
       /* Tab header — mirrors Klar's StructuredPanel tabs exactly: `flex border-b
          border-edge` container; each tab `flex-1 py-2 text-[11px] font-medium
          uppercase tracking-[0.5px]`, active `text-foreground border-b-2
@@ -254,12 +271,14 @@
         border-bottom: 1px solid var(--color-edge);
         flex: 0 0 auto;
       }
+
       .tabs .tab {
         flex: 1 1 0%;
         padding: 0.5rem 0;
         font-family: inherit;
         font-size: 11px;
-        line-height: 1.5; /* match Klar's tab (py-2 + 11px/1.5) — body no longer sets it */
+        line-height: 1.5;
+        /* match Klar's tab (py-2 + 11px/1.5) — body no longer sets it */
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -269,12 +288,15 @@
         color: var(--color-subtle);
         transition: color 150ms;
       }
+
       .tabs .tab:hover {
         color: var(--color-muted);
       }
+
       .tabs .tab.active {
         color: var(--color-foreground);
       }
+
       .tabs .act {
         align-self: center;
         margin-left: auto;
@@ -287,14 +309,17 @@
         color: var(--color-foreground);
         cursor: pointer;
       }
+
       .tabs .act.primary {
         background: var(--color-foreground);
         color: var(--color-base);
         border-color: var(--color-foreground);
       }
+
       .tabs .act:hover {
         opacity: 0.85;
       }
+
       #applycfg {
         display: none;
       }
@@ -304,11 +329,13 @@
         overflow: auto;
         min-height: 0;
       }
+
       #cfgwrap {
         display: flex;
         flex-direction: column;
         padding: 12px 14px;
       }
+
       #cfg {
         flex: 1 1 auto;
         width: 100%;
@@ -321,9 +348,11 @@
         padding: 8px 10px;
         outline: none;
       }
+
       #cfg:focus {
         border-color: var(--color-primary);
       }
+
       /* "Show HTML" modal — an exact replica of Klar's Project Settings modal
          (src/components/SetupForm.tsx). Plain CSS mirrors the Tailwind values
          (backdrop-blur-2xl = blur(40px), rounded-3xl = 24px, etc.) since the
@@ -338,6 +367,7 @@
         padding: 24px;
         background: color-mix(in srgb, var(--color-surface) 40%, transparent);
       }
+
       #outcard {
         position: relative;
         display: flex;
@@ -353,6 +383,7 @@
         -webkit-backdrop-filter: blur(40px);
         backdrop-filter: blur(40px);
       }
+
       #outhead {
         display: flex;
         align-items: center;
@@ -361,15 +392,18 @@
         padding: 20px 32px 16px 24px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
+
       #outhead h2 {
         margin: 0;
         font-size: 17px;
         font-weight: 600;
         color: #fff;
       }
+
       #outhead .spacer {
         flex: 1;
       }
+
       #closeout {
         width: 32px;
         height: 32px;
@@ -384,10 +418,12 @@
         cursor: pointer;
         transition: all 150ms;
       }
+
       #closeout:hover {
         background: rgba(255, 255, 255, 0.2);
         color: rgba(255, 255, 255, 0.8);
       }
+
       #outbody {
         display: flex;
         flex: 1;
@@ -396,6 +432,7 @@
         overflow: hidden;
         border-radius: 0 0 24px 24px;
       }
+
       #outnav {
         width: 180px;
         flex-shrink: 0;
@@ -404,6 +441,7 @@
         padding: 16px 12px 0;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
       }
+
       #outnav .navitem {
         display: flex;
         align-items: center;
@@ -417,6 +455,7 @@
         background: rgba(255, 255, 255, 0.1);
         color: #fff;
       }
+
       #outcontent {
         flex: 1;
         min-width: 0;
@@ -424,6 +463,7 @@
         flex-direction: column;
         overflow: hidden;
       }
+
       /* HTML / HEAD / BODY tabs — Klar's segmented control (SetupForm's
          "Project defaults / This page" toggle). */
       #outtabs {
@@ -437,6 +477,7 @@
         background: rgba(255, 255, 255, 0.05);
         border-radius: 8px;
       }
+
       #outtabs button {
         padding: 6px 12px;
         font: 500 12px/1 inherit;
@@ -447,13 +488,16 @@
         color: rgba(255, 255, 255, 0.5);
         transition: color 150ms, background-color 150ms;
       }
+
       #outtabs button:hover {
         color: rgba(255, 255, 255, 0.7);
       }
+
       #outtabs button.active {
         background: rgba(255, 255, 255, 0.15);
         color: #fff;
       }
+
       /* Section title — Klar's field-label style (EditorTextField in SetupForm):
          no top margin, mb-2 (8px) below. */
       #outtitle {
@@ -463,6 +507,7 @@
         font-weight: 500;
         color: rgba(255, 255, 255, 0.7);
       }
+
       #out {
         flex: 1;
         min-width: 0;
@@ -474,12 +519,13 @@
         word-break: break-word;
         color: rgba(255, 255, 255, 0.8);
       }
+
       .muted {
         color: var(--color-muted);
       }
     </style>
 
-    
+
     <nav class="nav" id="nav">
       <style>
         .nav__theme {
@@ -591,122 +637,164 @@
         })();
       </script>
     </nav>
-    <main style="padding-top:168px;">
+    <div style="padding-top:168px;">
 
-    <div id="app">
-    <header>
-      <div class="brand">
-        <img src="https://editor.klar.website/klar-logo.png" alt="KLAR" />
-      </div>
-      <span id="editbadge" class="edit-badge" hidden></span>
-      <div class="actions">
-        <button id="toggleurl" class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary" title="Load a live site" aria-label="Load a live site">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </button>
-        <button id="save" class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show HTML</button>
-      </div>
-    </header>
-    <div id="urlbar" class="urlbar" hidden>
-      <input id="url" type="text" spellcheck="false"
-        placeholder="https://example.com — load a live site" />
-      <button id="loadurl" class="primary">Load →</button>
-      <button id="reset">Demo page</button>
-    </div>
-    <main>
-      <div id="stage">
-        <iframe id="editor" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
-      </div>
-      <aside>
-        <div id="resizer" title="Drag to resize"></div>
-        <div class="tabs">
-          <button class="tab active" data-tab="field">Element</button>
-          <button class="tab" data-tab="editable">Editable Elements</button>
-          <button class="act" id="applycfg" hidden>Apply →</button>
-        </div>
-        <div id="panel" class="pane"></div>
-        <div id="cfgwrap" class="pane" hidden>
-          <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
-        </div>
-        <div id="outwrap" hidden>
-          <div id="outcard">
-            <div id="outhead">
-              <h2>HTML</h2>
-              <div class="spacer"></div>
-              <button id="closeout" type="button" title="Close" aria-label="Close">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              </button>
-            </div>
-            <div id="outbody">
-              <div id="outnav">
-                <div class="navitem">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                  HTML
-                </div>
-              </div>
-              <div id="outcontent">
-                <div id="outtabs">
-                  <button type="button" data-view="html" class="active">HTML</button>
-                  <button type="button" data-view="head">HEAD</button>
-                  <button type="button" data-view="body">BODY</button>
-                </div>
-                <div id="outtitle">Html</div>
-                <pre id="out" class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
-              </div>
-            </div>
+      <div id="app">
+        <header>
+          <div class="brand">
+            <img src="https://editor.klar.website/klar-logo.png" alt="KLAR" />
           </div>
+          <span id="editbadge" class="edit-badge" hidden></span>
+          <div class="actions">
+            <button id="toggleurl"
+              class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary"
+              title="Load a live site" aria-label="Load a live site">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </button>
+            <button id="save"
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show
+              HTML</button>
+          </div>
+        </header>
+        <div id="urlbar" class="urlbar" hidden>
+          <input id="url" type="text" spellcheck="false" placeholder="https://example.com — load a live site" />
+          <button id="loadurl" class="primary">Load →</button>
+          <button id="reset">Demo page</button>
         </div>
-      </aside>
-    </main>
-    </div>
+        <main>
+          <div id="stage">
+            <iframe id="editor"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
+          </div>
+          <aside>
+            <div id="resizer" title="Drag to resize"></div>
+            <div class="tabs">
+              <button class="tab active" data-tab="field">Element</button>
+              <button class="tab" data-tab="editable">Editable Elements</button>
+              <button class="act" id="applycfg" hidden>Apply →</button>
+            </div>
+            <div id="panel" class="pane"></div>
+            <div id="cfgwrap" class="pane" hidden>
+              <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
+            </div>
+            <div id="outwrap" hidden>
+              <div id="outcard">
+                <div id="outhead">
+                  <h2>HTML</h2>
+                  <div class="spacer"></div>
+                  <button id="closeout" type="button" title="Close" aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 6 6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div id="outbody">
+                  <div id="outnav">
+                    <div class="navitem">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                      </svg>
+                      HTML
+                    </div>
+                  </div>
+                  <div id="outcontent">
+                    <div id="outtabs">
+                      <button type="button" data-view="html" class="active">HTML</button>
+                      <button type="button" data-view="head">HEAD</button>
+                      <button type="button" data-view="body">BODY</button>
+                    </div>
+                    <div id="outtitle">Html</div>
+                    <pre id="out"
+                      class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </main>
+      </div>
 
-    <!-- Two UMD globals, React bundled into the panel one. Loaded from the hosted
+      <!-- Two UMD globals, React bundled into the panel one. Loaded from the hosted
          editor (editor.klar.website) so this page is portable — drop it on any host
          and it pulls the canonical editor bundles; the host handles cache headers. -->
-    <script src="https://editor.klar.website/klar-editor.umd.js"></script>
-    <script src="https://editor.klar.website/klar-editor-panel.umd.js"></script>
-    <script type="module">
-      import { createEditHistory } from 'https://editor.klar.website/editHistory.js';
-      const { getIframeScript, injectScript } = window.KlarEditor;
-      const { mountFieldPanel, applyEditsToDoc, reorderContainerItems } = window.KlarEditorPanel;
+      <script src="https://editor.klar.website/klar-editor.umd.js"></script>
+      <script src="https://editor.klar.website/klar-editor-panel.umd.js"></script>
+      <script type="module">
+        import {
+          createEditHistory
+        } from 'https://editor.klar.website/editHistory.js';
+        const {
+          getIframeScript,
+          injectScript
+        } = window.KlarEditor;
+        const {
+          mountFieldPanel,
+          applyEditsToDoc,
+          reorderContainerItems
+        } = window.KlarEditorPanel;
 
-      const iframe = document.getElementById('editor');
-      const panelEl = document.getElementById('panel');
-      const cfgEl = document.getElementById('cfg');
-      const outEl = document.getElementById('out');
-      const outWrap = document.getElementById('outwrap');
-      document
-        .getElementById('closeout')
-        .addEventListener('click', hideOutput);
-      // Click the dimmed backdrop (outside the card) to dismiss — same as the
-      // real Project Settings modal.
-      outWrap.addEventListener('click', (e) => {
-        if (e.target === outWrap) hideOutput();
-      });
-      // Esc closes the modal when it's open.
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !outWrap.hidden) hideOutput();
-      });
-      function hideOutput() {
-        outWrap.hidden = true;
-        const sb = document.getElementById('save');
-        if (sb) sb.textContent = 'Show HTML';
-      }
-      const sendToIframe = (msg) =>
-        iframe.contentWindow && iframe.contentWindow.postMessage(msg, '*');
+        const iframe = document.getElementById('editor');
+        const panelEl = document.getElementById('panel');
+        const cfgEl = document.getElementById('cfg');
+        const outEl = document.getElementById('out');
+        const outWrap = document.getElementById('outwrap');
+        document
+          .getElementById('closeout')
+          .addEventListener('click', hideOutput);
+        // Click the dimmed backdrop (outside the card) to dismiss — same as the
+        // real Project Settings modal.
+        outWrap.addEventListener('click', (e) => {
+          if (e.target === outWrap) hideOutput();
+        });
+        // Esc closes the modal when it's open.
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !outWrap.hidden) hideOutput();
+        });
 
-      // Persist the URL + Editable Elements fields across reloads.
-      const LS = { url: 'klar-demo-url', cfg: 'klar-demo-cfg', tab: 'klar-demo-tab', width: 'klar-demo-width' };
-      const lsGet = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
-      const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch { /* ignore */ } };
+        function hideOutput() {
+          outWrap.hidden = true;
+          const sb = document.getElementById('save');
+          if (sb) sb.textContent = 'Show HTML';
+        }
+        const sendToIframe = (msg) =>
+          iframe.contentWindow && iframe.contentWindow.postMessage(msg, '*');
 
-      // Vocabulary for tag/select fields — resolved by both iframe (chips) and panel.
-      const vocabularies = {
-        topics: ['css', 'design', 'javascript', 'tutorial', 'react'],
-        categories: ['Technology', 'Podcast', 'Lifestyle', 'Business'],
-      };
+        // Persist the URL + Editable Elements fields across reloads.
+        const LS = {
+          url: 'klar-demo-url',
+          cfg: 'klar-demo-cfg',
+          tab: 'klar-demo-tab',
+          width: 'klar-demo-width'
+        };
+        const lsGet = (k) => {
+          try {
+            return localStorage.getItem(k);
+          } catch {
+            return null;
+          }
+        };
+        const lsSet = (k, v) => {
+          try {
+            localStorage.setItem(k, v);
+          } catch {
+            /* ignore */ }
+        };
 
-      // The built-in demo page.
-      const DEMO_HTML = `<!doctype html><html><head><meta charset="utf-8"><style>
+        // Vocabulary for tag/select fields — resolved by both iframe (chips) and panel.
+        const vocabularies = {
+          topics: ['css', 'design', 'javascript', 'tutorial', 'react'],
+          categories: ['Technology', 'Podcast', 'Lifestyle', 'Business'],
+        };
+
+        // The built-in demo page.
+        const DEMO_HTML = `<!doctype html><html><head><meta charset="utf-8"><style>
         *{box-sizing:border-box}
         body{font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#111418;margin:0;background:#eef1f5;padding:56px 24px}
         .wrap{max-width:720px;margin:0 auto;background:#fff;border:1px solid #e6e8eb;border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(17,20,24,.07)}
@@ -738,484 +826,601 @@
         </div>
       </body></html>`;
 
-      // The editable-elements config — shown in the textarea and editable live.
-      const defaultSelectors = [
-        '.title:field(title:Headline, name:title, type:string)',
-        '.lead:field(title:Lead, name:lead, type:text)',
-        '.cta:field(title:Button label, name:cta, type:string)',
-        '.hero:field(title:Image alt text, name:heroAlt, attr:alt)',
-        '.tags:field(title:Topics, name:topics, type:tags, vocab:topics)',
-        '#address:field(title:Address, name:address, type:object, options(collapsible:true), fields:[' +
+        // The editable-elements config — shown in the textarea and editable live.
+        const defaultSelectors = [
+          '.title:field(title:Headline, name:title, type:string)',
+          '.lead:field(title:Lead, name:lead, type:text)',
+          '.cta:field(title:Button label, name:cta, type:string)',
+          '.hero:field(title:Image alt text, name:heroAlt, attr:alt)',
+          '.tags:field(title:Topics, name:topics, type:tags, vocab:topics)',
+          '#address:field(title:Address, name:address, type:object, options(collapsible:true), fields:[' +
           "{title:Link, name:link, type:string, attr:data-link, selector:'&scope'}," +
           '{title:Street, name:street, type:string, selector:#street},' +
           '{title:No., name:streetNo, type:string, selector:#streetNo},' +
           '{title:City, name:city, type:string, selector:#city}])',
-      ].join(',\n');
+        ].join(',\n');
 
-      // The page currently loaded in the iframe: the built-in demo, or a site
-      // fetched by URL. `baseUrl` (when set) makes the injected <base> resolve the
-      // loaded site's relative assets (css/images).
-      let source = { html: DEMO_HTML, baseUrl: undefined };
+        // The page currently loaded in the iframe: the built-in demo, or a site
+        // fetched by URL. `baseUrl` (when set) makes the injected <base> resolve the
+        // loaded site's relative assets (css/images).
+        let source = {
+          html: DEMO_HTML,
+          baseUrl: undefined
+        };
 
-      // (Re)build the iframe + panel for a given editableSelectors config. Called on
-      // load and whenever the config is applied — the iframe reloads with the new
-      // rules and the panel re-mounts to match.
-      let panel = null;
-      // Undo/redo history — a thin adapter over Klar's own editReducer (one
-      // source of truth); it just replays snapshots into the iframe. ⌘Z / ⇧⌘Z
-      // below drive it. The
-      // edit-count pill in the header updates on every record/undo/redo.
-      const editBadge = document.getElementById('editbadge');
-      function syncEditBadge() {
-        const n = Object.keys(history.edits).length;
-        editBadge.textContent = n + ' edit' + (n !== 1 ? 's' : '');
-        editBadge.hidden = n === 0;
-      }
-      const history = createEditHistory(sendToIframe, syncEditBadge, {
-        // Reuse Klar's own edit-history reducer + replay diff (one source of truth).
-        editReducer: window.KlarEditorPanel.editReducer,
-        initialEditState: window.KlarEditorPanel.initialEditState,
-        computeReplayEdits: window.KlarEditorPanel.computeReplayEdits,
-        // Code fields hold verbatim source — replay them by setting textContent
-        // directly (same-origin), never through setTextBr.
-        setElementText: (sel, text) => {
-          try { const el = iframe.contentDocument.querySelector(sel); if (el) el.textContent = text; } catch (_) { /* cross-origin */ }
-        },
-        isCodeField: (sel) => { try { return !!panel && !!panel.isCodeField && panel.isCodeField(sel); } catch (_) { return false; } },
-      });
-      // The original raw textContent of an element, from the injected source.
-      function codeOriginal(sel) {
-        try { const el = new DOMParser().parseFromString(source.html || '', 'text/html').querySelector(sel); return el ? el.textContent : ''; }
-        catch (_) { return ''; }
-      }
-      // The original OUTERHTML of a container (list/blocks), from the injected
-      // source — the true baseline undo reverts to (the reducer preserves the
-      // first-seen original). Works in the bulk view where nothing was clicked.
-      function originalOuterHTML(sel) {
-        try { const el = new DOMParser().parseFromString(source.html || '', 'text/html').querySelector(sel); return el ? el.outerHTML : ''; }
-        catch (_) { return ''; }
-      }
-      // Fields commit on blur, so a field you're still editing when you hit ⌘Z
-      // isn't in history yet — blur the focused element first to flush its
-      // pending commit, then undo. Blur both documents (parent panel + iframe).
-      function flushActive() {
-        try { const a = document.activeElement; if (a && a.blur && a.id !== 'cfg' && a.id !== 'url') a.blur(); } catch (_) {}
-        try { const ai = iframe.contentDocument && iframe.contentDocument.activeElement; if (ai && ai.blur) ai.blur(); } catch (_) {}
-      }
-      // ⌘Z / ⇧⌘Z (or Ctrl+Z / Ctrl+Y). Native undo only for the config/URL editors.
-      function onUndoKey(e) {
-        if (!(e.metaKey || e.ctrlKey)) return;
-        const t = e.target;
-        if (t && (t.id === 'cfg' || t.id === 'url')) return;
-        const undo = e.key === 'z' && !e.shiftKey;
-        const redo = (e.key === 'z' && e.shiftKey) || e.key === 'y';
-        if (!undo && !redo) return;
-        e.preventDefault();
-        flushActive(); // commit the focused field's pending on-blur edit first
-        if (undo) history.undo(); else history.redo();
-      }
-      window.addEventListener('keydown', onUndoKey);
-      // Focus is often inside the iframe (after a click), where the parent window
-      // never sees the keystroke — listen on the iframe's document too (same-origin).
-      iframe.addEventListener('load', () => {
-        try { iframe.contentDocument.addEventListener('keydown', onUndoKey); } catch (_) { /* cross-origin */ }
-      });
-      function init(editableSelectors) {
-        history.reset();
-        outEl.innerHTML =
-          '<span class="muted">Click an element, edit its field, then “Apply edits”.</span>';
-        const script = getIframeScript(
-          editableSelectors,
-          '',
-          [],
-          '',
-          '',
-          vocabularies,
-          null,
-        );
-        // keepScripts: true — keep the loaded page's <script>s + inline on* handlers
-        // so interactive elements (event buttons, toggles) still work; ⌘/Ctrl+click
-        // then fires them (the editor's click handler doesn't stop propagation for
-        // modifier-clicks). The built-in demo page has no scripts, so this is a no-op
-        // for it.
-        iframe.srcdoc = injectScript(source.html, script, source.baseUrl, true);
-        if (panel) panel.destroy();
-        panel = mountFieldPanel({
-          container: panelEl,
-          editableSelectors,
-          sendToIframe,
-          vocabularies,
-          pageHtml: source.html,
-          // Live raw textContent for code-format fields (same-origin iframe) so
-          // inline edits show up in the panel's code editor.
-          getElementText: (sel) => {
-            try { const el = iframe.contentDocument.querySelector(sel); return el ? el.textContent : null; }
-            catch (_) { return null; }
+        // (Re)build the iframe + panel for a given editableSelectors config. Called on
+        // load and whenever the config is applied — the iframe reloads with the new
+        // rules and the panel re-mounts to match.
+        let panel = null;
+        // Undo/redo history — a thin adapter over Klar's own editReducer (one
+        // source of truth); it just replays snapshots into the iframe. ⌘Z / ⇧⌘Z
+        // below drive it. The
+        // edit-count pill in the header updates on every record/undo/redo.
+        const editBadge = document.getElementById('editbadge');
+
+        function syncEditBadge() {
+          const n = Object.keys(history.edits).length;
+          editBadge.textContent = n + ' edit' + (n !== 1 ? 's' : '');
+          editBadge.hidden = n === 0;
+        }
+        const history = createEditHistory(sendToIframe, syncEditBadge, {
+          // Reuse Klar's own edit-history reducer + replay diff (one source of truth).
+          editReducer: window.KlarEditorPanel.editReducer,
+          initialEditState: window.KlarEditorPanel.initialEditState,
+          computeReplayEdits: window.KlarEditorPanel.computeReplayEdits,
+          // Code fields hold verbatim source — replay them by setting textContent
+          // directly (same-origin), never through setTextBr.
+          setElementText: (sel, text) => {
+            try {
+              const el = iframe.contentDocument.querySelector(sel);
+              if (el) el.textContent = text;
+            } catch (_) {
+              /* cross-origin */ }
           },
-          // The tracked edits map — the bulk list/blocks cards rebuild from
-          // source.html + these edits (like Klar's StructuredPanel), so they're
-          // derived from the clean source, not the bloated iframe DOM.
-          getEdits: () => history.edits,
-          onEdit: (e) => {
-            history.record(e);
+          isCodeField: (sel) => {
+            try {
+              return !!panel && !!panel.isCodeField && panel.isCodeField(sel);
+            } catch (_) {
+              return false;
+            }
           },
         });
-      }
-
-      // --- :list / :blocks editing (duplicate / add / remove / reorder) ----------
-      // The in-iframe toolbar delegates its actions to the host: it posts an action
-      // message and expects us to rebuild the container's inner HTML and send it
-      // back. (This is what EditorLayout does in the real app.)
-      let containerData = null; // latest klar-activate-container
-      let blocksData = null; // latest klar-activate-blocks
-
-      // Rebuild a container's outerHTML from the CLEAN source.html shell + the new
-      // inner items — never the bloated iframe DOM. Klar's truth is source.html;
-      // the iframe only carries the changed item order/content (which may still
-      // hold data-klar-wrap / contenteditable), so strip that on the way in.
-      function rebuildContainerHtml(selector, innerHTML) {
-        const doc = new DOMParser().parseFromString(source.html, 'text/html');
-        const root = doc.querySelector(selector);
-        if (!root) return null;
-        root.innerHTML = innerHTML;
-        cleanKlarDoc(root); // unwrap wraps + drop klar attrs on the injected items
-        return stripEmptyKlarAttrs(root.outerHTML);
-      }
-      // The inner markup of a container's outerHTML (the items, minus the shell).
-      function innerHtmlOf(outerHTML) {
-        const t = new DOMParser().parseFromString(outerHTML || '', 'text/html');
-        const el = t.body.firstElementChild;
-        return el ? el.innerHTML : '';
-      }
-
-      // NOTE: container/blocks changes are recorded in ONE place — the
-      // klar-container-updated / klar-blocks-updated echo handler below. Both the
-      // iframe's own toolbar (klar-*-action → containerAction/blocksAction) and the
-      // right panel apply the change via klar-replace-container / klar-blocks-update,
-      // and the iframe echoes back *-updated. Recording here too would stage the
-      // same edit twice, so undo would need two presses (first is a no-op).
-      // reorder/move/duplicate use Klar's shared reorderContainerItems; add/remove/
-      // replace stay here (item shape differs). Same split as Klar's EditorLayout.
-      function containerAction(m) {
-        const cd = containerData;
-        if (!cd || cd.selector !== m.selector) return;
-        let items;
-        const reordered = reorderContainerItems(cd.items || [], m.index, m.action, m.toIndex);
-        if (reordered) items = reordered;
-        else if (m.action === 'remove') { if ((cd.items || []).length <= 1) return; items = (cd.items || []).slice(); items.splice(m.index, 1); }
-        else if (m.action === 'add' && m.html) { items = (cd.items || []).slice(); items.splice(m.index + 1, 0, { html: m.html }); }
-        else if (m.action === 'replace' && m.html) { items = (cd.items || []).slice(); items.splice(m.index, 1, { html: m.html }); }
-        else return;
-        const innerHTML = items.map((x) => x.html).join('\n');
-        sendToIframe({ type: 'klar-replace-container', selector: cd.selector, innerHTML });
-        cd.items = items; // the klar-container-updated echo records the edit (once)
-      }
-      function blockToItem(html) {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html;
-        const el = tmp.firstElementChild;
-        if (!el) return null;
-        const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
-        return { tagName: el.tagName.toLowerCase(), outerHTML: el.outerHTML, preview: text.slice(0, 50) };
-      }
-      function blocksAction(m) {
-        const dd = blocksData;
-        if (!dd || dd.selector !== m.selector) return;
-        let blocks;
-        const reordered = reorderContainerItems(dd.blocks || [], m.index, m.action, m.toIndex);
-        if (reordered) blocks = reordered;
-        else if (m.action === 'remove') { if (dd.mode !== 'html' && (dd.blocks || []).length <= 1) return; blocks = (dd.blocks || []).slice(); blocks.splice(m.index, 1); }
-        else if (m.action === 'add' && m.html) { const b = blockToItem(m.html); if (!b) return; blocks = (dd.blocks || []).slice(); blocks.splice(m.index + 1, 0, b); }
-        else if (m.action === 'replace' && m.html) { const b = blockToItem(m.html); if (!b) return; blocks = (dd.blocks || []).slice(); blocks.splice(m.index, 1, b); }
-        else return;
-        const innerHTML = blocks.map((b) => b.outerHTML).join('\n');
-        sendToIframe({ type: 'klar-blocks-update', selector: dd.selector, innerHTML });
-        dd.blocks = blocks; // the klar-blocks-updated echo records the edit (once)
-      }
-
-      // Route every iframe message to the current panel; also capture inline edits.
-      window.addEventListener('message', (e) => {
-        const m = e.data;
-        if (!m || typeof m !== 'object') return;
-        if (panel) panel.handleMessage(m);
-        if (m.type === 'klar-edit') {
-          let entry = m;
-          // Inline edit of a code field: m.original/m.edited come from getTextBr
-          // (collapsed/escaped). Store the RAW textContent instead, so undo
-          // restores the real source. (The reducer preserves the first-seen
-          // original, so passing the raw baseline each time is safe.)
-          if (!m.attribute && panel && panel.isCodeField && panel.isCodeField(m.selector)) {
-            let edited = m.edited;
-            try { const el = iframe.contentDocument.querySelector(m.selector); if (el) edited = el.textContent; } catch (_) { /* cross-origin */ }
-            entry = Object.assign({}, m, { edited, original: codeOriginal(m.selector) });
-          }
-          history.record(entry);
-        }
-        // Inline edit of an object CHILD (named object) comes through as
-        // klar-object-child-edit, not klar-edit — but it carries the child's
-        // selector, so record it as a normal DOM text edit (the demo treats
-        // objects as DOM-bound). Without this, object-child inline edits can't undo.
-        else if (m.type === 'klar-object-child-edit' && m.selector && !m.attribute) {
-          history.record({ type: 'klar-edit', selector: m.selector, original: m.original, edited: m.edited, tagName: m.tagName || '' });
-        }
-        else if (m.type === 'klar-activate-container') containerData = m;
-        else if (m.type === 'klar-activate-blocks') blocksData = m;
-        else if (m.type === 'klar-container-block-action') containerAction(m);
-        else if (m.type === 'klar-blocks-action') blocksAction(m);
-        else if (m.type === 'klar-container-updated') {
-          // Iframe applied the change and re-read the container — record the exact
-          // new outerHTML and keep our local items in sync. `syncOnly` = an
-          // undo/redo re-sync round-trip: refresh state but DON'T re-stage (that
-          // would corrupt the history we're replaying).
-          if (containerData && containerData.selector === m.selector) containerData.items = m.items;
-          if (!m.syncOnly) {
-            const edited = rebuildContainerHtml(m.selector, innerHtmlOf(m.outerHTML));
-            if (edited != null) history.record({ type: 'klar-edit', selector: m.selector, attribute: 'outerHTML', original: originalOuterHTML(m.selector), edited, tagName: (containerData && containerData.tagName) || '' });
-          }
-        } else if (m.type === 'klar-blocks-updated') {
-          if (blocksData && blocksData.selector === m.selector) blocksData.blocks = m.blocks;
-          if (!m.syncOnly) {
-            const edited = rebuildContainerHtml(m.selector, innerHtmlOf(m.outerHTML));
-            if (edited != null) history.record({ type: 'klar-edit', selector: m.selector, attribute: 'outerHTML', original: originalOuterHTML(m.selector), edited, tagName: (blocksData && blocksData.tagName) || '' });
+        // The original raw textContent of an element, from the injected source.
+        function codeOriginal(sel) {
+          try {
+            const el = new DOMParser().parseFromString(source.html || '', 'text/html').querySelector(sel);
+            return el ? el.textContent : '';
+          } catch (_) {
+            return '';
           }
         }
-        // ⌘/Ctrl+click link navigation is intentionally NOT handled here — for now
-        // the demo doesn't let users navigate to other pages. (The iframe still
-        // posts klar-link-click / klar-link-navigate; we simply ignore them.)
-      });
-
-      // Tabs: Field (the widget panel) / Editable Elements (the config editor).
-      // The active tab persists across reloads.
-      function setTab(tab) {
-        if (tab !== 'editable') tab = 'field';
-        document.querySelectorAll('.tab').forEach((b) =>
-          b.classList.toggle('active', b.dataset.tab === tab),
-        );
-        document.getElementById('panel').hidden = tab !== 'field';
-        document.getElementById('cfgwrap').hidden = tab !== 'editable';
-        document.getElementById('applycfg').hidden = tab !== 'editable';
-        lsSet(LS.tab, tab);
-      }
-      document.querySelectorAll('.tab').forEach((b) =>
-        b.addEventListener('click', () => setTab(b.dataset.tab)),
-      );
-
-      // Globe icon toggles the URL bar (hidden by default).
-      const urlbarEl = document.getElementById('urlbar');
-      document.getElementById('toggleurl').addEventListener('click', () => {
-        const show = urlbarEl.hidden;
-        urlbarEl.hidden = !show;
-        document.getElementById('toggleurl').classList.toggle('active', show);
-        if (show) urlEl.focus();
-      });
-
-      // Apply an edited Editable Elements config → rebuild everything.
-      document
-        .getElementById('applycfg')
-        .addEventListener('click', () => init(cfgEl.value));
-
-      // --- Load a live site by URL ----------------------------------------------
-      // A cross-origin <iframe src> can't be scripted, so we fetch the HTML and
-      // srcdoc it (same as the demo page). Two fetch strategies:
-      //   1. DIRECT — works for same-origin, a localhost dev server that allows
-      //      CORS, and any CORS-enabled site. This is the ONLY option for localhost:
-      //      a remote proxy can't reach your machine.
-      //   2. PROXY  — fall back to a public CORS proxy for remote sites that block
-      //      direct reads. (Can't reach localhost.)
-      // The robust production path is a tiny server-side fetch — Klar's /api/fetch-page.
-      const urlEl = document.getElementById('url');
-      const isLocal = (u) => /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(:|\/|$)/i.test(u);
-      async function fetchHtml(url) {
-        // 1. Klar server-side fetch endpoint — no CORS, reaches localhost too.
-        //    Hosted with the editor, so it works from any host this page runs on.
-        try {
-          const r = await fetch('https://editor.klar.website/api/dev-fetch-url?url=' + encodeURIComponent(url));
-          if (r.ok) return await r.text();
-        } catch (_) {
-          /* not served by Klar (e.g. file://) — fall through */
+        // The original OUTERHTML of a container (list/blocks), from the injected
+        // source — the true baseline undo reverts to (the reducer preserves the
+        // first-seen original). Works in the bulk view where nothing was clicked.
+        function originalOuterHTML(sel) {
+          try {
+            const el = new DOMParser().parseFromString(source.html || '', 'text/html').querySelector(sel);
+            return el ? el.outerHTML : '';
+          } catch (_) {
+            return '';
+          }
         }
-        // 2. Direct — same-origin, CORS-enabled site, or localhost-with-CORS.
-        try {
-          const r = await fetch(url);
-          if (r.ok) return await r.text();
-        } catch (_) {
-          /* CORS/network — fall through */
+        // Fields commit on blur, so a field you're still editing when you hit ⌘Z
+        // isn't in history yet — blur the focused element first to flush its
+        // pending commit, then undo. Blur both documents (parent panel + iframe).
+        function flushActive() {
+          try {
+            const a = document.activeElement;
+            if (a && a.blur && a.id !== 'cfg' && a.id !== 'url') a.blur();
+          } catch (_) {}
+          try {
+            const ai = iframe.contentDocument && iframe.contentDocument.activeElement;
+            if (ai && ai.blur) ai.blur();
+          } catch (_) {}
         }
-        // 3. Public CORS proxy — remote sites only (can't reach localhost).
-        if (isLocal(url)) {
-          throw new Error(
-            'a localhost page needs the Klar dev endpoint (run `npm run dev`) or a ' +
-            'server that sends CORS headers — a remote proxy can’t reach your machine.',
-          );
+        // ⌘Z / ⇧⌘Z (or Ctrl+Z / Ctrl+Y). Native undo only for the config/URL editors.
+        function onUndoKey(e) {
+          if (!(e.metaKey || e.ctrlKey)) return;
+          const t = e.target;
+          if (t && (t.id === 'cfg' || t.id === 'url')) return;
+          const undo = e.key === 'z' && !e.shiftKey;
+          const redo = (e.key === 'z' && e.shiftKey) || e.key === 'y';
+          if (!undo && !redo) return;
+          e.preventDefault();
+          flushActive(); // commit the focused field's pending on-blur edit first
+          if (undo) history.undo();
+          else history.redo();
         }
-        const r2 = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
-        if (!r2.ok) throw new Error('proxy HTTP ' + r2.status);
-        return await r2.text();
-      }
-      // Load a site by URL. The user's Editable Elements config is ALWAYS kept —
-      // changing website never wipes it. (Empty config = Klar's default
-      // editability; the user clears it themselves if they want that.)
-      async function loadUrl(raw) {
-        const url = /^https?:\/\//i.test(raw) ? raw : 'https://' + raw;
-        outEl.textContent = 'Loading ' + url + ' …';
-        try {
-          const html = await fetchHtml(url);
-          source = { html, baseUrl: url };
-          urlEl.value = url;
-          lsSet(LS.url, url);
-          init(cfgEl.value);
+        window.addEventListener('keydown', onUndoKey);
+        // Focus is often inside the iframe (after a click), where the parent window
+        // never sees the keystroke — listen on the iframe's document too (same-origin).
+        iframe.addEventListener('load', () => {
+          try {
+            iframe.contentDocument.addEventListener('keydown', onUndoKey);
+          } catch (_) {
+            /* cross-origin */ }
+        });
+
+        function init(editableSelectors) {
+          history.reset();
           outEl.innerHTML =
-            '<span class="muted">Loaded ' + url +
-            '. Empty Editable Elements = all text editable. Add :field() rules to target specific elements.</span>';
-        } catch (err) {
-          outEl.textContent = 'Could not load ' + url + ' — ' + err.message;
-          // The info box is hidden — surface failures in the console too.
-          console.warn('[klar-demo] could not load', url, '—', err.message);
-          // On a failed load, fall back to the demo page so the app is usable.
-          source = { html: DEMO_HTML, baseUrl: undefined };
+            '<span class="muted">Click an element, edit its field, then “Apply edits”.</span>';
+          const script = getIframeScript(
+            editableSelectors,
+            '',
+            [],
+            '',
+            '',
+            vocabularies,
+            null,
+          );
+          // keepScripts: true — keep the loaded page's <script>s + inline on* handlers
+          // so interactive elements (event buttons, toggles) still work; ⌘/Ctrl+click
+          // then fires them (the editor's click handler doesn't stop propagation for
+          // modifier-clicks). The built-in demo page has no scripts, so this is a no-op
+          // for it.
+          iframe.srcdoc = injectScript(source.html, script, source.baseUrl, true);
+          if (panel) panel.destroy();
+          panel = mountFieldPanel({
+            container: panelEl,
+            editableSelectors,
+            sendToIframe,
+            vocabularies,
+            pageHtml: source.html,
+            // Live raw textContent for code-format fields (same-origin iframe) so
+            // inline edits show up in the panel's code editor.
+            getElementText: (sel) => {
+              try {
+                const el = iframe.contentDocument.querySelector(sel);
+                return el ? el.textContent : null;
+              } catch (_) {
+                return null;
+              }
+            },
+            // The tracked edits map — the bulk list/blocks cards rebuild from
+            // source.html + these edits (like Klar's StructuredPanel), so they're
+            // derived from the clean source, not the bloated iframe DOM.
+            getEdits: () => history.edits,
+            onEdit: (e) => {
+              history.record(e);
+            },
+          });
+        }
+
+        // --- :list / :blocks editing (duplicate / add / remove / reorder) ----------
+        // The in-iframe toolbar delegates its actions to the host: it posts an action
+        // message and expects us to rebuild the container's inner HTML and send it
+        // back. (This is what EditorLayout does in the real app.)
+        let containerData = null; // latest klar-activate-container
+        let blocksData = null; // latest klar-activate-blocks
+
+        // Rebuild a container's outerHTML from the CLEAN source.html shell + the new
+        // inner items — never the bloated iframe DOM. Klar's truth is source.html;
+        // the iframe only carries the changed item order/content (which may still
+        // hold data-klar-wrap / contenteditable), so strip that on the way in.
+        function rebuildContainerHtml(selector, innerHTML) {
+          const doc = new DOMParser().parseFromString(source.html, 'text/html');
+          const root = doc.querySelector(selector);
+          if (!root) return null;
+          root.innerHTML = innerHTML;
+          cleanKlarDoc(root); // unwrap wraps + drop klar attrs on the injected items
+          return stripEmptyKlarAttrs(root.outerHTML);
+        }
+        // The inner markup of a container's outerHTML (the items, minus the shell).
+        function innerHtmlOf(outerHTML) {
+          const t = new DOMParser().parseFromString(outerHTML || '', 'text/html');
+          const el = t.body.firstElementChild;
+          return el ? el.innerHTML : '';
+        }
+
+        // NOTE: container/blocks changes are recorded in ONE place — the
+        // klar-container-updated / klar-blocks-updated echo handler below. Both the
+        // iframe's own toolbar (klar-*-action → containerAction/blocksAction) and the
+        // right panel apply the change via klar-replace-container / klar-blocks-update,
+        // and the iframe echoes back *-updated. Recording here too would stage the
+        // same edit twice, so undo would need two presses (first is a no-op).
+        // reorder/move/duplicate use Klar's shared reorderContainerItems; add/remove/
+        // replace stay here (item shape differs). Same split as Klar's EditorLayout.
+        function containerAction(m) {
+          const cd = containerData;
+          if (!cd || cd.selector !== m.selector) return;
+          let items;
+          const reordered = reorderContainerItems(cd.items || [], m.index, m.action, m.toIndex);
+          if (reordered) items = reordered;
+          else if (m.action === 'remove') {
+            if ((cd.items || []).length <= 1) return;
+            items = (cd.items || []).slice();
+            items.splice(m.index, 1);
+          } else if (m.action === 'add' && m.html) {
+            items = (cd.items || []).slice();
+            items.splice(m.index + 1, 0, {
+              html: m.html
+            });
+          } else if (m.action === 'replace' && m.html) {
+            items = (cd.items || []).slice();
+            items.splice(m.index, 1, {
+              html: m.html
+            });
+          } else return;
+          const innerHTML = items.map((x) => x.html).join('\n');
+          sendToIframe({
+            type: 'klar-replace-container',
+            selector: cd.selector,
+            innerHTML
+          });
+          cd.items = items; // the klar-container-updated echo records the edit (once)
+        }
+
+        function blockToItem(html) {
+          const tmp = document.createElement('div');
+          tmp.innerHTML = html;
+          const el = tmp.firstElementChild;
+          if (!el) return null;
+          const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+          return {
+            tagName: el.tagName.toLowerCase(),
+            outerHTML: el.outerHTML,
+            preview: text.slice(0, 50)
+          };
+        }
+
+        function blocksAction(m) {
+          const dd = blocksData;
+          if (!dd || dd.selector !== m.selector) return;
+          let blocks;
+          const reordered = reorderContainerItems(dd.blocks || [], m.index, m.action, m.toIndex);
+          if (reordered) blocks = reordered;
+          else if (m.action === 'remove') {
+            if (dd.mode !== 'html' && (dd.blocks || []).length <= 1) return;
+            blocks = (dd.blocks || []).slice();
+            blocks.splice(m.index, 1);
+          } else if (m.action === 'add' && m.html) {
+            const b = blockToItem(m.html);
+            if (!b) return;
+            blocks = (dd.blocks || []).slice();
+            blocks.splice(m.index + 1, 0, b);
+          } else if (m.action === 'replace' && m.html) {
+            const b = blockToItem(m.html);
+            if (!b) return;
+            blocks = (dd.blocks || []).slice();
+            blocks.splice(m.index, 1, b);
+          } else return;
+          const innerHTML = blocks.map((b) => b.outerHTML).join('\n');
+          sendToIframe({
+            type: 'klar-blocks-update',
+            selector: dd.selector,
+            innerHTML
+          });
+          dd.blocks = blocks; // the klar-blocks-updated echo records the edit (once)
+        }
+
+        // Route every iframe message to the current panel; also capture inline edits.
+        window.addEventListener('message', (e) => {
+          const m = e.data;
+          if (!m || typeof m !== 'object') return;
+          if (panel) panel.handleMessage(m);
+          if (m.type === 'klar-edit') {
+            let entry = m;
+            // Inline edit of a code field: m.original/m.edited come from getTextBr
+            // (collapsed/escaped). Store the RAW textContent instead, so undo
+            // restores the real source. (The reducer preserves the first-seen
+            // original, so passing the raw baseline each time is safe.)
+            if (!m.attribute && panel && panel.isCodeField && panel.isCodeField(m.selector)) {
+              let edited = m.edited;
+              try {
+                const el = iframe.contentDocument.querySelector(m.selector);
+                if (el) edited = el.textContent;
+              } catch (_) {
+                /* cross-origin */ }
+              entry = Object.assign({}, m, {
+                edited,
+                original: codeOriginal(m.selector)
+              });
+            }
+            history.record(entry);
+          }
+          // Inline edit of an object CHILD (named object) comes through as
+          // klar-object-child-edit, not klar-edit — but it carries the child's
+          // selector, so record it as a normal DOM text edit (the demo treats
+          // objects as DOM-bound). Without this, object-child inline edits can't undo.
+          else if (m.type === 'klar-object-child-edit' && m.selector && !m.attribute) {
+            history.record({
+              type: 'klar-edit',
+              selector: m.selector,
+              original: m.original,
+              edited: m.edited,
+              tagName: m.tagName || ''
+            });
+          } else if (m.type === 'klar-activate-container') containerData = m;
+          else if (m.type === 'klar-activate-blocks') blocksData = m;
+          else if (m.type === 'klar-container-block-action') containerAction(m);
+          else if (m.type === 'klar-blocks-action') blocksAction(m);
+          else if (m.type === 'klar-container-updated') {
+            // Iframe applied the change and re-read the container — record the exact
+            // new outerHTML and keep our local items in sync. `syncOnly` = an
+            // undo/redo re-sync round-trip: refresh state but DON'T re-stage (that
+            // would corrupt the history we're replaying).
+            if (containerData && containerData.selector === m.selector) containerData.items = m.items;
+            if (!m.syncOnly) {
+              const edited = rebuildContainerHtml(m.selector, innerHtmlOf(m.outerHTML));
+              if (edited != null) history.record({
+                type: 'klar-edit',
+                selector: m.selector,
+                attribute: 'outerHTML',
+                original: originalOuterHTML(m.selector),
+                edited,
+                tagName: (containerData && containerData.tagName) || ''
+              });
+            }
+          } else if (m.type === 'klar-blocks-updated') {
+            if (blocksData && blocksData.selector === m.selector) blocksData.blocks = m.blocks;
+            if (!m.syncOnly) {
+              const edited = rebuildContainerHtml(m.selector, innerHtmlOf(m.outerHTML));
+              if (edited != null) history.record({
+                type: 'klar-edit',
+                selector: m.selector,
+                attribute: 'outerHTML',
+                original: originalOuterHTML(m.selector),
+                edited,
+                tagName: (blocksData && blocksData.tagName) || ''
+              });
+            }
+          }
+          // ⌘/Ctrl+click link navigation is intentionally NOT handled here — for now
+          // the demo doesn't let users navigate to other pages. (The iframe still
+          // posts klar-link-click / klar-link-navigate; we simply ignore them.)
+        });
+
+        // Tabs: Field (the widget panel) / Editable Elements (the config editor).
+        // The active tab persists across reloads.
+        function setTab(tab) {
+          if (tab !== 'editable') tab = 'field';
+          document.querySelectorAll('.tab').forEach((b) =>
+            b.classList.toggle('active', b.dataset.tab === tab),
+          );
+          document.getElementById('panel').hidden = tab !== 'field';
+          document.getElementById('cfgwrap').hidden = tab !== 'editable';
+          document.getElementById('applycfg').hidden = tab !== 'editable';
+          lsSet(LS.tab, tab);
+        }
+        document.querySelectorAll('.tab').forEach((b) =>
+          b.addEventListener('click', () => setTab(b.dataset.tab)),
+        );
+
+        // Globe icon toggles the URL bar (hidden by default).
+        const urlbarEl = document.getElementById('urlbar');
+        document.getElementById('toggleurl').addEventListener('click', () => {
+          const show = urlbarEl.hidden;
+          urlbarEl.hidden = !show;
+          document.getElementById('toggleurl').classList.toggle('active', show);
+          if (show) urlEl.focus();
+        });
+
+        // Apply an edited Editable Elements config → rebuild everything.
+        document
+          .getElementById('applycfg')
+          .addEventListener('click', () => init(cfgEl.value));
+
+        // --- Load a live site by URL ----------------------------------------------
+        // A cross-origin <iframe src> can't be scripted, so we fetch the HTML and
+        // srcdoc it (same as the demo page). Two fetch strategies:
+        //   1. DIRECT — works for same-origin, a localhost dev server that allows
+        //      CORS, and any CORS-enabled site. This is the ONLY option for localhost:
+        //      a remote proxy can't reach your machine.
+        //   2. PROXY  — fall back to a public CORS proxy for remote sites that block
+        //      direct reads. (Can't reach localhost.)
+        // The robust production path is a tiny server-side fetch — Klar's /api/fetch-page.
+        const urlEl = document.getElementById('url');
+        const isLocal = (u) => /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(:|\/|$)/i.test(u);
+        async function fetchHtml(url) {
+          // 1. Klar server-side fetch endpoint — no CORS, reaches localhost too.
+          //    Hosted with the editor, so it works from any host this page runs on.
+          try {
+            const r = await fetch('https://editor.klar.website/api/dev-fetch-url?url=' + encodeURIComponent(url));
+            if (r.ok) return await r.text();
+          } catch (_) {
+            /* not served by Klar (e.g. file://) — fall through */
+          }
+          // 2. Direct — same-origin, CORS-enabled site, or localhost-with-CORS.
+          try {
+            const r = await fetch(url);
+            if (r.ok) return await r.text();
+          } catch (_) {
+            /* CORS/network — fall through */
+          }
+          // 3. Public CORS proxy — remote sites only (can't reach localhost).
+          if (isLocal(url)) {
+            throw new Error(
+              'a localhost page needs the Klar dev endpoint (run `npm run dev`) or a ' +
+              'server that sends CORS headers — a remote proxy can’t reach your machine.',
+            );
+          }
+          const r2 = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url));
+          if (!r2.ok) throw new Error('proxy HTTP ' + r2.status);
+          return await r2.text();
+        }
+        // Load a site by URL. The user's Editable Elements config is ALWAYS kept —
+        // changing website never wipes it. (Empty config = Klar's default
+        // editability; the user clears it themselves if they want that.)
+        async function loadUrl(raw) {
+          const url = /^https?:\/\//i.test(raw) ? raw : 'https://' + raw;
+          outEl.textContent = 'Loading ' + url + ' …';
+          try {
+            const html = await fetchHtml(url);
+            source = {
+              html,
+              baseUrl: url
+            };
+            urlEl.value = url;
+            lsSet(LS.url, url);
+            init(cfgEl.value);
+            outEl.innerHTML =
+              '<span class="muted">Loaded ' + url +
+              '. Empty Editable Elements = all text editable. Add :field() rules to target specific elements.</span>';
+          } catch (err) {
+            outEl.textContent = 'Could not load ' + url + ' — ' + err.message;
+            // The info box is hidden — surface failures in the console too.
+            console.warn('[klar-demo] could not load', url, '—', err.message);
+            // On a failed load, fall back to the demo page so the app is usable.
+            source = {
+              html: DEMO_HTML,
+              baseUrl: undefined
+            };
+            init(cfgEl.value);
+          }
+        }
+        document.getElementById('loadurl').addEventListener('click', () => {
+          const v = urlEl.value.trim();
+          if (v) loadUrl(v);
+        });
+        urlEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            const v = urlEl.value.trim();
+            if (v) loadUrl(v);
+          }
+        });
+        // Persist field values as they change.
+        urlEl.addEventListener('input', () => lsSet(LS.url, urlEl.value));
+        cfgEl.addEventListener('input', () => lsSet(LS.cfg, cfgEl.value));
+        // Reset back to the built-in demo page + its field config (and clear storage).
+        document.getElementById('reset').addEventListener('click', () => {
+          source = {
+            html: DEMO_HTML,
+            baseUrl: undefined
+          };
+          cfgEl.value = defaultSelectors;
+          urlEl.value = '';
+          lsSet(LS.cfg, defaultSelectors);
+          lsSet(LS.url, '');
+          init(defaultSelectors);
+        });
+
+        // Klar delivers CLEAN HTML: edits are applied to the original source, never
+        // the bloated iframe DOM. Text/attr edits are already clean (textContent /
+        // setAttribute on the source element), but `outerHTML` edits (container/blocks
+        // reorders, tag changes) carry the iframe's runtime bloat — `data-klar-wrap`
+        // naked-text spans, `contenteditable`, and `data-klar-*` metadata. Strip it
+        // before emitting, mirroring the server (server/github.js: unwrapNakedText +
+        // the contenteditable / data-klar-* cleanup after applyEdits).
+        function cleanKlarDoc(doc) {
+          doc.querySelectorAll('span[data-klar-wrap]').forEach((s) => {
+            while (s.firstChild) s.parentNode.insertBefore(s.firstChild, s);
+            s.remove();
+          });
+          doc.querySelectorAll('[data-klar-injected]').forEach((e) => e.remove());
+          doc.querySelectorAll('[contenteditable]').forEach((e) => e.removeAttribute('contenteditable'));
+          ['data-klar-placeholder', 'data-klar-excluded-edit', 'data-klar-outline']
+          .forEach((a) => doc.querySelectorAll('[' + a + ']').forEach((e) => e.removeAttribute(a)));
+        }
+
+        // Serializers emit boolean-style attrs (`<div data-klar-strip>`) as
+        // `data-klar-strip=""`, which churns the diff. Strip the empty value back
+        // off our internal data-* attrs so the source round-trips byte-stable —
+        // same as the server (server/github.js: stripEmptyKlarAttrs).
+        function stripEmptyKlarAttrs(html) {
+          return html.replace(/\s(data-(?:klar|edit|list)[\w-]*)=""/g, ' $1');
+        }
+
+        // Apply the collected edits to the original source.html (Cheerio does this
+        // server-side; DOMParser here). Uses Klar's shared applyEditsToDoc — the
+        // SAME edit-application Klar runs at save (outerHTML edits first, removeAttr,
+        // inline-HTML-vs-textContent branch). Returns the clean DOM Document.
+        function buildOutputDoc() {
+          const doc = new DOMParser().parseFromString(source.html, 'text/html');
+          applyEditsToDoc(doc, history.edits);
+          cleanKlarDoc(doc); // strip iframe bloat that rode in on outerHTML edits
+          return doc;
+        }
+        // The HTML modal has three tabs — full document / just <head> / just <body>.
+        let outputView = 'html';
+
+        function renderOutputHtml() {
+          const doc = buildOutputDoc();
+          if (outputView === 'head') return stripEmptyKlarAttrs(doc.head.outerHTML);
+          if (outputView === 'body') return stripEmptyKlarAttrs(doc.body.outerHTML);
+          return stripEmptyKlarAttrs('<!doctype html>\n' + doc.documentElement.outerHTML);
+        }
+        // HTML / HEAD / BODY tabs — switch which slice of the output is shown.
+        const outTitle = document.getElementById('outtitle');
+        document.querySelectorAll('#outtabs button').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            outputView = btn.dataset.view;
+            outTitle.textContent = outputView.charAt(0).toUpperCase() + outputView.slice(
+            1); // Html / Head / Body
+            document.querySelectorAll('#outtabs button').forEach((b) => b.classList.toggle('active', b ===
+            btn));
+            if (!outWrap.hidden) outEl.textContent = renderOutputHtml();
+          });
+        });
+        // "Show HTML" toggles the output box: shown → re-render fresh + reveal;
+        // hidden → close. The label follows the state.
+        const saveBtn = document.getElementById('save');
+        saveBtn.addEventListener('click', () => {
+          if (outWrap.hidden) {
+            outEl.textContent = renderOutputHtml();
+            outWrap.hidden = false;
+            saveBtn.textContent = 'Hide HTML';
+          } else {
+            outWrap.hidden = true;
+            saveBtn.textContent = 'Show HTML';
+          }
+        });
+
+        // --- Resizable right panel -------------------------------------------------
+        const aside = document.querySelector('aside');
+        const resizer = document.getElementById('resizer');
+        let dragging = false;
+        resizer.addEventListener('mousedown', (e) => {
+          dragging = true;
+          resizer.classList.add('dragging');
+          // The iframe would swallow mousemove while the cursor is over it — disable
+          // its pointer events for the duration of the drag.
+          iframe.style.pointerEvents = 'none';
+          document.body.style.userSelect = 'none';
+          e.preventDefault();
+        });
+        // Coalesce width updates to one per animation frame — setting width on every
+        // mousemove reflows the iframe several times per frame, which trails/flickers.
+        let pendingX = 0;
+        let rafId = 0;
+        window.addEventListener('mousemove', (e) => {
+          if (!dragging) return;
+          pendingX = e.clientX;
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            rafId = 0;
+            aside.style.width = Math.min(1000, Math.max(260, window.innerWidth - pendingX)) + 'px';
+          });
+        });
+        window.addEventListener('mouseup', () => {
+          if (!dragging) return;
+          dragging = false;
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = 0;
+          }
+          resizer.classList.remove('dragging');
+          iframe.style.pointerEvents = '';
+          document.body.style.userSelect = '';
+          lsSet(LS.width, aside.style.width); // persist the final panel width
+        });
+
+        // --- Restore persisted state on load ---------------------------------------
+        // Panel width is restored before first paint by the inline <head> script
+        // (as --klar-panel-width) to avoid a flicker — nothing to do here.
+        setTab(lsGet(LS.tab) || 'field');
+        const storedUrl = (lsGet(LS.url) || '').trim();
+        const storedCfg = lsGet(LS.cfg);
+        cfgEl.value = storedCfg != null ? storedCfg : defaultSelectors;
+        urlEl.value = storedUrl;
+        if (storedUrl) {
+          loadUrl(storedUrl); // resume the loaded site (config is always preserved)
+        } else {
           init(cfgEl.value);
         }
-      }
-      document.getElementById('loadurl').addEventListener('click', () => {
-        const v = urlEl.value.trim();
-        if (v) loadUrl(v);
-      });
-      urlEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { const v = urlEl.value.trim(); if (v) loadUrl(v); }
-      });
-      // Persist field values as they change.
-      urlEl.addEventListener('input', () => lsSet(LS.url, urlEl.value));
-      cfgEl.addEventListener('input', () => lsSet(LS.cfg, cfgEl.value));
-      // Reset back to the built-in demo page + its field config (and clear storage).
-      document.getElementById('reset').addEventListener('click', () => {
-        source = { html: DEMO_HTML, baseUrl: undefined };
-        cfgEl.value = defaultSelectors;
-        urlEl.value = '';
-        lsSet(LS.cfg, defaultSelectors);
-        lsSet(LS.url, '');
-        init(defaultSelectors);
-      });
+      </script>
 
-      // Klar delivers CLEAN HTML: edits are applied to the original source, never
-      // the bloated iframe DOM. Text/attr edits are already clean (textContent /
-      // setAttribute on the source element), but `outerHTML` edits (container/blocks
-      // reorders, tag changes) carry the iframe's runtime bloat — `data-klar-wrap`
-      // naked-text spans, `contenteditable`, and `data-klar-*` metadata. Strip it
-      // before emitting, mirroring the server (server/github.js: unwrapNakedText +
-      // the contenteditable / data-klar-* cleanup after applyEdits).
-      function cleanKlarDoc(doc) {
-        doc.querySelectorAll('span[data-klar-wrap]').forEach((s) => {
-          while (s.firstChild) s.parentNode.insertBefore(s.firstChild, s);
-          s.remove();
-        });
-        doc.querySelectorAll('[data-klar-injected]').forEach((e) => e.remove());
-        doc.querySelectorAll('[contenteditable]').forEach((e) => e.removeAttribute('contenteditable'));
-        ['data-klar-placeholder', 'data-klar-excluded-edit', 'data-klar-outline']
-          .forEach((a) => doc.querySelectorAll('[' + a + ']').forEach((e) => e.removeAttribute(a)));
-      }
-
-      // Serializers emit boolean-style attrs (`<div data-klar-strip>`) as
-      // `data-klar-strip=""`, which churns the diff. Strip the empty value back
-      // off our internal data-* attrs so the source round-trips byte-stable —
-      // same as the server (server/github.js: stripEmptyKlarAttrs).
-      function stripEmptyKlarAttrs(html) {
-        return html.replace(/\s(data-(?:klar|edit|list)[\w-]*)=""/g, ' $1');
-      }
-
-      // Apply the collected edits to the original source.html (Cheerio does this
-      // server-side; DOMParser here). Uses Klar's shared applyEditsToDoc — the
-      // SAME edit-application Klar runs at save (outerHTML edits first, removeAttr,
-      // inline-HTML-vs-textContent branch). Returns the clean DOM Document.
-      function buildOutputDoc() {
-        const doc = new DOMParser().parseFromString(source.html, 'text/html');
-        applyEditsToDoc(doc, history.edits);
-        cleanKlarDoc(doc); // strip iframe bloat that rode in on outerHTML edits
-        return doc;
-      }
-      // The HTML modal has three tabs — full document / just <head> / just <body>.
-      let outputView = 'html';
-      function renderOutputHtml() {
-        const doc = buildOutputDoc();
-        if (outputView === 'head') return stripEmptyKlarAttrs(doc.head.outerHTML);
-        if (outputView === 'body') return stripEmptyKlarAttrs(doc.body.outerHTML);
-        return stripEmptyKlarAttrs('<!doctype html>\n' + doc.documentElement.outerHTML);
-      }
-      // HTML / HEAD / BODY tabs — switch which slice of the output is shown.
-      const outTitle = document.getElementById('outtitle');
-      document.querySelectorAll('#outtabs button').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          outputView = btn.dataset.view;
-          outTitle.textContent = outputView.charAt(0).toUpperCase() + outputView.slice(1); // Html / Head / Body
-          document.querySelectorAll('#outtabs button').forEach((b) => b.classList.toggle('active', b === btn));
-          if (!outWrap.hidden) outEl.textContent = renderOutputHtml();
-        });
-      });
-      // "Show HTML" toggles the output box: shown → re-render fresh + reveal;
-      // hidden → close. The label follows the state.
-      const saveBtn = document.getElementById('save');
-      saveBtn.addEventListener('click', () => {
-        if (outWrap.hidden) {
-          outEl.textContent = renderOutputHtml();
-          outWrap.hidden = false;
-          saveBtn.textContent = 'Hide HTML';
-        } else {
-          outWrap.hidden = true;
-          saveBtn.textContent = 'Show HTML';
-        }
-      });
-
-      // --- Resizable right panel -------------------------------------------------
-      const aside = document.querySelector('aside');
-      const resizer = document.getElementById('resizer');
-      let dragging = false;
-      resizer.addEventListener('mousedown', (e) => {
-        dragging = true;
-        resizer.classList.add('dragging');
-        // The iframe would swallow mousemove while the cursor is over it — disable
-        // its pointer events for the duration of the drag.
-        iframe.style.pointerEvents = 'none';
-        document.body.style.userSelect = 'none';
-        e.preventDefault();
-      });
-      // Coalesce width updates to one per animation frame — setting width on every
-      // mousemove reflows the iframe several times per frame, which trails/flickers.
-      let pendingX = 0;
-      let rafId = 0;
-      window.addEventListener('mousemove', (e) => {
-        if (!dragging) return;
-        pendingX = e.clientX;
-        if (rafId) return;
-        rafId = requestAnimationFrame(() => {
-          rafId = 0;
-          aside.style.width = Math.min(1000, Math.max(260, window.innerWidth - pendingX)) + 'px';
-        });
-      });
-      window.addEventListener('mouseup', () => {
-        if (!dragging) return;
-        dragging = false;
-        if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
-        resizer.classList.remove('dragging');
-        iframe.style.pointerEvents = '';
-        document.body.style.userSelect = '';
-        lsSet(LS.width, aside.style.width); // persist the final panel width
-      });
-
-      // --- Restore persisted state on load ---------------------------------------
-      // Panel width is restored before first paint by the inline <head> script
-      // (as --klar-panel-width) to avoid a flicker — nothing to do here.
-      setTab(lsGet(LS.tab) || 'field');
-      const storedUrl = (lsGet(LS.url) || '').trim();
-      const storedCfg = lsGet(LS.cfg);
-      cfgEl.value = storedCfg != null ? storedCfg : defaultSelectors;
-      urlEl.value = storedUrl;
-      if (storedUrl) {
-        loadUrl(storedUrl); // resume the loaded site (config is always preserved)
-      } else {
-        init(cfgEl.value);
-      }
-    </script>
-      
-    </main>
+    </div>
     <footer id="docs">
       <div class="wrap">
         <div class="foot">
