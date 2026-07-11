@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klar Editor — standalone demo</title>
+    <!-- Klar's favicon, served from the hosted editor. -->
+    <link rel="icon" type="image/png" href="https://editor.klar.website/favicon.png">
+    <!-- Match Klar's typography (its UI is Inter, loaded the same way in the app). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <!-- Panel widget styles (Tailwind theme, emitted by the panel build). -->
+    <link rel="stylesheet" href="https://editor.klar.website/klar-editor-panel.css">
+    <!-- Restore the persisted panel width BEFORE first paint, as a CSS var the
+         aside reads. A plain (non-module) inline script runs synchronously during
+         head parse — before the aside lays out — so the panel never flashes at the
+         340px default and then jumps to the stored width. -->
+    <script>
+      try {
+        let __w = localStorage.getItem('klar-demo-width');
+        if (__w) document.documentElement.style.setProperty('--klar-panel-width', __w);
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Demo layout styles (built artifact — not meant to be edited). -->
+    <link rel="stylesheet" href="https://editor.klar.website/klar-demo.css">
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav" id="nav" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+      <style>
+        .nav__theme {
+          display: grid;
+          place-items: center;
+          width: 38px;
+          height: 38px;
+          border-radius: 9px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          color: var(--text);
+          cursor: pointer;
+          transition: background 0.15s, border-color 0.15s;
+        }
+
+        .nav__theme:hover {
+          background: var(--surface-2);
+          border-color: var(--border-strong);
+        }
+
+        .nav__theme .icon-moon {
+          display: none;
+        }
+
+        .nav__theme .icon-sun {
+          display: block;
+        }
+
+        /* When dark mode is active on <html>, swap icons */
+        .dark .nav__theme .icon-sun {
+          display: none;
+        }
+
+        .dark .nav__theme .icon-moon {
+          display: block;
+        }
+      </style>
+      <div class="nav__inner">
+        <a href="/#" class="logo">
+          <span class="logo__mark"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m3.844-8.791a.75.75 0 0 0-1.187-.918l-3.7 4.79l-1.65-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043z" clip-rule="evenodd"></path>
+            </svg></span>
+          KLAR
+        </a>
+        <div class="nav__links"><a href="/#features">Features</a>
+<a href="/#ai">AI</a>
+<a href="/#content">Content</a>
+<a href="/#developers">Developers</a>
+<a href="#">Klar Fields</a>
+<a href="/templates.html">Templates</a>
+<a href="https://klar-sites.github.io/klar-docs/page-5.html">Docs</a></div>
+        <div class="nav__cta">
+          <button class="nav__theme" aria-label="Toggle dark mode" id="themeToggle">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <a href="https://editor.klar.website/" class="btn btn-ghost btn-sm">Sign in</a>
+          <a href="#start" class="btn btn-primary btn-sm">Start editing</a>
+          <button class="nav__burger" aria-label="Menu" id="burger">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <script>
+        // Theme toggle — also fixes the "dar" typo to "dark" on <html>
+        (function() {
+          const html = document.documentElement;
+          if (html.classList.contains("dar")) {
+            html.classList.remove("dar");
+            html.classList.add("dark");
+          }
+
+          const btn = document.getElementById("themeToggle");
+          if (!btn) return;
+
+          // Sync with stored preference
+          const stored = localStorage.getItem("klar-theme");
+          if (stored === "light") {
+            html.classList.remove("dark");
+          } else if (stored === "dark") {
+            html.classList.add("dark");
+          }
+
+          btn.addEventListener("click", () => {
+            const isDark = html.classList.toggle("dark");
+            localStorage.setItem("klar-theme", isDark ? "dark" : "light");
+          });
+        })();
+      </script>
+    </nav>
+
+    <div id="app" style="padding-top: 65px;max-width: 1352px;margin: 0 auto;">
+      <header style="display: none;">
+        <div class="brand" style="visibility: hidden;">
+          <img src="https://editor.klar.website/klar-logo.png" alt="KLAR">
+        </div>
+        <span id="editbadge" class="edit-badge" hidden=""></span>
+        <div class="actions">
+          <button id="toggleurl" class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary" title="Load a live site" aria-label="Load a live site">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </button>
+          <button id="save" class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show
+            HTML</button>
+        </div>
+      </header>
+      <div id="urlbar" class="urlbar" hidden="">
+        <input id="url" type="text" spellcheck="false" placeholder="https://example.com — load a live site">
+        <button id="loadurl" class="primary">Load →</button>
+        <button id="reset">Demo page</button>
+      </div>
+      <main>
+        <div id="stage" style="border-left: 1px solid rgb(43, 43, 43);">
+          <iframe id="editor" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
+        </div>
+        <aside style="border-right: 1px solid #2b2b2b;">
+          <div id="resizer" title="Drag to resize"></div>
+          <div class="tabs">
+            <button class="tab active" data-tab="field">Element</button>
+            <button class="tab" data-tab="editable">Editable Elements</button>
+            <button class="act" id="applycfg" hidden="">Apply →</button>
+          </div>
+          <div id="panel" class="pane"></div>
+          <div id="cfgwrap" class="pane" hidden="">
+            <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
+          </div>
+          <div id="outwrap" hidden="">
+            <div id="outcard">
+              <div id="outhead">
+                <h2>HTML</h2>
+                <div class="spacer"></div>
+                <button id="closeout" type="button" title="Close" aria-label="Close">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div id="outbody">
+                <div id="outnav">
+                  <div class="navitem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    HTML
+                  </div>
+                </div>
+                <div id="outcontent">
+                  <div id="outtabs">
+                    <button type="button" data-view="html" class="active">HTML</button>
+                    <button type="button" data-view="head">HEAD</button>
+                    <button type="button" data-view="body">BODY</button>
+                  </div>
+                  <div id="outtitle">Html</div>
+                  <pre id="out" class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <!-- Two UMD globals, React bundled into the panel one. Loaded from the hosted
+         editor (editor.klar.website) so this page is portable — drop it on any host
+         and it pulls the canonical editor bundles; the host handles cache headers. -->
+    <script src="https://editor.klar.website/klar-editor.umd.js"></script>
+    <script src="https://editor.klar.website/klar-editor-panel.umd.js"></script>
+    <!-- Demo wiring (built artifact — not meant to be edited). Sets the one
+         per-host value (where the server-side dev-fetch lives), then loads the
+         bundled glue that imports editHistory + drives the two UMD globals. -->
+    <script>
+      window.KLAR_DEMO = {
+        fetchBase: "https://editor.klar.website"
+      };
+    </script>
+    <script type="module" src="https://editor.klar.website/klar-demo.js"></script>
+
+    <script>
+      // Nav background on scroll
+      const nav = document.getElementById("nav");
+      const onScroll = () =>
+        nav.classList.toggle("scrolled", window.scrollY > 12);
+      onScroll();
+      window.addEventListener("scroll", onScroll, {
+        passive: true,
+      });
+
+      // Mobile menu (lightweight: reveal links inline)
+      const burger = document.getElementById("burger");
+      const links = document.querySelector(".nav__links");
+      burger?.addEventListener("click", () => {
+        const open = links.style.display === "flex";
+        Object.assign(links.style, {
+          display: open ? "" : "flex",
+          position: "absolute",
+          top: "64px",
+          left: "0",
+          right: "0",
+          flexDirection: "column",
+          gap: "4px",
+          padding: "16px 24px",
+          background: "rgba(8,9,10,0.96)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        });
+      });
+
+      // Scroll-reveal with stagger
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.transitionDelay =
+                (e.target.dataset.delay || 0) + "ms";
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -8% 0px",
+        },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Stagger bento tiles for a touch of polish
+      document.querySelectorAll(".bento .tile").forEach((el, i) => {
+        el.dataset.delay = i * 60;
+      });
+    </script>
+  </body>
+</html>
