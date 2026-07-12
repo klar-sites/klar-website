@@ -142,73 +142,100 @@
     </nav>
 
     <div id="app" style="padding-top: 65px;max-width: 1352px;margin: 0 auto;">
-    <header style="display: none">
-      <div class="brand">
-        <img src="https://editor.klar.website/klar-logo.png" alt="KLAR" />
-        <button id="toggleurl" class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary" aria-label="Load a live site">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </button>
-      </div>
-      <span id="editbadge" class="edit-badge" hidden></span>
+      <header style="display: none">
+        <div class="brand">
+          <img src="https://editor.klar.website/klar-logo.png" alt="KLAR" />
+          <button id="toggleurl"
+            class="flex items-center justify-center p-2 border-none cursor-pointer rounded-lg transition-colors duration-150 bg-surface-input text-foreground hover:bg-secondary"
+            aria-label="Load a live site">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+          </button>
+        </div>
+        <span id="editbadge" class="edit-badge" hidden></span>
+        <span id="editbadge" class="edit-badge" hidden></span>
       <div class="actions">
+        <button id="savefile" class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Save to file</button>
+        <button id="switchfile" hidden aria-label="Save to a different file" class="inline-flex items-center justify-center whitespace-nowrap py-1.5 px-2.5 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </button>
         <button id="save" class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show HTML</button>
       </div>
-    </header>
-    <div id="urlbar" class="urlbar" hidden>
-      <select id="sites" title="Saved sites" hidden></select>
-      <button id="removesite" hidden aria-label="Remove saved site">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-      <input id="url" type="text" spellcheck="false"
-        placeholder="https://example.com — load a live site" />
-      <button id="loadurl">Load →</button>
-      <button id="reset">Demo page</button>
-    </div>
-    <main>
-      <div id="stage">
-        <iframe id="editor" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
+        <div class="actions">
+          <button id="save"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap py-1.5 px-4 rounded text-sm font-normal font-sans-system border-none cursor-pointer transition-colors bg-[#333333] text-neutral-50 hover:bg-[#333333]/80 disabled:pointer-events-none disabled:opacity-50">Show
+            HTML</button>
+        </div>
+      </header>
+      <div id="urlbar" class="urlbar" hidden>
+        <select id="sites" title="Saved sites" hidden></select>
+        <button id="removesite" hidden aria-label="Remove saved site">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <input id="url" type="text" spellcheck="false" placeholder="https://example.com — load a live site" />
+        <button id="loadurl">Load →</button>
+        <button id="reset">Demo page</button>
       </div>
-      <aside style="border-right: 1px solid #2b2b2b;">
-        <div id="resizer" title="Drag to resize"></div>
-        <div class="tabs">
-          <button class="tab active" data-tab="field">Element</button>
-          <button class="tab" data-tab="editable">Editable Elements</button>
-          <button class="act" id="applycfg" hidden>Apply →</button>
+      <main>
+        <div id="stage">
+          <iframe id="editor"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals"></iframe>
         </div>
-        <div id="panel" class="pane"></div>
-        <div id="cfgwrap" class="pane" hidden>
-          <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
-        </div>
-        <div id="outwrap" hidden>
-          <div id="outcard">
-            <div id="outhead">
-              <h2>HTML</h2>
-              <div class="spacer"></div>
-              <button id="closeout" type="button" title="Close" aria-label="Close">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              </button>
-            </div>
-            <div id="outbody">
-              <div id="outnav">
-                <div class="navitem">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                  HTML
-                </div>
+        <aside style="border-right: 1px solid #2b2b2b;">
+          <div id="resizer" title="Drag to resize"></div>
+          <div class="tabs">
+            <button class="tab active" data-tab="field">Element</button>
+            <button class="tab" data-tab="editable">Editable Elements</button>
+            <button class="act" id="applycfg" hidden>Apply →</button>
+          </div>
+          <div id="panel" class="pane"></div>
+          <div id="cfgwrap" class="pane" hidden>
+            <textarea id="cfg" class="scrollbar-modal" spellcheck="false"></textarea>
+          </div>
+          <div id="outwrap" hidden>
+            <div id="outcard">
+              <div id="outhead">
+                <h2>HTML</h2>
+                <div class="spacer"></div>
+                <button id="closeout" type="button" title="Close" aria-label="Close">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
-              <div id="outcontent">
-                <div id="outtabs">
-                  <button type="button" data-view="html" class="active">HTML</button>
-                  <button type="button" data-view="head">HEAD</button>
-                  <button type="button" data-view="body">BODY</button>
+              <div id="outbody">
+                <div id="outnav">
+                  <div class="navitem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    HTML
+                  </div>
                 </div>
-                <div id="outtitle">Html</div>
-                <pre id="out" class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
+                <div id="outcontent">
+                  <div id="outtabs">
+                    <button type="button" data-view="html" class="active">HTML</button>
+                    <button type="button" data-view="head">HEAD</button>
+                    <button type="button" data-view="body">BODY</button>
+                  </div>
+                  <div id="outtitle">Html</div>
+                  <pre id="out"
+                    class="scrollbar-modal"><span class="muted">Click an element, edit its field, then “Show HTML”.</span></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </aside>
-    </main>
+        </aside>
+      </main>
     </div>
 
 
@@ -219,7 +246,7 @@
       window.KLAR_EDITOR_CONFIG = {
         // html: '<!doctype html>…',        // page to edit (instead of the built-in demo)
         // selectors: '.title:field(name:title, type:string)', // default Editable Elements
-        url: 'https://klar-templates.github.io/klar-blog/field-2.html',      // site to load on start (overrides the saved selection)
+        url: 'https://klar-templates.github.io/klar-blog/field-2.html', // site to load on start (overrides the saved selection)
       };
     </script>
     <!-- The whole editor in one built module (not meant to be edited): editor
