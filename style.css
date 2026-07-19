@@ -413,6 +413,63 @@ a {
   flex-wrap: wrap;
 }
 
+/* ───────── Hero prompt box (prompt-to-site) ───────── */
+.hero__prompt {
+  display: flex;
+  gap: 10px;
+  max-width: 640px;
+  margin: 34px auto 0;
+  padding: 8px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px var(--shadow-float);
+  transition: border-color 0.15s ease;
+}
+
+.hero__prompt:focus-within {
+  border-color: var(--border-strong);
+}
+
+.hero__prompt-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.hero__prompt-input::placeholder {
+  color: var(--subtle);
+}
+
+.hero__prompt-btn {
+  flex-shrink: 0;
+}
+
+.hero__cta--secondary {
+  margin-top: 14px;
+}
+
+.hero__cta--secondary .btn {
+  height: 36px;
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .hero__prompt {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .hero__prompt-input {
+    padding: 10px 8px;
+  }
+}
+
 .hero__note {
   margin-top: 18px;
   font-size: 13px;

@@ -179,11 +179,21 @@
           connect your own GitHub repo, where every save commits clean HTML and
           ⌘⇧P publishes to GitHub Pages.
         </p>
-        <div class="hero__cta">
-          <a href="templates.html" class="btn btn-primary">Start free →</a>
+        <!-- Prompt-to-site: a native GET form to the editor encodes ?brief= itself
+             (the inline script below adds a trim/empty guard). The editor's ?brief=
+             gate signs the visitor in, provisions a hosted site, and starts the AI
+             generation. -->
+        <form class="hero__prompt" id="hero-prompt" action="https://editor.klar.website/" method="get">
+          <input class="hero__prompt-input" name="brief" type="text" required maxlength="500"
+                 placeholder="Describe your website — Klar builds and hosts it for you…"
+                 aria-label="Describe your website" autocomplete="off">
+          <button class="btn btn-primary hero__prompt-btn" type="submit">Generate site →</button>
+        </form>
+        <div class="hero__cta hero__cta--secondary">
+          <a href="templates.html" class="btn btn-ghost">Browse templates</a>
           <a href="https://editor.klar.website/" class="btn btn-ghost">Connect your GitHub</a>
         </div>
-        <p class="hero__note">Pick a template and go live in minutes, or bring your own GitHub repo. Sign in with Google to start.</p>
+        <p class="hero__note">Describe it and Klar builds it — or start from a template, or bring your own GitHub repo. Sign in with Google to start.</p>
 
         <!-- editor mockup -->
         <div class="shot reveal">
@@ -778,6 +788,18 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
       document.querySelectorAll(".bento .tile").forEach((el, i) => {
         el.dataset.delay = i * 60;
       });
+
+      // Hero prompt → editor. The GET form handles the ?brief= encoding;
+      // this only trims and blocks whitespace-only submits.
+      const heroPrompt = document.getElementById("hero-prompt");
+      if (heroPrompt) {
+        heroPrompt.addEventListener("submit", (e) => {
+          const input = heroPrompt.querySelector('input[name="brief"]');
+          const v = input.value.trim();
+          if (!v) { e.preventDefault(); input.focus(); return; }
+          input.value = v;
+        });
+      }
     </script>
   </body>
 </html>
