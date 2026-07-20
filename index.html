@@ -185,7 +185,7 @@
              generation. -->
         <form class="hero__prompt" id="hero-prompt" action="https://editor.klar.website/" method="get">
           <textarea class="hero__prompt-input" name="brief" required maxlength="4000" rows="3"
-                    placeholder="Ask Klar to create …"
+                    placeholder="Describe your website — Klar builds and hosts it for you…"
                     aria-label="Describe your website" autocomplete="off"></textarea>
           <button class="hero__prompt-btn" type="submit" aria-label="Generate site" title="Generate site" disabled>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12V4M4 7l4-4 4 4"/></svg>
@@ -816,11 +816,13 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
         window.addEventListener("pageshow", syncBriefBtn);
         syncBriefBtn();
 
-        // Typewriter placeholder (Lovable-style): type the prefix once, then
-        // cycle suggestions — type, hold, delete, next. Placeholder-only, so it
+        // Typewriter placeholder (Lovable-style): cycle suggestions after the
+        // fixed prefix — type, hold, delete, next. Placeholder-only, so it
         // vanishes automatically as soon as the user types. Skipped for
         // prefers-reduced-motion (the static attribute stays).
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        // Currently DISABLED (static placeholder) — flip to true to re-enable.
+        const ANIMATE_PLACEHOLDER = false;
+        if (ANIMATE_PLACEHOLDER && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           const PREFIX = "Ask Klar to create ";
           const IDEAS = [
             "a site for my yoga studio…",
