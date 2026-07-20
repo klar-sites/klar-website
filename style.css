@@ -467,8 +467,13 @@ a {
   transition: opacity 0.15s ease;
 }
 
-.hero__prompt-btn:hover {
+.hero__prompt-btn:hover:not(:disabled) {
   opacity: 0.85;
+}
+
+.hero__prompt-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
 }
 
 .hero__cta--secondary {
