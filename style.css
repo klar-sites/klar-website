@@ -416,6 +416,7 @@ a {
 /* ───────── Hero prompt box (prompt-to-site) ───────── */
 .hero__prompt {
   display: flex;
+  align-items: flex-end; /* button sits bottom-right beside the multi-line field */
   gap: 10px;
   max-width: 640px;
   margin: 34px auto 0;
@@ -438,9 +439,11 @@ a {
   background: transparent;
   font: inherit;
   font-size: 15px;
+  line-height: 1.5;
   color: var(--text);
-  padding: 0 12px;
+  padding: 6px 12px;
   outline: none;
+  resize: none;
 }
 
 .hero__prompt-input::placeholder {

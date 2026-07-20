@@ -184,9 +184,9 @@
              gate signs the visitor in, provisions a hosted site, and starts the AI
              generation. -->
         <form class="hero__prompt" id="hero-prompt" action="https://editor.klar.website/" method="get">
-          <input class="hero__prompt-input" name="brief" type="text" required maxlength="500"
-                 placeholder="Describe your website — Klar builds and hosts it for you…"
-                 aria-label="Describe your website" autocomplete="off">
+          <textarea class="hero__prompt-input" name="brief" required maxlength="4000" rows="3"
+                    placeholder="Describe your website — Klar builds and hosts it for you…"
+                    aria-label="Describe your website" autocomplete="off"></textarea>
           <button class="btn btn-primary hero__prompt-btn" type="submit">Generate site →</button>
         </form>
         <div class="hero__cta hero__cta--secondary">
@@ -789,15 +789,22 @@ document.<span class="c-fn">querySelector</span>(<span class="c-str">'#list'</sp
         el.dataset.delay = i * 60;
       });
 
-      // Hero prompt → editor. The GET form handles the ?brief= encoding;
-      // this only trims and blocks whitespace-only submits.
+      // Hero prompt → editor. The GET form handles the ?brief= encoding
+      // (newlines ride as %0A); this only trims, blocks whitespace-only
+      // submits, and gives the textarea Enter-to-submit (Shift+Enter = newline).
       const heroPrompt = document.getElementById("hero-prompt");
       if (heroPrompt) {
+        const briefField = heroPrompt.querySelector('[name="brief"]');
         heroPrompt.addEventListener("submit", (e) => {
-          const input = heroPrompt.querySelector('input[name="brief"]');
-          const v = input.value.trim();
-          if (!v) { e.preventDefault(); input.focus(); return; }
-          input.value = v;
+          const v = briefField.value.trim();
+          if (!v) { e.preventDefault(); briefField.focus(); return; }
+          briefField.value = v;
+        });
+        briefField.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            heroPrompt.requestSubmit();
+          }
         });
       }
     </script>
