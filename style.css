@@ -450,8 +450,25 @@ a {
   color: var(--subtle);
 }
 
+/* Round ↑ submit — same affordance as the editor's prompt composer. Inverted
+   fill (text-on-background swap) so it reads in both themes. */
 .hero__prompt-btn {
   flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg-elev);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.hero__prompt-btn:hover {
+  opacity: 0.85;
 }
 
 .hero__cta--secondary {
@@ -470,6 +487,9 @@ a {
   }
   .hero__prompt-input {
     padding: 10px 8px;
+  }
+  .hero__prompt-btn {
+    align-self: flex-end;
   }
 }
 
